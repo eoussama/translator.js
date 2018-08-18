@@ -107,7 +107,7 @@
             selectControl = document.getElementById('langSelect');
 
         selectControl.addEventListener('change', () => {
-            translate(document.body, dict, selectControl.value);
+            translate(document.querySelector('nav'), dict, selectControl.value);
         });      
     </script>
 </body>
