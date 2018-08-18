@@ -12,7 +12,7 @@ Not everything gets translated, only the elements that have the class  `trnsjs` 
 Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid excessive pain. translateJS operates on one and only function that takes three parameters `translate(element, dictionary, language)`.
 
 | element   |      dictionary      |  language |
-|----------|:-------------:|------:|
+|----------|:-------------:|------|
 | The element you want to translate, in the case of the whole page, target `body`. |  An object containing all of the terms and their respective translations. | The name of the language you want to translate the current content to. |
     
 ## Usage
