@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        header {
+            background-color: rgb(44, 37, 37);
+            color: white;
+            padding: 100px;
+            text-align: center;
+        }
+
+        div.inner {
+            width: 500px;
+            margin: auto;
+        }
+
+        ul {
+            padding: 10px;
+            list-style-type: none;
+            background-color: rgb(44, 37, 37);
+        }
+
+        li {
+            display: inline;
+            cursor: pointer;
+        }
+
+        li a {
+            padding: 5px 10px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="inner">
+            <h1 class="trnsjs">Hello, world!</h1>
+            <h3 class="trnsjs">Quality serivces since 2003</h3>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#" class="trnsjs">Home</a></li>
+            <li><a href="#" class="trnsjs">Skills</a></li>
+            <li><a href="#" class="trnsjs">Contact</a></li>
+            <li><a href="#" class="trnsjs">About</a></li>
+            <li style="float: right;">
+                <select id="langSelect">
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    <option value="fr">French</option>
+                </select>
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Lorem, ipsum dolor.</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque magni laboriosam illum saepe minus placeat recusandae pariatur, vitae voluptate quae provident omnis distinctio! Totam id ad maiores, quae nihil sit illo voluptates, quam doloremque aliquam nam accusantium, eum inventore. Officia non vel, ratione modi fugiat facilis delectus hic! Odit, consectetur similique, quo aliquid illum fugit consequuntur optio facilis est nulla veniam ex voluptatem, iusto ea aspernatur delectus eaque. Voluptatum, quibusdam. Quo blanditiis deserunt voluptatem molestiae officia omnis laborum quasi fugiat, cupiditate alias facere vero, dicta recusandae velit repudiandae exercitationem corporis, quia fugit ipsa dolores delectus est cumque modi. Maxime, expedita?</p>
+        <hr>
+    </main>
+
+    <script src="translate.js"></script>
+    <script>
+        const
+            dict = {
+                "Hello, world!": {
+                    'en': "Hello, world!",
+                    'es': "Hola, el mundo!",
+                    'fr': "Bonjour, le monde!",
+                },
+                "Quality serivces since 2003": {
+                    'en': "Quality serivces since 2003",
+                    'es': "Servicios de calidad desde 2003",
+                    'fr': "Des services de qualité depuis 2003",
+                },
+                "Home": {
+                    'en': "Home",
+                    'es': "Inicio",
+                    'fr': "Accueil"
+                },
+                "Skills": {
+                    'en': "Skills",
+                    'es': "Capacidad",
+                    'fr': "Compétences"
+                },
+                "About": {
+                    'en': "About",
+                    'es': "Acerca de",
+                    'fr': "à propos"
+                },
+                "Contact": {
+                    'en': "Contact",
+                    'es': "Contacto",
+                    'fr': "Contact"
+                }
+            },
+            selectControl = document.getElementById('langSelect');
+
+        selectControl.addEventListener('change', () => {
+            translate(document.body, dict, selectControl.value);
+        });      
+    </script>
+</body>
+</html>
