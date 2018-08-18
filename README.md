@@ -94,6 +94,5 @@ To target a specific part of the page, simply pass it as the first argument inst
 ```javascript
 translate(document.querySelector('nav'), dict, 'fr');
 ```
-That will only translate the children of than `nav` tag that have the class `trnsjs`.
-
+That will only translate the children of the `nav` tag that have the class `trnsjs`.
 And that's literally it.
