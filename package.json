@@ -1,0 +1,19 @@
+{
+  "name": "translatejs",
+  "version": "1.0.0",
+  "description": "A simple javascript library for translating web content.",
+  "main": "translate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EOussama/translatejs.git"
+  },
+  "author": "EOussama",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EOussama/translatejs/issues"
+  },
+  "homepage": "https://github.com/EOussama/translatejs#readme"
+}

@@ -1,1 +1,2 @@
-*.html
+# Ignoring node modules
+node_modules/
