@@ -1,36 +1,42 @@
 <p align="center">
     <img src="docs/assets/img/logo.svg" width="130" />
-    <h1 align="center">translatorjs</h1>
+    <h1 align="center">Translator JS</h1>
 </p>
 
 ## What's this?
 
-translatorjs is a lightweight very simple-to-use Javascript library that facilitates the process of translating web pages. For more about how this works, read along.
+Translator JS is a lightweight very simple-to-use Javascript library that facilitates the process of translating web pages. For more about how this works, read along.
 
 
 ## How does this work?
 
-translatorjs doesn't depend on any external APIs or resources to work, in fact, there is a crucial part of this magic that requires a little bit of work, but not the kind of work that made you look up a library for this need.
+Translator JS doesn't depend on any external APIs or resources to work, in fact, there is a crucial part of this magic that requires a little bit of work, but not the kind of work that made you look up a library for this need.
 You should create your own dictionary, containing the words and/or sentences you want to translate with their respective translations, and then target the whole web page or just a specific section.
-Not everything gets translated, only the elements that have the class  `trnsjs` toggeled.
+Not everything gets translated, only the elements that have the class `trnsjs`.
 
 
 ## Syntax
 
-Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid excessive pain. translatorjs operates on one and only function that takes three parameters `translate(element, dictionary, language)`.
+Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid that excessive pain. Translator JS operates on very minimalistic controllers. All you need to do is instanciate a Translator object and set it for work.
+```js
+const translator = new Translator(dictionary, localLanguage);
+```
 
-| element   |      dictionary      |  language |
-|----------|:-------------:|------|
-| The element you want to translate, in the case of the whole page, target `body`. |  An object containing all of the terms and their respective translations. | The name of the language you want to translate the current content to. |
+| dictionary   |  language |
+|------------- |-----------|
+| An object containing all of the terms and their respective translations. | The code of the base language. By default, it's `en` for `english`. |
     
 
 ## Usage
 
-In order to start using translatorjs, you should first include it on your HTML file;
+In order to start using Translator JS, you should first include it on your HTML file;
+
 ```html
 <script src="translate.js"></script>
 ```
+
 Now, we need to create a dictionary, an object that stores all of our translations.
+
 ```javascript
 const dict = {
         "Hello, world!": {
@@ -65,11 +71,15 @@ const dict = {
         }
     };
 ```
-Now, we have an object with all the terms we want to translate, and their respective translations, the name you choose for languages is important, in our case, they are `en`, `es` and `fr` indicating English, Espagnol and Français respectively.
 
-Then we call the big dog, passing the right arguments.
+Now, that we have an object with all the terms we want to translate, and their respective translations, the name you choose for languages is important, in our case, they are `en`, `es` and `fr` indicating _English_, _Espagnol_ and _Français_ respectively. The could be called anything, however, for the sake of simplicity, we used those specific codes.
+
+Then we call the big dog.
+
 ```javascript
-translate(document.body, dict, 'fr');
+const translator = new Translator(dict, 'en');
+
+translator.translate('fr');
 ```
 
 That still won't do anything, we are up for a last step, nothing major. We need to add the class `trnsjs` to the elements we want to translate.
@@ -98,14 +108,17 @@ That still won't do anything, we are up for a last step, nothing major. We need 
 </nav>
 ```
 
-By calling that function, we've targeted the body of the webpage and specified the dictionary we want to use, and the language that we want translate the content to, `fr`, meaning French.
+By calling that function, we've translated all translatable elements to their respective frensh translations.
 
 To target a specific part of the page, simply pass it as the first argument instead of the whole body.
-```javascript
-translate(document.querySelector('nav'), dict, 'fr');
+
+To check if a language is supported by yourt dictionary, simply call the following function.
+
+```js
+const language = 'fr';
+
+translator.isValidLanguage(language);
 ```
-That will only translate the children of the `nav` tag that have the class `trnsjs`.
-And that's literally it.
 
 
 ## Credits
