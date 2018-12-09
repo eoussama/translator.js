@@ -10,8 +10,26 @@
  * 
  */
 
- 'use strict';
- 
- window.addEventListener('load', () => {
-    console.log('Hello, world!');
- });
+'use strict';
+
+window.addEventListener('load', () => {
+
+    // The dictionary.
+    const dictionary = {
+        "About": {
+            'fr': 'A propos',
+            'es': 'nos'
+        },
+        "Hello": {
+            'fr': 'Bonjour',
+            'es': 'Hola',
+            'br': 'Jola'
+        }
+    };
+
+    // The translator.
+    const Translator = new Translate(dictionary);
+
+    // Translating.
+    Translator.translate('br');
+});

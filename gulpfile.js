@@ -7,7 +7,7 @@ const
 
 // Building the code for production.
 gulp.task('build', () => {
-    gulp.src('src/translatejs.js')
+    gulp.src('src/translate.js')
 
         // Translating code.
         .pipe(babel({
