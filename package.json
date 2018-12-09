@@ -1,5 +1,5 @@
 {
-  "name": "translatorjs",
+  "name": "eo-translatorjs",
   "version": "2.0.1",
   "description": "A simple javascript library for translating web content.",
   "scripts": {
