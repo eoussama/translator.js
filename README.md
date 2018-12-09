@@ -1,21 +1,31 @@
-<h1 align="center">translateJS</h1>
+<p align="center">
+    <img src="docs/assets/img/logo.svg" width="130" />
+    <h1 align="center">translateJS</h1>
+</p>
 
 ## What's this?
+
 translateJS is a lightweight very simple-to-use Javascript library that facilitates the process of translating web pages. For more about how this works, read along.
 
+
 ## How does this work?
+
 translateJS doesn't depend on any external APIs or resources to work, in fact, there is a crucial part of this magic that requires a little bit of work, but not the kind of work that made you look up a library for this need.
 You should create your own dictionary, containing the words and/or sentences you want to translate with their respective translations, and then target the whole web page or just a specific section.
 Not everything gets translated, only the elements that have the class  `trnsjs` toggeled.
 
+
 ## Syntax
+
 Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid excessive pain. translateJS operates on one and only function that takes three parameters `translate(element, dictionary, language)`.
 
 | element   |      dictionary      |  language |
 |----------|:-------------:|------|
 | The element you want to translate, in the case of the whole page, target `body`. |  An object containing all of the terms and their respective translations. | The name of the language you want to translate the current content to. |
     
+
 ## Usage
+
 In order to start using translateJS, you should first include it on your HTML file;
 ```html
 <script src="translate.js"></script>
@@ -96,3 +106,8 @@ translate(document.querySelector('nav'), dict, 'fr');
 ```
 That will only translate the children of the `nav` tag that have the class `trnsjs`.
 And that's literally it.
+
+
+## Credits
+
+Icon made by [Freepik](https://www.freepik.com/) from [Flaticon](https://www.flaticon.com/) and is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).

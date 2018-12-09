@@ -10,11 +10,10 @@
  * 
  */
 
-(function (obj) {
+ body {
+     font-family: Arial, Helvetica, sans-serif;
+ }
 
-    if (typeof exports !== 'undefined') {
-        module.exports = Translate;
-    } else {
-        obj.Translate = Translate;
-    }
-})((typeof window !== 'undefined') ? window : this);
+ main.container {
+    padding: 80px 50px;
+ }

@@ -10,11 +10,8 @@
  * 
  */
 
-(function (obj) {
-
-    if (typeof exports !== 'undefined') {
-        module.exports = Translate;
-    } else {
-        obj.Translate = Translate;
-    }
-})((typeof window !== 'undefined') ? window : this);
+ 'use strict';
+ 
+ window.addEventListener('load', () => {
+    console.log('Hello, world!');
+ });

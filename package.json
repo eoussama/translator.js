@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/EOussama/translatejs/issues"
   },
-  "homepage": "https://github.com/EOussama/translatejs#readme"
+  "homepage": "https://github.com/EOussama/translatejs#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }

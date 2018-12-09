@@ -1,2 +1,5 @@
 # Ignoring node modules
 node_modules/
+
+# Ignoring the dist ready code.
+dist/
