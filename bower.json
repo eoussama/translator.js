@@ -1,0 +1,24 @@
+{
+  "name": "translatejs",
+  "description": "A simple javascript library for translating web content.",
+  "main": "",
+  "authors": [
+    "EOussama"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "translate",
+    "javascript-library",
+    "text-translation",
+    "node-package"
+  ],
+  "homepage": "https://github.com/EOussama/translatejs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ]
+}
