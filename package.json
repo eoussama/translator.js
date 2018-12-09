@@ -1,6 +1,6 @@
 {
-  "name": "translatejs",
-  "version": "2.0.0",
+  "name": "translatorjs",
+  "version": "2.0.1",
   "description": "A simple javascript library for translating web content.",
   "scripts": {
     "build": "npx gulp"
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EOussama/translatejs.git"
+    "url": "git+https://github.com/EOussama/translatorjs.git"
   },
   "author": "EOussama",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EOussama/translatejs/issues"
+    "url": "https://github.com/EOussama/translatorjs/issues"
   },
-  "homepage": "https://github.com/EOussama/translatejs#readme",
+  "homepage": "https://github.com/EOussama/translatorjs#readme",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",

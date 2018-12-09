@@ -1,10 +1,10 @@
 /**
  * 
- * @name:       translatejs
- * @version:    2.0.0
+ * @name:       translatorjs
+ * @version:    2.0.1
  * @author:     EOussama
  * @license     MIT
- * @source:     https://github.com/EOussama/translatejs
+ * @source:     https://github.com/EOussama/translatorjs
  * 
  * A simple javascript library for translating web content.
  * 
@@ -28,8 +28,8 @@ window.addEventListener('load', () => {
     };
 
     // The translator.
-    const Translator = new Translate(dictionary);
+    const translator = new Translator(dictionary);
 
     // Translating.
-    Translator.translate('br');
+    translator.translate('br');
 });

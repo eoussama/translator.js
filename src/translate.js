@@ -1,10 +1,10 @@
 /**
  * 
- * @name:       translatejs
- * @version:    2.0.0
+ * @name:       translatorjs
+ * @version:    2.0.1
  * @author:     EOussama
  * @license     MIT
- * @source:     https://github.com/EOussama/translatejs
+ * @source:     https://github.com/EOussama/translatorjs
  * 
  * A simple javascript library for translating web content.
  * 
@@ -15,7 +15,7 @@
     /**
      * The translate JS class.
      */
-    class Translate {
+    class Translator {
 
         /**
          * The local language, by default `en` for `english`.
@@ -125,8 +125,8 @@
     }
 
     if (typeof exports !== 'undefined') {
-        module.exports = Translate;
+        module.exports = Translator;
     } else {
-        obj.Translate = Translate;
+        obj.Translator = Translator;
     }
 })((typeof window !== 'undefined') ? window : this);
