@@ -1,6 +1,6 @@
 /**
  * 
- * @name:       translatorjs
+ * @name:       eo-translatorjs
  * @version:    3.0.0
  * @author:     EOussama
  * @license     MIT
@@ -38,11 +38,14 @@
 		 * Translates an input value
 		 *
 		 * @param {string} input The input value to translate
+		 * @param {string} fallback The fallback value to use
 		 * @param {string} lang The language to translate to
 		 */
-		translate(input = '', lang) {
+		translate(input = '', lang, fallback) {
 			const language = lang || this.language;
-			return this.dictionary[language][input] || input;
+			const fallback = language;
+
+			return this.dictionary[language][input] || fallback || input;
 		}
 
 		/**
@@ -66,7 +69,6 @@
 			const container = DOMContainer || document;
 			const elements = container.querySelectorAll('[eo-translator]');
 
-			console.log(container);
 			elements.forEach((element) => this.translateElement(element, language));
 		}
 

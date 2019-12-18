@@ -6,21 +6,23 @@ var
 	uglify = require('gulp-uglify');
 
 // Building the code for production.
-gulp.task('build', async function () {
-	gulp.src('src/eo-translator.js')
+gulp.task('build', function (done) {
+	gulp.src('./src/eo-translator.js')
 
 		// Translating code.
 		.pipe(babel({
 			presets: ['@babel/env']
 		}))
 		.pipe(beautify())
-		.pipe(gulp.dest('dist'))
+		.pipe(gulp.dest('./dist'))
 
 		// Minifying Temme.
 		.pipe(uglify())
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(gulp.dest('dist'))
 		.pipe(gulp.dest('docs/assets/js/lib'));
+
+	done();
 });
 
 // The default task.

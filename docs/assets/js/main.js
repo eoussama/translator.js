@@ -1,6 +1,6 @@
 /**
  * 
- * @name:       translatorjs
+ * @name:       eo-translatorjs
  * @version:    3.0.0
  * @author:     EOussama
  * @license     MIT
