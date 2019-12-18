@@ -45,5 +45,13 @@ window.addEventListener('load', () => {
 	var target = document.getElementById('target');
 	translator.translateElement(target);
 
+	// Global translation
+	var globalParent = document.getElementById('global-parent');
 
+	translator.translateDOM(globalParent);
+	document
+		.getElementById('globalTranslate')
+		.addEventListener('change', function (e) {
+			translator.translateDOM(globalParent, e.target.value);
+		});
 });

@@ -49,17 +49,29 @@
 		<h1>EO TranslatorJS</h1>
 		<hr>
 
+		<!-- Input translation -->
 		<button id="translateBtn">Translate an input</button>
 
 		<hr>
 
-		<p><b>Translating a DOM element:</b> <span id="target">greeting</span></p>
+		<!-- Element translation -->
+		<p><b>Translating a DOM element:</b> <span id="target"
+						eo-translator="greeting"></span></p>
 
 		<hr>
 
+		<!-- Global translation -->
 		<p><b>DOM elements to globally translate:</b></p>
-		<p eo-translator>Hello</p>
-		<p eo-translator>About</p>
+		<div id="global-parent">
+			<select id="globalTranslate">
+				<option value="en">English</option>
+				<option value="fr">French</option>
+				<option value="es">Spanish</option>
+				<option value="br">Portuguese</option>
+			</select>
+
+			<p eo-translator="greeting"></p>
+		</div>
 	</main>
 
 	<!-- Translate JS. -->

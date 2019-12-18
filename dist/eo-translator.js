@@ -84,15 +84,23 @@ function _createClass(Constructor, protoProps, staticProps) {
                 value: function translateElement(DOMElement, lang) {
                     if (DOMElement) {
                         var language = lang || this.language;
-                        var input = DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
+                        var input = DOMElement.attributes['eo-translator'].value || DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
                         DOMElement.textContent = this.translate(input, language);
                     }
                 } // Translates the DOM
 
             }, {
                 key: "translateDOM",
-                value: function translateDOM() {
-                    console.log('Translating the DOM...');
+                value: function translateDOM(DOMContainer, lang) {
+                    var _this = this;
+
+                    var language = lang || this.language;
+                    var container = DOMContainer || document;
+                    var elements = container.querySelectorAll('[eo-translator]');
+                    console.log(container);
+                    elements.forEach(function(element) {
+                        return _this.translateElement(element, language);
+                    });
                 } //#endregion
 
             }]);

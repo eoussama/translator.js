@@ -41,7 +41,7 @@
 		 * @param {string} lang The language to translate to
 		 */
 		translate(input = '', lang) {
-			var language = lang || this.language;
+			const language = lang || this.language;
 			return this.dictionary[language][input] || input;
 		}
 
@@ -53,16 +53,21 @@
 		 */
 		translateElement(DOMElement, lang) {
 			if (DOMElement) {
-				var language = lang || this.language;
-				var input = DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
+				const language = lang || this.language;
+				const input = DOMElement.attributes['eo-translator'].value || DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
 
 				DOMElement.textContent = this.translate(input, language);
 			}
 		}
 
 		// Translates the DOM
-		translateDOM() {
-			console.log('Translating the DOM...');
+		translateDOM(DOMContainer, lang) {
+			const language = lang || this.language;
+			const container = DOMContainer || document;
+			const elements = container.querySelectorAll('[eo-translator]');
+
+			console.log(container);
+			elements.forEach((element) => this.translateElement(element, language));
 		}
 
 		//#endregion
