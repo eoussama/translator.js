@@ -14,22 +14,22 @@
 
 window.addEventListener('load', () => {
 
-    // The dictionary.
-    const dictionary = {
-        "About": {
-            'fr': 'A propos',
-            'es': 'nos'
-        },
-        "Hello": {
-            'fr': 'Bonjour',
-            'es': 'Hola',
-            'br': 'Jola'
-        }
-    };
+	// The dictionary.
+	var dictionary = {
+		"About": {
+			'fr': 'A propos',
+			'es': 'nos'
+		},
+		"Hello": {
+			'fr': 'Bonjour',
+			'es': 'Hola',
+			'br': 'Jola'
+		}
+	};
 
-    // The translator.
-    const translator = new Translator(dictionary);
+	// The translator.
+	var translator = new EOTranslator(dictionary);
 
-    // Translating.
-    translator.translate('br');
+	// Translating.
+	translator.translate('br');
 });

@@ -25,7 +25,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 /**
  * 
  * @name:       translatorjs
- * @version:    2.0.1
+ * @version:    3.0.0
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/translatorjs
@@ -37,10 +37,10 @@ function _createClass(Constructor, protoProps, staticProps) {
     /**
      * The translate JS class.
      */
-    var Translator =
+    var EOTranslator =
         /*#__PURE__*/
         function() {
-            _createClass(Translator, [{
+            _createClass(EOTranslator, [{
                 key: "local",
 
                 /**
@@ -72,11 +72,11 @@ function _createClass(Constructor, protoProps, staticProps) {
 
             }]);
 
-            function Translator() {
+            function EOTranslator() {
                 var dictionary = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
                 var local = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'en';
 
-                _classCallCheck(this, Translator);
+                _classCallCheck(this, EOTranslator);
 
                 this._dictionary = dictionary;
                 this._local = local;
@@ -88,7 +88,7 @@ function _createClass(Constructor, protoProps, staticProps) {
              */
 
 
-            _createClass(Translator, [{
+            _createClass(EOTranslator, [{
                 key: "translate",
                 value: function translate() {
                     var _this = this;
@@ -161,12 +161,12 @@ function _createClass(Constructor, protoProps, staticProps) {
                 }
             }]);
 
-            return Translator;
+            return EOTranslator;
         }();
 
     if (typeof exports !== 'undefined') {
-        module.exports = Translator;
+        module.exports = EOTranslator;
     } else {
-        obj.Translator = Translator;
+        obj.EOTranslator = EOTranslator;
     }
 })(typeof window !== 'undefined' ? window : void 0);

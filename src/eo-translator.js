@@ -1,7 +1,7 @@
 /**
  * 
  * @name:       translatorjs
- * @version:    2.0.1
+ * @version:    3.0.0
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/translatorjs
@@ -15,7 +15,7 @@
     /**
      * The translate JS class.
      */
-    class Translator {
+    class EOTranslator {
 
         /**
          * The local language, by default `en` for `english`.
@@ -68,7 +68,7 @@
 
                         // Checking if any translations exist for the current element.
                         if (typeof this._dictionary[element.textContent] !== 'undefined') {
-                            
+
                             // Checking if any translations exist in the passed language.
                             if (this._dictionary[element.textContent][language]) {
                                 element.textContent = this._dictionary[element.textContent][language];
@@ -83,7 +83,7 @@
                                         }
                                     }
                                 }
-                                
+
                                 if (translationFound === false) {
                                     console.warn(`[Translate JS]: No translations in “${language}” were found for “${element.textContent}”.`);
                                 }
@@ -125,8 +125,8 @@
     }
 
     if (typeof exports !== 'undefined') {
-        module.exports = Translator;
+        module.exports = EOTranslator;
     } else {
-        obj.Translator = Translator;
+        obj.EOTranslator = EOTranslator;
     }
 })((typeof window !== 'undefined') ? window : this);

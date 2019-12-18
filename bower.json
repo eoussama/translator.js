@@ -1,10 +1,8 @@
 {
-  "name": "translatorjs",
+  "name": "eo-translatorjs",
   "description": "A simple javascript library for translating web content.",
   "main": "",
-  "authors": [
-    "EOussama"
-  ],
+  "authors": ["EOussama"],
   "license": "MIT",
   "keywords": [
     "translate",

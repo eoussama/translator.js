@@ -3,7 +3,9 @@
   "version": "2.0.1",
   "description": "A simple javascript library for translating web content.",
   "scripts": {
-    "build": "npx gulp"
+    "build": "npx gulp",
+    "docs": "cp ./dist/eo-translator.min.js ./docs/assets/js/lib/",
+    "prod": "npm run build && npm run docs"
   },
   "directories": {
     "doc": "docs"
@@ -21,7 +23,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-beautify": "^2.0.1",
     "gulp-rename": "^1.4.0",
