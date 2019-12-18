@@ -1,6 +1,6 @@
 {
   "name": "eo-translatorjs",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "A simple javascript library for translating web content.",
   "scripts": {
     "build": "npx gulp",
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EOussama/translatorjs.git"
+    "url": "git+https://github.com/EOussama/eo-translatorjs.git"
   },
   "author": "EOussama",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EOussama/translatorjs/issues"
+    "url": "https://github.com/EOussama/eo-translatorjs/issues"
   },
-  "homepage": "https://github.com/EOussama/translatorjs#readme",
+  "homepage": "https://github.com/EOussama/eo-translatorjs#readme",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",

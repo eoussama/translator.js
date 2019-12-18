@@ -10,7 +10,7 @@
     "text-translation",
     "node-package"
   ],
-  "homepage": "https://github.com/EOussama/translatorjs",
+  "homepage": "https://github.com/EOussama/eo-translatorjs",
   "ignore": [
     "**/.*",
     "node_modules",
