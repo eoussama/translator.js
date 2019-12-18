@@ -1,10 +1,10 @@
 /**
  * 
  * @name:       translatorjs
- * @version:    2.0.1
+ * @version:    3.0.0
  * @author:     EOussama
  * @license     MIT
- * @source:     https://github.com/EOussama/translatorjs
+ * @source:     https://github.com/EOussama/eo-translatorjs
  * 
  * A simple javascript library for translating web content.
  * 
@@ -14,22 +14,25 @@
 
 window.addEventListener('load', () => {
 
-	// The dictionary.
+	// The dictionary
 	var dictionary = {
-		"About": {
-			'fr': 'A propos',
-			'es': 'nos'
+		'en': {
+			'greeting': 'Hello!'
 		},
-		"Hello": {
-			'fr': 'Bonjour',
-			'es': 'Hola',
-			'br': 'Jola'
+		'fr': {
+			'greeting': 'Bonjour!'
+		},
+		'es': {
+			'greeting': 'Hola!'
+		},
+		'br': {
+			'greeting': 'Jola!'
 		}
 	};
 
-	// The translator.
+	// The translator
 	var translator = new EOTranslator(dictionary);
 
-	// Translating.
+	// Translating the DOM
 	translator.translate('br');
 });
