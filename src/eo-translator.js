@@ -43,9 +43,9 @@
 		 */
 		translate(input = '', lang, fallback) {
 			const language = lang || this.language;
-			const fallback = language;
+			const fallbackVal = fallback || input;
 
-			return this.dictionary[language][input] || fallback || input;
+			return this.dictionary[language][input] || fallbackVal || input;
 		}
 
 		/**
@@ -58,8 +58,9 @@
 			if (DOMElement) {
 				const language = lang || this.language;
 				const input = DOMElement.attributes['eo-translator'].value || DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
+				const fallbackVal = (DOMElement.attributes['eo-translator-fallback'] || { value: input }).value;
 
-				DOMElement.textContent = this.translate(input, language);
+				DOMElement.textContent = this.translate(input, language, fallbackVal);
 			}
 		}
 
