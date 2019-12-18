@@ -22,28 +22,42 @@
 		/**
 		 * Instantiates a translator object
 		 *
-		 * @param {object} dictionary The translation dictionary
-		 * @param {string} language The default language
+		 * @param {object} dict The translation dictionary
+		 * @param {string} lang The default language
 		 */
-		constructor(dictionary = {}, language = 'en') {
-			this.dictionary = dictionary;
-			this.language = language;
-
-			console.log('EO TranslatorJS', this.dictionary, this.language);
+		constructor(dict, lang) {
+			this.dictionary = dict || {};
+			this.language = lang || 'en';
 		}
 
 		//#endregion
 
 		//#region Methods
 
-		// Translates an input
-		translate() {
-			console.log('Translating...');
+		/**
+		 * Translates an input value
+		 *
+		 * @param {string} input The input value to translate
+		 * @param {string} lang The language to translate to
+		 */
+		translate(input = '', lang) {
+			var language = lang || this.language;
+			return this.dictionary[language][input] || input;
 		}
 
-		// Translates a DOM element
-		translateElement() {
-			console.log('Translating the element...');
+		/**
+		 * Translates the contents of a DOM elemnt
+		 * 
+		 * @param {HTMLElement} DOMElement The DOM element to translate the content of
+		 * @param {string} lang The language to translate to
+		 */
+		translateElement(DOMElement, lang) {
+			if (DOMElement) {
+				var language = lang || this.language;
+				var input = DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
+
+				DOMElement.textContent = this.translate(input, language);
+			}
 		}
 
 		// Translates the DOM

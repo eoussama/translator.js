@@ -33,6 +33,17 @@ window.addEventListener('load', () => {
 	// The translator
 	var translator = new EOTranslator(dictionary);
 
-	// Translating the DOM
-	translator.translate('br');
+	// Translating an input
+	document
+		.getElementById('translateBtn')
+		.addEventListener('click', function () {
+			var input = translator.translate('greeting', 'es');
+			alert(input);
+		});
+
+	// Translating a DOM element
+	var target = document.getElementById('target');
+	translator.translateElement(target);
+
+
 });

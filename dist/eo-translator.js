@@ -45,33 +45,48 @@ function _createClass(Constructor, protoProps, staticProps) {
             /**
              * Instantiates a translator object
              *
-             * @param {object} dictionary The translation dictionary
-             * @param {string} language The default language
+             * @param {object} dict The translation dictionary
+             * @param {string} lang The default language
              */
-            function EOTranslator() {
-                var dictionary = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-                var language = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'en';
-
+            function EOTranslator(dict, lang) {
                 _classCallCheck(this, EOTranslator);
 
-                this.dictionary = dictionary;
-                this.language = language;
-                console.log('EO TranslatorJS', this.dictionary, this.language);
+                this.dictionary = dict || {};
+                this.language = lang || 'en';
             } //#endregion
             //#region Methods
-            // Translates an input
+
+            /**
+             * Translates an input value
+             *
+             * @param {string} input The input value to translate
+             * @param {string} lang The language to translate to
+             */
 
 
             _createClass(EOTranslator, [{
                 key: "translate",
                 value: function translate() {
-                    console.log('Translating...');
-                } // Translates a DOM element
+                    var input = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+                    var lang = arguments.length > 1 ? arguments[1] : undefined;
+                    var language = lang || this.language;
+                    return this.dictionary[language][input] || input;
+                }
+                /**
+                 * Translates the contents of a DOM elemnt
+                 * 
+                 * @param {HTMLElement} DOMElement The DOM element to translate the content of
+                 * @param {string} lang The language to translate to
+                 */
 
             }, {
                 key: "translateElement",
-                value: function translateElement() {
-                    console.log('Translating the element...');
+                value: function translateElement(DOMElement, lang) {
+                    if (DOMElement) {
+                        var language = lang || this.language;
+                        var input = DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
+                        DOMElement.textContent = this.translate(input, language);
+                    }
                 } // Translates the DOM
 
             }, {
