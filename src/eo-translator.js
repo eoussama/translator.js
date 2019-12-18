@@ -16,9 +16,42 @@
 	 * The translator class
 	 */
 	class EOTranslator {
-		constructor() {
-			console.log('EO TranslatorJS');
+
+		//#region Constructor
+
+		/**
+		 * Instantiates a translator object
+		 *
+		 * @param {object} dictionary The translation dictionary
+		 * @param {string} language The default language
+		 */
+		constructor(dictionary = {}, language = 'en') {
+			this.dictionary = dictionary;
+			this.language = language;
+
+			console.log('EO TranslatorJS', this.dictionary, this.language);
 		}
+
+		//#endregion
+
+		//#region Methods
+
+		// Translates an input
+		translate() {
+			console.log('Translating...');
+		}
+
+		// Translates a DOM element
+		translateElement() {
+			console.log('Translating the element...');
+		}
+
+		// Translates the DOM
+		translateDOM() {
+			console.log('Translating the DOM...');
+		}
+
+		//#endregion
 	}
 
 	if (typeof exports !== 'undefined') {
