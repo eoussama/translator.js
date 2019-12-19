@@ -17,7 +17,14 @@ window.addEventListener('load', () => {
 	// The dictionary
 	var dictionary = {
 		'en': {
-			'greeting': 'Hello!'
+			'greeting': 'Hello!',
+			'nested': {
+				'a': 'first value',
+				'b': 'second value',
+				'c': {
+					'd': 'third value'
+				}
+			}
 		},
 		'fr': {
 			'greeting': 'Bonjour!'
