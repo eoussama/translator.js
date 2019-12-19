@@ -17,7 +17,7 @@ window.addEventListener('load', () => {
 	// The dictionary
 	var dictionary = {
 		'en': {
-			'greeting': 'Hello!',
+			'greeting': 'Hello {name}!',
 			'nested': {
 				'a': 'first value',
 				'b': 'second value',
@@ -27,18 +27,19 @@ window.addEventListener('load', () => {
 			}
 		},
 		'fr': {
-			'greeting': 'Bonjour!',
+			'greeting': 'Bonjour {name}!',
 			'nested': {
 				'c': {
-					'd': 'troisième valeur'
+					'd': 'troisième valeur',
+					'e': 'Je m\'appelle {name}, je suis {age} ans'
 				}
 			}
 		},
 		'es': {
-			'greeting': 'Hola!'
+			'greeting': 'Hola {name}!'
 		},
 		'br': {
-			'greeting': 'Jola!'
+			'greeting': 'Jola {name}!'
 		}
 	};
 
@@ -49,7 +50,7 @@ window.addEventListener('load', () => {
 	document
 		.getElementById('translateBtn')
 		.addEventListener('click', function () {
-			var input = translator.translate('greeting', { lang: 'es' });
+			var input = translator.translate('greeting', { lang: 'es', params: { name: 'Oussama' } });
 			alert(input);
 		});
 

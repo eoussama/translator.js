@@ -43,9 +43,19 @@
 		translate(input = '', options = {}) {
 			const language = options.lang || this.language;
 			const fallbackVal = options.fallback || input;
+			const params = options.params || {};
 			const frags = input.split('.');
 
 			let output = null;
+
+			const assignParams = (raw) => {
+				Object.keys(params).forEach(key => {
+					const pattern = new RegExp(`{${key}}`, 'g');
+					raw = raw.replace(pattern, params[key]);
+				});
+
+				return raw;
+			};
 
 			if (frags.filter(frag => frag.length > 0).length > 1) {
 				let temp = this.dictionary[language];
@@ -63,7 +73,7 @@
 				output = this.dictionary[language][input];
 			}
 
-			return output || fallbackVal || input;
+			return output ? assignParams(output) : fallbackVal || input;
 		}
 
 		/**
@@ -76,9 +86,10 @@
 			if (DOMElement) {
 				const language = lang || this.language;
 				const input = DOMElement.attributes['eo-translator'].value || DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
-				const fallbackVal = (DOMElement.attributes['eo-translator-fallback'] || { value: input }).value;
+				const fallback = (DOMElement.attributes['eo-translator-fallback'] || { value: input }).value;
+				const params = JSON.parse((DOMElement.attributes['eo-translator-params'] || { value: "{}" }).value) || {};
 
-				DOMElement.textContent = this.translate(input, { lang: language, fallback: fallbackVal });
+				DOMElement.textContent = this.translate(input, { lang: language, fallback, params });
 			}
 		}
 

@@ -71,8 +71,17 @@ function _createClass(Constructor, protoProps, staticProps) {
                     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
                     var language = options.lang || this.language;
                     var fallbackVal = options.fallback || input;
+                    var params = options.params || {};
                     var frags = input.split('.');
                     var output = null;
+
+                    var assignParams = function assignParams(raw) {
+                        Object.keys(params).forEach(function(key) {
+                            var pattern = new RegExp("{".concat(key, "}"), 'g');
+                            raw = raw.replace(pattern, params[key]);
+                        });
+                        return raw;
+                    };
 
                     if (frags.filter(function(frag) {
                             return frag.length > 0;
@@ -111,7 +120,7 @@ function _createClass(Constructor, protoProps, staticProps) {
                         output = this.dictionary[language][input];
                     }
 
-                    return output || fallbackVal || input;
+                    return output ? assignParams(output) : fallbackVal || input;
                 }
                 /**
                  * Translates the contents of a DOM elemnt
@@ -126,12 +135,16 @@ function _createClass(Constructor, protoProps, staticProps) {
                     if (DOMElement) {
                         var language = lang || this.language;
                         var input = DOMElement.attributes['eo-translator'].value || DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
-                        var fallbackVal = (DOMElement.attributes['eo-translator-fallback'] || {
+                        var fallback = (DOMElement.attributes['eo-translator-fallback'] || {
                             value: input
                         }).value;
+                        var params = JSON.parse((DOMElement.attributes['eo-translator-params'] || {
+                            value: "{}"
+                        }).value) || {};
                         DOMElement.textContent = this.translate(input, {
                             lang: language,
-                            fallback: fallbackVal
+                            fallback: fallback,
+                            params: params
                         });
                     }
                 } // Translates the DOM
