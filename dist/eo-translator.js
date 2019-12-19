@@ -52,7 +52,7 @@ function _createClass(Constructor, protoProps, staticProps) {
                 _classCallCheck(this, EOTranslator);
 
                 this.dictionary = dict || {};
-                this.language = lang || 'en';
+                this.language = lang || document.documentElement.lang || 'en';
             } //#endregion
             //#region Methods
 

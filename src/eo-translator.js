@@ -27,7 +27,7 @@
 		 */
 		constructor(dict, lang) {
 			this.dictionary = dict || {};
-			this.language = lang || 'en';
+			this.language = lang || document.documentElement.lang || 'en';
 		}
 
 		//#endregion
