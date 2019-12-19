@@ -50,7 +50,7 @@ window.addEventListener('load', () => {
 	document
 		.getElementById('translateBtn')
 		.addEventListener('click', function () {
-			var input = translator.translate('greeting', { lang: 'es', params: { name: 'Oussama' } });
+			var input = translator.translate('greeting', { lang: 'en', params: { name: 'Oussama' } });
 			alert(input);
 		});
 
@@ -60,11 +60,12 @@ window.addEventListener('load', () => {
 
 	// Global translation
 	var globalParent = document.getElementById('global-parent');
+	var globalTranslateSelect = document.getElementById('globalTranslate');
+
+	globalTranslateSelect.value = translator.language;
 
 	translator.translateDOM(globalParent);
-	document
-		.getElementById('globalTranslate')
-		.addEventListener('change', function (e) {
-			translator.translateDOM(globalParent, e.target.value);
-		});
+	globalTranslateSelect.addEventListener('change', function (e) {
+		translator.translateDOM(globalParent, e.target.value);
+	});
 });
