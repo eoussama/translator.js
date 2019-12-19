@@ -27,7 +27,12 @@ window.addEventListener('load', () => {
 			}
 		},
 		'fr': {
-			'greeting': 'Bonjour!'
+			'greeting': 'Bonjour!',
+			'nested': {
+				'c': {
+					'd': 'troisième valeur'
+				}
+			}
 		},
 		'es': {
 			'greeting': 'Hola!'
@@ -44,7 +49,7 @@ window.addEventListener('load', () => {
 	document
 		.getElementById('translateBtn')
 		.addEventListener('click', function () {
-			var input = translator.translate('greeting', 'es');
+			var input = translator.translate('greeting', { lang: 'es' });
 			alert(input);
 		});
 

@@ -38,12 +38,11 @@
 		 * Translates an input value
 		 *
 		 * @param {string} input The input value to translate
-		 * @param {string} fallback The fallback value to use
-		 * @param {string} lang The language to translate to
+		 * @param {object} options The translation options
 		 */
-		translate(input = '', lang, fallback) {
-			const language = lang || this.language;
-			const fallbackVal = fallback || input;
+		translate(input = '', options = {}) {
+			const language = options.lang || this.language;
+			const fallbackVal = options.fallback || input;
 			const frags = input.split('.');
 
 			let output = null;
@@ -79,7 +78,7 @@
 				const input = DOMElement.attributes['eo-translator'].value || DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
 				const fallbackVal = (DOMElement.attributes['eo-translator-fallback'] || { value: input }).value;
 
-				DOMElement.textContent = this.translate(input, language, fallbackVal);
+				DOMElement.textContent = this.translate(input, { lang: language, fallback: fallbackVal });
 			}
 		}
 

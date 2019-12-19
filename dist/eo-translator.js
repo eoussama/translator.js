@@ -60,8 +60,7 @@ function _createClass(Constructor, protoProps, staticProps) {
              * Translates an input value
              *
              * @param {string} input The input value to translate
-             * @param {string} fallback The fallback value to use
-             * @param {string} lang The language to translate to
+             * @param {object} options The translation options
              */
 
 
@@ -69,10 +68,9 @@ function _createClass(Constructor, protoProps, staticProps) {
                 key: "translate",
                 value: function translate() {
                     var input = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-                    var lang = arguments.length > 1 ? arguments[1] : undefined;
-                    var fallback = arguments.length > 2 ? arguments[2] : undefined;
-                    var language = lang || this.language;
-                    var fallbackVal = fallback || input;
+                    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+                    var language = options.lang || this.language;
+                    var fallbackVal = options.fallback || input;
                     var frags = input.split('.');
                     var output = null;
 
@@ -131,7 +129,10 @@ function _createClass(Constructor, protoProps, staticProps) {
                         var fallbackVal = (DOMElement.attributes['eo-translator-fallback'] || {
                             value: input
                         }).value;
-                        DOMElement.textContent = this.translate(input, language, fallbackVal);
+                        DOMElement.textContent = this.translate(input, {
+                            lang: language,
+                            fallback: fallbackVal
+                        });
                     }
                 } // Translates the DOM
 
