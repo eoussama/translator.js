@@ -44,8 +44,27 @@
 		translate(input = '', lang, fallback) {
 			const language = lang || this.language;
 			const fallbackVal = fallback || input;
+			const frags = input.split('.');
 
-			return this.dictionary[language][input] || fallbackVal || input;
+			let output = null;
+
+			if (frags.filter(frag => frag.length > 0).length > 1) {
+				let temp = this.dictionary[language];
+
+				for (const frag of frags) {
+					temp = temp[frag] || undefined
+
+					if (!temp) {
+						break;
+					}
+				}
+
+				output = temp;
+			} else {
+				output = this.dictionary[language][input];
+			}
+
+			return output || fallbackVal || input;
 		}
 
 		/**
