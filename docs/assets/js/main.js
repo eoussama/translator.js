@@ -69,5 +69,6 @@ window.addEventListener('load', () => {
 		translator.translateDOM(globalParent, e.target.value);
 	});
 
+	// translator.dictionary = {};
 	console.log({ translator });
 });

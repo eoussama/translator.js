@@ -19,8 +19,37 @@
 
 		//#region Properties
 
-		// #dictionary;
-		// #language;
+		/**
+		 * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
+		 */
+		set dictionary(dict) {
+			if (typeof dict === 'object' && !Array.isArray(dict)) {
+				this._dictionary = dict;
+			}
+		}
+
+		/**
+		 * Gets the dictionary value
+		 */
+		get dictionary() {
+			return this._dictionary;
+		}
+
+		/**
+		 * @param {{ [x: string]: { [x: string]: any; }; }} language The new language value
+		 */
+		set language(language) {
+			if (typeof language === 'string') {
+				this._language = language;
+			}
+		}
+
+		/**
+		 * Gets the language value
+		 */
+		get language() {
+			return this._language;
+		}
 
 		//#endregion
 
@@ -49,11 +78,11 @@
 		 */
 		translate(input = '', options = {}) {
 			const language = options.lang || this.language;
-			const fallbackVal = options.fallback || input;
+			const fallback = options.fallback || input;
 			const params = options.params || {};
 			const frags = input.split('.');
 
-			let output = null;
+			let output = this.dictionary.hasOwnProperty(this.language);
 
 			const assignParams = (raw) => {
 				Object.keys(params).forEach(key => {
@@ -64,23 +93,25 @@
 				return raw;
 			};
 
-			if (frags.filter(frag => frag.length > 0).length > 1) {
-				let temp = this.dictionary[language];
+			if (output) {
+				if (frags.filter(frag => frag.length > 0).length > 1) {
+					let temp = this.dictionary[language];
 
-				for (const frag of frags) {
-					temp = temp[frag] || undefined
+					for (const frag of frags) {
+						temp = temp[frag] || undefined
 
-					if (!temp) {
-						break;
+						if (!temp) {
+							break;
+						}
 					}
-				}
 
-				output = temp;
-			} else {
-				output = this.dictionary[language][input];
+					output = temp;
+				} else {
+					output = this.dictionary[language][input];
+				}
 			}
 
-			return output ? assignParams(output) : fallbackVal || input;
+			return output ? assignParams(output) : fallback;
 		}
 
 		/**

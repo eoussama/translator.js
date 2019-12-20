@@ -1,5 +1,18 @@
 "use strict";
 
+function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+        _typeof = function _typeof(obj) {
+            return typeof obj;
+        };
+    } else {
+        _typeof = function _typeof(obj) {
+            return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+        };
+    }
+    return _typeof(obj);
+}
+
 function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
         throw new TypeError("Cannot call a class as a function");
@@ -40,18 +53,54 @@ function _createClass(Constructor, protoProps, staticProps) {
     var EOTranslator =
         /*#__PURE__*/
         function() {
-            //#region Properties
-            // #dictionary;
-            // #language;
-            //#endregion
-            //#region Constructor
+            _createClass(EOTranslator, [{
+                key: "dictionary",
+                //#region Properties
 
-            /**
-             * Instantiates a translator object
-             *
-             * @param {object} dict The translation dictionary
-             * @param {string} lang The default language
-             */
+                /**
+                 * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
+                 */
+                set: function set(dict) {
+                        if (_typeof(dict) === 'object' && !Array.isArray(dict)) {
+                            this._dictionary = dict;
+                        }
+                    }
+                    /**
+                     * Gets the dictionary value
+                     */
+                    ,
+                get: function get() {
+                    return this._dictionary;
+                }
+                /**
+                 * @param {{ [x: string]: { [x: string]: any; }; }} language The new language value
+                 */
+
+            }, {
+                key: "language",
+                set: function set(language) {
+                        if (typeof language === 'string') {
+                            this._language = language;
+                        }
+                    }
+                    /**
+                     * Gets the language value
+                     */
+                    ,
+                get: function get() {
+                    return this._language;
+                } //#endregion
+                //#region Constructor
+
+                /**
+                 * Instantiates a translator object
+                 *
+                 * @param {object} dict The translation dictionary
+                 * @param {string} lang The default language
+                 */
+
+            }]);
+
             function EOTranslator(dict, lang) {
                 _classCallCheck(this, EOTranslator);
 
@@ -74,10 +123,10 @@ function _createClass(Constructor, protoProps, staticProps) {
                     var input = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
                     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
                     var language = options.lang || this.language;
-                    var fallbackVal = options.fallback || input;
+                    var fallback = options.fallback || input;
                     var params = options.params || {};
                     var frags = input.split('.');
-                    var output = null;
+                    var output = this.dictionary.hasOwnProperty(this.language);
 
                     var assignParams = function assignParams(raw) {
                         Object.keys(params).forEach(function(key) {
@@ -87,44 +136,46 @@ function _createClass(Constructor, protoProps, staticProps) {
                         return raw;
                     };
 
-                    if (frags.filter(function(frag) {
-                            return frag.length > 0;
-                        }).length > 1) {
-                        var temp = this.dictionary[language];
-                        var _iteratorNormalCompletion = true;
-                        var _didIteratorError = false;
-                        var _iteratorError = undefined;
+                    if (output) {
+                        if (frags.filter(function(frag) {
+                                return frag.length > 0;
+                            }).length > 1) {
+                            var temp = this.dictionary[language];
+                            var _iteratorNormalCompletion = true;
+                            var _didIteratorError = false;
+                            var _iteratorError = undefined;
 
-                        try {
-                            for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                                var frag = _step.value;
-                                temp = temp[frag] || undefined;
-
-                                if (!temp) {
-                                    break;
-                                }
-                            }
-                        } catch (err) {
-                            _didIteratorError = true;
-                            _iteratorError = err;
-                        } finally {
                             try {
-                                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                                    _iterator.return();
+                                for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                    var frag = _step.value;
+                                    temp = temp[frag] || undefined;
+
+                                    if (!temp) {
+                                        break;
+                                    }
                                 }
+                            } catch (err) {
+                                _didIteratorError = true;
+                                _iteratorError = err;
                             } finally {
-                                if (_didIteratorError) {
-                                    throw _iteratorError;
+                                try {
+                                    if (!_iteratorNormalCompletion && _iterator.return != null) {
+                                        _iterator.return();
+                                    }
+                                } finally {
+                                    if (_didIteratorError) {
+                                        throw _iteratorError;
+                                    }
                                 }
                             }
-                        }
 
-                        output = temp;
-                    } else {
-                        output = this.dictionary[language][input];
+                            output = temp;
+                        } else {
+                            output = this.dictionary[language][input];
+                        }
                     }
 
-                    return output ? assignParams(output) : fallbackVal || input;
+                    return output ? assignParams(output) : fallback;
                 }
                 /**
                  * Translates the contents of a DOM elemnt
