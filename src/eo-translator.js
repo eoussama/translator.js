@@ -17,6 +17,13 @@
 	 */
 	class EOTranslator {
 
+		//#region Properties
+
+		// #dictionary;
+		// #language;
+
+		//#endregion
+
 		//#region Constructor
 
 		/**

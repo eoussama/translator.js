@@ -68,4 +68,6 @@ window.addEventListener('load', () => {
 	globalTranslateSelect.addEventListener('change', function (e) {
 		translator.translateDOM(globalParent, e.target.value);
 	});
+
+	console.log({ translator });
 });

@@ -5,7 +5,8 @@
   "scripts": {
     "build": "npx gulp",
     "docs": "cp ./dist/eo-translator.min.js ./docs/assets/js/lib/",
-    "prod": "npm run build && npm run docs"
+    "clean": "rm -rf ./dist/",
+    "prod": "npm run clean && npm run build && npm run docs"
   },
   "directories": {
     "doc": "docs"

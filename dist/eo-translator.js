@@ -40,6 +40,10 @@ function _createClass(Constructor, protoProps, staticProps) {
     var EOTranslator =
         /*#__PURE__*/
         function() {
+            //#region Properties
+            // #dictionary;
+            // #language;
+            //#endregion
             //#region Constructor
 
             /**
