@@ -23,7 +23,11 @@
 		 * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
 		 */
 		set dictionary(dict) {
+
+			// Checking if the dictionary value is an object
 			if (typeof dict === 'object' && !Array.isArray(dict)) {
+
+				// If so, assign it the passed value
 				this._dictionary = dict;
 			}
 		}
@@ -32,6 +36,8 @@
 		 * Gets the dictionary value
 		 */
 		get dictionary() {
+
+			// Returning the dictionary value
 			return this._dictionary;
 		}
 
@@ -39,7 +45,11 @@
 		 * @param {{ [x: string]: { [x: string]: any; }; }} language The new language value
 		 */
 		set language(language) {
+
+			// Checking if the language value is a string
 			if (typeof language === 'string') {
+
+				// If so, assign it the passed value
 				this._language = language;
 			}
 		}
@@ -48,6 +58,8 @@
 		 * Gets the language value
 		 */
 		get language() {
+
+			// Returning the language value
 			return this._language;
 		}
 
@@ -84,15 +96,6 @@
 
 			let output = this.dictionary.hasOwnProperty(this.language);
 
-			const assignParams = (raw) => {
-				Object.keys(params).forEach(key => {
-					const pattern = new RegExp(`{${key}}`, 'g');
-					raw = raw.replace(pattern, params[key]);
-				});
-
-				return raw;
-			};
-
 			if (output) {
 				if (frags.filter(frag => frag.length > 0).length > 1) {
 					let temp = this.dictionary[language];
@@ -111,7 +114,7 @@
 				}
 			}
 
-			return output ? assignParams(output) : fallback;
+			return output ? assignParams(output, params) : fallback;
 		}
 
 		/**
@@ -142,6 +145,28 @@
 
 		//#endregion
 	}
+
+	/**
+	 * Affects a raw string a collection of parameters
+	 *
+	 * @param {string} raw The raw string to add the parameters to
+	 * @param {object} params The parameters object
+	 */
+	function assignParams(raw, params) {
+
+		// Looping through the parameters
+		Object.keys(params).forEach(key => {
+
+			// Creating a replacement pattern
+			const pattern = new RegExp(`{${key}}`, 'g');
+
+			// Replacing the parameters accordingly
+			raw = raw.replace(pattern, params[key]);
+		});
+
+		// Returning a parametated (if you will) output
+		return raw;
+	};
 
 	if (typeof exports !== 'undefined') {
 		module.exports = EOTranslator;
