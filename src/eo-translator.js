@@ -92,12 +92,12 @@
 			const language = options.lang || this.language;
 			const fallback = options.fallback || input;
 			const params = options.params || {};
-			const frags = input.split('.');
+			const frags = input.split('.').filter(frag => frag.length > 0);
 
 			let output = this.dictionary.hasOwnProperty(this.language);
 
 			if (output) {
-				if (frags.filter(frag => frag.length > 0).length > 1) {
+				if (frags.length > 1) {
 					output = extractValue(this.dictionary, language, frags);
 				} else {
 					output = this.dictionary[language][input];
@@ -124,13 +124,72 @@
 			}
 		}
 
-		// Translates the DOM
+
+		/**
+		 * Translates a DOM document/element
+		 *
+		 * @param {HTMLElement} DOMContainer The HTML container
+		 * @param {string} lang The language to translate to
+		 */
 		translateDOM(DOMContainer, lang) {
 			const language = lang || this.language;
 			const container = DOMContainer || document;
 			const elements = container.querySelectorAll('[eo-translator]');
 
 			elements.forEach((element) => this.translateElement(element, language));
+		}
+
+		/**
+		 * Adds a new translation to a given language or updates an existing
+		 * one accordingly.
+		 *
+		 * @param {string} lang The language to add the translation to
+		 * @param {string} keys The key of the translation
+		 * @param {string} translation The translation to add
+		 */
+		add(lang, key, translation) {
+
+			// Filtering the fragments
+			const frags = key.split('.').filter((frag, index) => frag.length > 0);
+
+			// Getting the raw key
+			const rawKey = frags.pop();
+
+			// Checking if the language already exists in the dictionary
+			if (!this.dictionary.hasOwnProperty(lang)) {
+
+				// Initiate a value for the language
+				this.dictionary[lang] = {};
+			}
+
+			// Getting a copy of the dictionary
+			let tempDict = this.dictionary[lang];
+
+			// Checking if the passed key can be nested
+			if (frags.length > 0) {
+
+				// Looping through the fragments
+				for (const frag of frags) {
+
+					// Updates the value of the temporary dictionary
+					tempDict = tempDict[frag];
+
+					// Checking if the last iteration has been reached
+					if (frag === frags.slice(0).reverse()[0]) {
+
+						// Adding/Updating the transition
+						tempDict[rawKey] = translation;
+					}
+				}
+			} else {
+
+				// If not, affect the translation directly
+				tempDict[key] = translation;
+			}
+		}
+
+		remove() {
+
 		}
 
 		//#endregion

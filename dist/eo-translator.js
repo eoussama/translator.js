@@ -131,13 +131,13 @@ function _createClass(Constructor, protoProps, staticProps) {
                     var language = options.lang || this.language;
                     var fallback = options.fallback || input;
                     var params = options.params || {};
-                    var frags = input.split('.');
+                    var frags = input.split('.').filter(function(frag) {
+                        return frag.length > 0;
+                    });
                     var output = this.dictionary.hasOwnProperty(this.language);
 
                     if (output) {
-                        if (frags.filter(function(frag) {
-                                return frag.length > 0;
-                            }).length > 1) {
+                        if (frags.length > 1) {
                             output = extractValue(this.dictionary, language, frags);
                         } else {
                             output = this.dictionary[language][input];
@@ -171,7 +171,13 @@ function _createClass(Constructor, protoProps, staticProps) {
                             params: params
                         });
                     }
-                } // Translates the DOM
+                }
+                /**
+                 * Translates a DOM document/element
+                 *
+                 * @param {HTMLElement} DOMContainer The HTML container
+                 * @param {string} lang The language to translate to
+                 */
 
             }, {
                 key: "translateDOM",
@@ -184,7 +190,73 @@ function _createClass(Constructor, protoProps, staticProps) {
                     elements.forEach(function(element) {
                         return _this.translateElement(element, language);
                     });
-                } //#endregion
+                }
+                /**
+                 * Adds a new translation to a given language or updates an existing
+                 * one accordingly.
+                 *
+                 * @param {string} lang The language to add the translation to
+                 * @param {string} keys The key of the translation
+                 * @param {string} translation The translation to add
+                 */
+
+            }, {
+                key: "add",
+                value: function add(lang, key, translation) {
+                    // Filtering the fragments
+                    var frags = key.split('.').filter(function(frag, index) {
+                        return frag.length > 0;
+                    }); // Getting the raw key
+
+                    var rawKey = frags.pop(); // Checking if the language already exists in the dictionary
+
+                    if (!this.dictionary.hasOwnProperty(lang)) {
+                        // Initiate a value for the language
+                        this.dictionary[lang] = {};
+                    } // Getting a copy of the dictionary
+
+
+                    var tempDict = this.dictionary[lang]; // Checking if the passed key can be nested
+
+                    if (frags.length > 0) {
+                        // Looping through the fragments
+                        var _iteratorNormalCompletion = true;
+                        var _didIteratorError = false;
+                        var _iteratorError = undefined;
+
+                        try {
+                            for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                                var frag = _step.value;
+                                // Updates the value of the temporary dictionary
+                                tempDict = tempDict[frag]; // Checking if the last iteration has been reached
+
+                                if (frag === frags.slice(0).reverse()[0]) {
+                                    // Adding/Updating the transition
+                                    tempDict[rawKey] = translation;
+                                }
+                            }
+                        } catch (err) {
+                            _didIteratorError = true;
+                            _iteratorError = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                                    _iterator.return();
+                                }
+                            } finally {
+                                if (_didIteratorError) {
+                                    throw _iteratorError;
+                                }
+                            }
+                        }
+                    } else {
+                        // If not, affect the translation directly
+                        tempDict[key] = translation;
+                    }
+                }
+            }, {
+                key: "remove",
+                value: function remove() {} //#endregion
 
             }]);
 
@@ -221,13 +293,13 @@ function _createClass(Constructor, protoProps, staticProps) {
 
     function extractValue(dictionary, language, frags) {
         var temp = dictionary[language];
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
 
         try {
-            for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var frag = _step.value;
+            for (var _iterator2 = frags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var frag = _step2.value;
                 temp = temp[frag] || undefined;
 
                 if (!temp) {
@@ -235,16 +307,16 @@ function _createClass(Constructor, protoProps, staticProps) {
                 }
             }
         } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
         } finally {
             try {
-                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                    _iterator.return();
+                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                    _iterator2.return();
                 }
             } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
                 }
             }
         }

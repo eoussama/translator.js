@@ -46,6 +46,7 @@ window.addEventListener('load', () => {
 	// The translator
 	var translator = new EOTranslator(dictionary);
 
+	translator.add('fr', 'nested.c.e', 'marhaba biik')
 	// Translating an input
 	document
 		.getElementById('translateBtn')
