@@ -46,7 +46,14 @@ window.addEventListener('load', () => {
 	// The translator
 	var translator = new EOTranslator(dictionary);
 
-	translator.add('fr', 'nested.c.e', 'marhaba biik')
+	// Adding translations
+	translator.add('fr', 'nested.c.f', 'Maah');
+	translator.add('en', 'dynamicallyAddedTop', 'Top test');
+	translator.add('en', 'nested.dynamicallyAddedNested', 'Nested test');
+
+	// Removing translations
+	translator.remove('fr', 'nested.c.f');
+
 	// Translating an input
 	document
 		.getElementById('translateBtn')

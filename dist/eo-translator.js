@@ -204,7 +204,7 @@ function _createClass(Constructor, protoProps, staticProps) {
                 key: "add",
                 value: function add(lang, key, translation) {
                     // Filtering the fragments
-                    var frags = key.split('.').filter(function(frag, index) {
+                    var frags = key.split('.').filter(function(frag) {
                         return frag.length > 0;
                     }); // Getting the raw key
 
@@ -254,9 +254,67 @@ function _createClass(Constructor, protoProps, staticProps) {
                         tempDict[key] = translation;
                     }
                 }
+                /**
+                 * Removes a translation from a given language
+                 *
+                 * @param {string} lang The language to remove the translation from
+                 * @param {string} keys The key of the translation to remove
+                 */
+
             }, {
                 key: "remove",
-                value: function remove() {} //#endregion
+                value: function remove(lang, key) {
+                    // Filtering the fragments
+                    var frags = key.split('.').filter(function(frag) {
+                        return frag.length > 0;
+                    }); // Getting the raw key
+
+                    var rawKey = frags.pop(); // Checking if the language already exists in the dictionary
+
+                    if (!this.dictionary.hasOwnProperty(lang)) {
+                        // Initiate a value for the language
+                        this.dictionary[lang] = {};
+                    } // Getting a copy of the dictionary
+
+
+                    var tempDict = this.dictionary[lang]; // Checking if the passed key can be nested
+
+                    if (frags.length > 0) {
+                        // Looping through the fragments
+                        var _iteratorNormalCompletion2 = true;
+                        var _didIteratorError2 = false;
+                        var _iteratorError2 = undefined;
+
+                        try {
+                            for (var _iterator2 = frags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                                var frag = _step2.value;
+                                // Updates the value of the temporary dictionary
+                                tempDict = tempDict[frag]; // Checking if the last iteration has been reached
+
+                                if (frag === frags.slice(0).reverse()[0]) {
+                                    // Removing the transition
+                                    delete tempDict[rawKey];
+                                }
+                            }
+                        } catch (err) {
+                            _didIteratorError2 = true;
+                            _iteratorError2 = err;
+                        } finally {
+                            try {
+                                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+                                    _iterator2.return();
+                                }
+                            } finally {
+                                if (_didIteratorError2) {
+                                    throw _iteratorError2;
+                                }
+                            }
+                        }
+                    } else {
+                        // If not, delete the translation directly
+                        delete tempDict[key];
+                    }
+                } //#endregion
 
             }]);
 
@@ -293,13 +351,13 @@ function _createClass(Constructor, protoProps, staticProps) {
 
     function extractValue(dictionary, language, frags) {
         var temp = dictionary[language];
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+        var _iteratorNormalCompletion3 = true;
+        var _didIteratorError3 = false;
+        var _iteratorError3 = undefined;
 
         try {
-            for (var _iterator2 = frags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var frag = _step2.value;
+            for (var _iterator3 = frags[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                var frag = _step3.value;
                 temp = temp[frag] || undefined;
 
                 if (!temp) {
@@ -307,16 +365,16 @@ function _createClass(Constructor, protoProps, staticProps) {
                 }
             }
         } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
+            _didIteratorError3 = true;
+            _iteratorError3 = err;
         } finally {
             try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                    _iterator2.return();
+                if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+                    _iterator3.return();
                 }
             } finally {
-                if (_didIteratorError2) {
-                    throw _iteratorError2;
+                if (_didIteratorError3) {
+                    throw _iteratorError3;
                 }
             }
         }

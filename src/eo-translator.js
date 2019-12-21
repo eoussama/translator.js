@@ -150,7 +150,7 @@
 		add(lang, key, translation) {
 
 			// Filtering the fragments
-			const frags = key.split('.').filter((frag, index) => frag.length > 0);
+			const frags = key.split('.').filter(frag => frag.length > 0);
 
 			// Getting the raw key
 			const rawKey = frags.pop();
@@ -188,8 +188,51 @@
 			}
 		}
 
-		remove() {
+		/**
+		 * Removes a translation from a given language
+		 *
+		 * @param {string} lang The language to remove the translation from
+		 * @param {string} keys The key of the translation to remove
+		 */
+		remove(lang, key) {
 
+			// Filtering the fragments
+			const frags = key.split('.').filter(frag => frag.length > 0);
+
+			// Getting the raw key
+			const rawKey = frags.pop();
+
+			// Checking if the language already exists in the dictionary
+			if (!this.dictionary.hasOwnProperty(lang)) {
+
+				// Initiate a value for the language
+				this.dictionary[lang] = {};
+			}
+
+			// Getting a copy of the dictionary
+			let tempDict = this.dictionary[lang];
+
+			// Checking if the passed key can be nested
+			if (frags.length > 0) {
+
+				// Looping through the fragments
+				for (const frag of frags) {
+
+					// Updates the value of the temporary dictionary
+					tempDict = tempDict[frag];
+
+					// Checking if the last iteration has been reached
+					if (frag === frags.slice(0).reverse()[0]) {
+
+						// Removing the transition
+						delete tempDict[rawKey];
+					}
+				}
+			} else {
+
+				// If not, delete the translation directly
+				delete tempDict[key]
+			}
 		}
 
 		//#endregion
