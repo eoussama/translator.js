@@ -98,17 +98,7 @@
 
 			if (output) {
 				if (frags.filter(frag => frag.length > 0).length > 1) {
-					let temp = this.dictionary[language];
-
-					for (const frag of frags) {
-						temp = temp[frag] || undefined
-
-						if (!temp) {
-							break;
-						}
-					}
-
-					output = temp;
+					output = extractValue(this.dictionary, language, frags);
 				} else {
 					output = this.dictionary[language][input];
 				}
@@ -167,6 +157,27 @@
 		// Returning a parametated (if you will) output
 		return raw;
 	};
+
+	/**
+	 * Extracts the nested values
+	 *
+	 * @param {object} dictionary The dictionary object
+	 * @param {string} language The language to translate to
+	 * @param {array<string>} frags The list of nested keys
+	 */
+	function extractValue(dictionary, language, frags) {
+		let temp = dictionary[language];
+
+		for (const frag of frags) {
+			temp = temp[frag] || undefined
+
+			if (!temp) {
+				break;
+			}
+		}
+
+		return temp;
+	}
 
 	if (typeof exports !== 'undefined') {
 		module.exports = EOTranslator;

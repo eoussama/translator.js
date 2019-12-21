@@ -138,36 +138,7 @@ function _createClass(Constructor, protoProps, staticProps) {
                         if (frags.filter(function(frag) {
                                 return frag.length > 0;
                             }).length > 1) {
-                            var temp = this.dictionary[language];
-                            var _iteratorNormalCompletion = true;
-                            var _didIteratorError = false;
-                            var _iteratorError = undefined;
-
-                            try {
-                                for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                                    var frag = _step.value;
-                                    temp = temp[frag] || undefined;
-
-                                    if (!temp) {
-                                        break;
-                                    }
-                                }
-                            } catch (err) {
-                                _didIteratorError = true;
-                                _iteratorError = err;
-                            } finally {
-                                try {
-                                    if (!_iteratorNormalCompletion && _iterator.return != null) {
-                                        _iterator.return();
-                                    }
-                                } finally {
-                                    if (_didIteratorError) {
-                                        throw _iteratorError;
-                                    }
-                                }
-                            }
-
-                            output = temp;
+                            output = extractValue(this.dictionary, language, frags);
                         } else {
                             output = this.dictionary[language][input];
                         }
@@ -240,6 +211,46 @@ function _createClass(Constructor, protoProps, staticProps) {
     }
 
     ;
+    /**
+     * Extracts the nested values
+     *
+     * @param {object} dictionary The dictionary object
+     * @param {string} language The language to translate to
+     * @param {array<string>} frags The list of nested keys
+     */
+
+    function extractValue(dictionary, language, frags) {
+        var temp = dictionary[language];
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var frag = _step.value;
+                temp = temp[frag] || undefined;
+
+                if (!temp) {
+                    break;
+                }
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+
+        return temp;
+    }
 
     if (typeof exports !== 'undefined') {
         module.exports = EOTranslator;
