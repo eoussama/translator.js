@@ -1,6 +1,6 @@
 {
   "name": "eo-translatorjs",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A simple javascript library for translating web content.",
   "scripts": {
     "build": "npx gulp",
