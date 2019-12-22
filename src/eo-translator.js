@@ -1,7 +1,7 @@
 /**
  * 
  * @name:       eo-translatorjs
- * @version:    3.0.0
+ * @version:    3.0.1
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/eo-translatorjs
@@ -96,6 +96,10 @@
 			const fallback = options.fallback || input;
 			const params = options.params || {};
 			const frags = input.split('.').filter(frag => frag.length > 0);
+
+			if (!this.isValidLanguage(language)) {
+				throw new Error(`[EO TranslatorJS] Invalid target language “${language}”`);
+			}
 
 			let output = this.dictionary.hasOwnProperty(this.language);
 

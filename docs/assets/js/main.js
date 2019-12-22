@@ -1,7 +1,7 @@
 /**
  * 
  * @name:       eo-translatorjs
- * @version:    3.0.0
+ * @version:    3.0.1
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/eo-translatorjs
@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
 	document
 		.getElementById('translateBtn')
 		.addEventListener('click', function () {
-			var input = translator.translate('greeting', { lang: 'ff', params: { name: 'Oussama' } });
+			var input = translator.translate('greeting', { lang: 'en', params: { name: 'Oussama' } });
 			alert(input);
 		});
 

@@ -73,7 +73,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 /**
  * 
  * @name:       eo-translatorjs
- * @version:    3.0.0
+ * @version:    3.0.1
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/eo-translatorjs
@@ -173,6 +173,11 @@ function _createClass(Constructor, protoProps, staticProps) {
                     var frags = input.split('.').filter(function(frag) {
                         return frag.length > 0;
                     });
+
+                    if (!this.isValidLanguage(language)) {
+                        throw new Error("[EO TranslatorJS] Invalid target language \u201C".concat(language, "\u201D"));
+                    }
+
                     var output = this.dictionary.hasOwnProperty(this.language);
 
                     if (output) {
