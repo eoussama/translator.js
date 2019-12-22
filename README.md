@@ -120,6 +120,109 @@ translator.translate("home");
 translator.translate("home", { lang: "en" });
 ```
 
+Translating an invalid key outputs the input key, unless a fallback value has been specified.
+
+```js
+// Creating a dictionary object
+var dict = {
+  en: { home: "Home" },
+  fr: { home: "Maison" }
+};
+
+// Creating a translator object
+var translator = new EOTranslator(dict, "en");
+
+// Returns `not-home` as no matching key in the dictionary was found
+translator.translate("not-home");
+
+// Returns `Fallback value`
+translator.translate("not-home", { fallback: "Fallback value" });
+```
+
+Nested keys are a big part of what makes EO TranslatorJS fun to use without sacrificing its simple usability.
+
+```js
+// Creating a dictionary object
+var dict = {
+  en: {
+    home: "Home",
+    a: {
+      b: {
+        c: {
+          d: "Nested value 1",
+          e: "Nested value 2",
+          f: {
+            g: "Nested value 3"
+          }
+        }
+      }
+    }
+  }
+};
+
+// Creating a translator object
+var translator = new EOTranslator(dict);
+
+// Returns `Nested value 1`
+translator.translate("a.b.c.d");
+
+// Returns `Nested value 3`
+translator.translate("a.b.c.f.g");
+
+// Returns `a.b.c.f.g.h` as ho matching key(s) was found
+translator.translate("a.b.c.f.g.h");
+```
+
+Another powerful feature that comes with EO TranslatorJS is embedding parameters.
+
+```js
+// Creating a dictionary object
+var dict = {
+  en: { greeting: "Hello, {name}!" }
+};
+
+// Creating a translator object
+var translator = new EOTranslator(dict);
+
+// Returns `Hello, Jeff!`
+translator.translate("greeting", { params: { name: "Jeff" } });
+```
+
+Using EO TranslatorJS on a DOM element is just as simple. Mark the target element or elements that you want to translate the contents of, and then leave the rest for EO TranslatorJS.
+
+```html
+<!-- The eo-translator attribute is the marker that tells EO TranslatorJS to translate the element, the value that's passed to it is the translation key -->
+
+<!-- eo-translator-params holds the parameters. It must be valid JSON object. -->
+<span
+  id="target"
+  eo-translator="greeting"
+  eo-translator-params='{ "name": "Luffy" }'
+></span>
+
+<script>
+  // Creating a dictionary object
+  var dict = {
+    en: { greeting: "Hello, {name}!" }
+  };
+
+  // Creating a translator object
+  var translator = new EOTranslator(dict);
+
+  // Getting the HTML element
+  var target = document.getElementById("target");
+
+  // Translating the element
+  translator.translateElement(target);
+</script>
+```
+
+Or you can simply translate the entire document;
+
+```js
+translator.translateDOM();
+```
+
 ## Credits
 
 Icon made by [Freepik](https://www.freepik.com/) from [Flaticon](https://www.flaticon.com/) and is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).
