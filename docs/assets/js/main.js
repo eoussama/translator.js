@@ -31,7 +31,7 @@ window.addEventListener('load', () => {
 			'nested': {
 				'c': {
 					'd': 'troisième valeur',
-					'e': 'Je m\'appelle {name}, je suis {age} ans'
+					'e': 'Je m\'appelle {name}, je suis {age} ans.'
 				}
 			}
 		},
@@ -77,6 +77,5 @@ window.addEventListener('load', () => {
 		translator.translateDOM(globalParent, e.target.value);
 	});
 
-	// translator.dictionary = {};
 	console.log({ translator });
 });

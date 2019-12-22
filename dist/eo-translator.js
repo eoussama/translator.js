@@ -96,9 +96,9 @@ function _createClass(Constructor, protoProps, staticProps) {
                  * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
                  */
                 set: function set(dict) {
-                        // Checking if the dictionary value is an object
-                        if (_typeof(dict) === 'object' && !Array.isArray(dict)) {
-                            // If so, assign it the passed value
+                        if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) {
+                            throw new Error('[EO TranslatorJS] Invalid dictionary object');
+                        } else {
                             this._dictionary = dict;
                         }
                     }
@@ -107,20 +107,19 @@ function _createClass(Constructor, protoProps, staticProps) {
                      */
                     ,
                 get: function get() {
-                    // Returning the dictionary value
                     return this._dictionary;
                 }
                 /**
-                 * @param {{ [x: string]: { [x: string]: any; }; }} language The new language value
+                 * @param {{ [x: string]: { [x: string]: any; }; }} lang The new language value
                  */
 
             }, {
                 key: "language",
-                set: function set(language) {
-                        // Checking if the language value is a string
-                        if (typeof language === 'string') {
-                            // If so, assign it the passed value
-                            this._language = language;
+                set: function set(lang) {
+                        if (typeof lang !== 'string') {
+                            throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D"));
+                        } else {
+                            this._language = lang;
                         }
                     }
                     /**
@@ -128,7 +127,6 @@ function _createClass(Constructor, protoProps, staticProps) {
                      */
                     ,
                 get: function get() {
-                    // Returning the language value
                     return this._language;
                 } //#endregion
                 //#region Constructor
@@ -142,10 +140,15 @@ function _createClass(Constructor, protoProps, staticProps) {
 
             }]);
 
-            function EOTranslator(dict, lang) {
+            function EOTranslator(dict) {
+                var lang = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
                 _classCallCheck(this, EOTranslator);
 
-                if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw '[EO TranslatorJS] Invalid dictionary object';
+                // Checking if the dictionary is valid
+                if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[EO TranslatorJS] Invalid dictionary object'); // Checking if the language is valid
+
+                if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D"));
                 this.dictionary = dict || {};
                 this.language = lang || document.documentElement.lang || 'en';
             } //#endregion

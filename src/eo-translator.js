@@ -10,6 +10,8 @@
  * 
  */
 
+
+
 (function (obj) {
 
 	/**
@@ -23,11 +25,9 @@
 		 * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
 		 */
 		set dictionary(dict) {
-
-			// Checking if the dictionary value is an object
-			if (typeof dict === 'object' && !Array.isArray(dict)) {
-
-				// If so, assign it the passed value
+			if (!dict || typeof dict !== 'object' || Array.isArray(dict)) {
+				throw new Error('[EO TranslatorJS] Invalid dictionary object');
+			} else {
 				this._dictionary = dict;
 			}
 		}
@@ -36,21 +36,17 @@
 		 * Gets the dictionary value
 		 */
 		get dictionary() {
-
-			// Returning the dictionary value
 			return this._dictionary;
 		}
 
 		/**
-		 * @param {{ [x: string]: { [x: string]: any; }; }} language The new language value
+		 * @param {{ [x: string]: { [x: string]: any; }; }} lang The new language value
 		 */
-		set language(language) {
-
-			// Checking if the language value is a string
-			if (typeof language === 'string') {
-
-				// If so, assign it the passed value
-				this._language = language;
+		set language(lang) {
+			if (typeof lang !== 'string') {
+				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”`);
+			} else {
+				this._language = lang;
 			}
 		}
 
@@ -58,8 +54,6 @@
 		 * Gets the language value
 		 */
 		get language() {
-
-			// Returning the language value
 			return this._language;
 		}
 
@@ -73,9 +67,15 @@
 		 * @param {object} dict The translation dictionary
 		 * @param {string} lang The default language
 		 */
-		constructor(dict, lang) {
-			if (!dict || (typeof dict !== 'object') || Array.isArray(dict))
-				throw '[EO TranslatorJS] Invalid dictionary object';
+		constructor(dict, lang = '') {
+
+			// Checking if the dictionary is valid
+			if (!dict || typeof dict !== 'object' || Array.isArray(dict))
+				throw new Error('[EO TranslatorJS] Invalid dictionary object');
+
+			// Checking if the language is valid
+			if (typeof lang !== 'string')
+				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”`);
 
 			this.dictionary = dict || {};
 			this.language = lang || document.documentElement.lang || 'en';
@@ -126,7 +126,6 @@
 				DOMElement.textContent = this.translate(input, { lang: language, fallback, params });
 			}
 		}
-
 
 		/**
 		 * Translates a DOM document/element
@@ -236,7 +235,7 @@
 				} else {
 
 					// If not, delete the translation directly
-					delete tempDict[key]
+					delete tempDict[key];
 				}
 			}
 		}
