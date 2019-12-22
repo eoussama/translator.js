@@ -326,6 +326,17 @@ function _createClass(Constructor, protoProps, staticProps) {
                             delete tempDict[key];
                         }
                     }
+                }
+                /**
+                 * Checks if an input language is defined in the dictionary
+                 *
+                 * @param {string} lang The language to check
+                 */
+
+            }, {
+                key: "isValidLanguage",
+                value: function isValidLanguage(lang) {
+                    return this.dictionary.hasOwnProperty(lang);
                 } //#endregion
 
             }]);

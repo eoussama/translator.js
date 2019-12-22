@@ -58,7 +58,7 @@ window.addEventListener('load', () => {
 	document
 		.getElementById('translateBtn')
 		.addEventListener('click', function () {
-			var input = translator.translate('greeting', { lang: 'en', params: { name: 'Oussama' } });
+			var input = translator.translate('greeting', { lang: 'ff', params: { name: 'Oussama' } });
 			alert(input);
 		});
 

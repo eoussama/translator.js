@@ -240,6 +240,15 @@
 			}
 		}
 
+		/**
+		 * Checks if an input language is defined in the dictionary
+		 *
+		 * @param {string} lang The language to check
+		 */
+		isValidLanguage(lang) {
+			return this.dictionary.hasOwnProperty(lang);
+		}
+
 		//#endregion
 	}
 
