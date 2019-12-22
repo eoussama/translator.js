@@ -3,81 +3,121 @@
     <h1 align="center">EO TranslatorJS</h1>
 </p>
 
-## What's this?
+## What is this?
 
-Translator JS is a lightweight very simple-to-use Javascript library that facilitates the process of translating web pages. For more about how this works, read along.
+EO TranslatorJS is a lightweight, very simple-to-use Javascript library that facilitates the process of translating web pages.
 
-## How does this work?
+## How does is work?
 
-Translator JS doesn't depend on any external APIs or resources to work, in fact, there is a crucial part of this magic that requires a little bit of work, but not the kind of work that made you look up a library for this need.
-You should create your own dictionary, containing the words and/or sentences you want to translate with their respective translations, and then target the whole web page or just a specific section.
-Not everything gets translated, only the elements that have the class `trnsjs`.
+In most cases all you need is a dictionary object and a function call.
 
 ## Syntax
 
 Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid that excessive pain. Translator JS operates on very minimalistic controllers. All you need to do is instanciate a Translator object and set it for work.
 
-```js
-const translator = new Translator(dictionary, localLanguage);
+```ts
+const translator = new EOTranslator(dictionary: Object, language: string);
 ```
 
-| dictionary                                                               | language                                                            |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| An object containing all of the terms and their respective translations. | The code of the base language. By default, it's `en` for `english`. |
+| dictionary (_`required`_)                                                  | language (_`optional`_)                                                                                                                                                            |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| An object that contains all of the keys and their respective translations. | A string value that represents the default language. If none is provided, the document's `lang` attribute value is used, otherwise the string `en` is set as the default language. |
 
 ## Usage
 
 In order to start using Translator JS, you should first include it on your HTML file;
 
 ```html
-<script src="translate.js"></script>
+<script src="eo-translator.js"></script>
+
+<!-- or -->
+
+<script src="eo-translator.min.js"></script>
 ```
 
-Now, we need to create a dictionary, an object that stores all of our translations.
+Now, we need to create a dictionary, an object that stores all of our translations, grouped by language keys;
 
-```javascript
-const dict = {
-  "Hello, world!": {
-    en: "Hello, world!",
-    es: "Hola, el mundo!",
-    fr: "Bonjour, le monde!"
-  },
-  "Quality serivces since 2003": {
-    en: "Quality serivces since 2003",
-    es: "Servicios de calidad desde 2003",
-    fr: "Des services de qualité depuis 2003"
-  },
-  Home: {
-    en: "Home",
-    es: "Inicio",
-    fr: "Accueil"
-  },
-  Skills: {
-    en: "Skills",
-    es: "Capacidad",
-    fr: "Compétences"
-  },
-  About: {
-    en: "About",
-    es: "Acerca de",
-    fr: "à propos"
-  },
-  Contact: {
-    en: "Contact",
-    es: "Contacto",
-    fr: "Contact"
-  }
+```js
+var dict = {
+  ar: { greeting: 'مرحباً' }
+  en: { greeting: 'Hello' },
+  es: { greeting: 'Hola' },
+  fr: { greeting: 'Bonjour' }
 };
 ```
 
-Now, that we have an object with all the terms we want to translate, and their respective translations, the name you choose for languages is important, in our case, they are `en`, `es` and `fr` indicating _English_, _Espagnol_ and _Français_ respectively. The could be called anything, however, for the sake of simplicity, we used those specific codes.
+The name you choose for languages is important, in our case, they are `ar`, `en`, `es`, and `fr` indicating _Arabic_ _English_, _Espagnol_ and _Français_ respectively. They could be called anything, however, for the sake of simplicity, we used those specific codes which can easily and universally be understood.
 
-Then we call the big dog.
+Then we instantiate a translator object;
 
-```javascript
-const translator = new Translator(dict, "en");
+```js
+var translator = new EOTranslator(dict);
+```
 
-translator.translate("fr");
+Now, translating something is as simple as stating the target translation's key;
+
+```js
+translator.translate("greeting");
+```
+
+The above would simply return the translation that matches the key `greeting`, but wait, what language are we targeting here? We did not specify any default language so `EO TranslatorJS` does some improvasition and takes the document's language that resides in the `lang` attribute on the `html` element. If there was none, then `en` is set as the default translation language. In our case, we should be expecting `Hello` as a return value.
+
+If we so wanted to target a specific language all we have to do is instruct EO TranslatorJS about it as follows;
+
+```js
+translator.translate("greeting", { lang: "ar" });
+```
+
+Simply that will return `مرحباً`.
+Notice how we forced the translator object to ignore the default language and use another that we specified with the translation function call, meaning that the default language is still `en`, and so to change it, we could have simply passed the desired default language to the object when we first intstantiated it.
+
+```js
+// Setting the default language to Spanish.
+var translator = new EOTranslator(dict, "es");
+```
+
+We can also change the default language on runtime by directly passing a valid string value to the `language` property of the translator object.
+
+```js
+// Setting the default language to Frensh on runtime.
+translator.language = "fr";
+```
+
+The same goes for the dictionary if we so wanted:
+
+```js
+var // Creating a dictionary object
+  dict1 = {
+    en: { home: "Home" },
+    fr: { home: "Maison" }
+  },
+  // Creating another dictionary object
+  dict2 = {
+    en: { home: "House" },
+    fr: { home: "Bâtiment" }
+  };
+
+// Creating a translator object with `dict1` as a dictionary
+// and `en` (English) as a default language
+var translator = new EOTranslator(dict1, "en");
+
+// Returns `Home`
+translator.translate("home");
+
+// Changing the dictionary
+translator.dictionary = dict2;
+
+// Returns `House`
+translator.translate("home");
+
+// Changing the default language
+translator.language = "fr";
+
+// Returns `Bâtiment`
+translator.translate("home");
+
+// Returns `House`
+translator.translate("home", { lang: "en" });
 ```
 
 That still won't do anything, we are up for a last step, nothing major. We need to add the class `trnsjs` to the elements we want to translate.
