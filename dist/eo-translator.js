@@ -1,5 +1,40 @@
 "use strict";
 
+function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+}
+
+function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+
+function _iterableToArrayLimit(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+    try {
+        for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+            _arr.push(_s.value);
+            if (i && _arr.length === i) break;
+        }
+    } catch (err) {
+        _d = true;
+        _e = err;
+    } finally {
+        try {
+            if (!_n && _i["return"] != null) _i["return"]();
+        } finally {
+            if (_d) throw _e;
+        }
+    }
+    return _arr;
+}
+
+function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+}
+
 function _typeof(obj) {
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
         _typeof = function _typeof(obj) {
@@ -110,6 +145,7 @@ function _createClass(Constructor, protoProps, staticProps) {
             function EOTranslator(dict, lang) {
                 _classCallCheck(this, EOTranslator);
 
+                if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw '[EO TranslatorJS] Invalid dictionary object';
                 this.dictionary = dict || {};
                 this.language = lang || document.documentElement.lang || 'en';
             } //#endregion
@@ -220,33 +256,21 @@ function _createClass(Constructor, protoProps, staticProps) {
 
                     if (frags.length > 0) {
                         // Looping through the fragments
-                        var _iteratorNormalCompletion = true;
-                        var _didIteratorError = false;
-                        var _iteratorError = undefined;
+                        var _arr = Object.entries(frags);
 
-                        try {
-                            for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                                var frag = _step.value;
-                                // Updates the value of the temporary dictionary
-                                tempDict = tempDict[frag]; // Checking if the last iteration has been reached
+                        for (var _i = 0; _i < _arr.length; _i++) {
+                            var _arr$_i = _slicedToArray(_arr[_i], 2),
+                                index = _arr$_i[0],
+                                frag = _arr$_i[1];
 
-                                if (frag === frags.slice(0).reverse()[0]) {
-                                    // Adding/Updating the transition
-                                    tempDict[rawKey] = translation;
-                                }
-                            }
-                        } catch (err) {
-                            _didIteratorError = true;
-                            _iteratorError = err;
-                        } finally {
-                            try {
-                                if (!_iteratorNormalCompletion && _iterator.return != null) {
-                                    _iterator.return();
-                                }
-                            } finally {
-                                if (_didIteratorError) {
-                                    throw _iteratorError;
-                                }
+                            // Updates the value of the temporary dictionary
+                            tempDict = tempDict[frag] || (tempDict[frag] = {}); // Stopping the loop if the temporary dictionary is not valid
+
+                            if (!tempDict) break; // Checking if the last iteration has been reached
+
+                            if (parseInt(index) === frags.length - 1) {
+                                // Adding/Updating the transition
+                                tempDict[rawKey] = translation;
                             }
                         }
                     } else {
@@ -271,48 +295,33 @@ function _createClass(Constructor, protoProps, staticProps) {
 
                     var rawKey = frags.pop(); // Checking if the language already exists in the dictionary
 
-                    if (!this.dictionary.hasOwnProperty(lang)) {
-                        // Initiate a value for the language
-                        this.dictionary[lang] = {};
-                    } // Getting a copy of the dictionary
+                    if (this.dictionary.hasOwnProperty(lang)) {
+                        // Getting a copy of the dictionary
+                        var tempDict = this.dictionary[lang]; // Checking if the passed key can be nested
 
+                        if (frags.length > 0) {
+                            // Looping through the fragments
+                            var _arr2 = Object.entries(frags);
 
-                    var tempDict = this.dictionary[lang]; // Checking if the passed key can be nested
+                            for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
+                                var _arr2$_i = _slicedToArray(_arr2[_i2], 2),
+                                    index = _arr2$_i[0],
+                                    frag = _arr2$_i[1];
 
-                    if (frags.length > 0) {
-                        // Looping through the fragments
-                        var _iteratorNormalCompletion2 = true;
-                        var _didIteratorError2 = false;
-                        var _iteratorError2 = undefined;
-
-                        try {
-                            for (var _iterator2 = frags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                                var frag = _step2.value;
                                 // Updates the value of the temporary dictionary
-                                tempDict = tempDict[frag]; // Checking if the last iteration has been reached
+                                tempDict = tempDict[frag]; // Stopping the loop if the temporary dictionary is not valid
 
-                                if (frag === frags.slice(0).reverse()[0]) {
+                                if (!tempDict) break; // Checking if the last iteration has been reached
+
+                                if (parseInt(index) === frags.length - 1) {
                                     // Removing the transition
                                     delete tempDict[rawKey];
                                 }
                             }
-                        } catch (err) {
-                            _didIteratorError2 = true;
-                            _iteratorError2 = err;
-                        } finally {
-                            try {
-                                if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                                    _iterator2.return();
-                                }
-                            } finally {
-                                if (_didIteratorError2) {
-                                    throw _iteratorError2;
-                                }
-                            }
+                        } else {
+                            // If not, delete the translation directly
+                            delete tempDict[key];
                         }
-                    } else {
-                        // If not, delete the translation directly
-                        delete tempDict[key];
                     }
                 } //#endregion
 
@@ -351,13 +360,13 @@ function _createClass(Constructor, protoProps, staticProps) {
 
     function extractValue(dictionary, language, frags) {
         var temp = dictionary[language];
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
 
         try {
-            for (var _iterator3 = frags[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                var frag = _step3.value;
+            for (var _iterator = frags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var frag = _step.value;
                 temp = temp[frag] || undefined;
 
                 if (!temp) {
@@ -365,16 +374,16 @@ function _createClass(Constructor, protoProps, staticProps) {
                 }
             }
         } catch (err) {
-            _didIteratorError3 = true;
-            _iteratorError3 = err;
+            _didIteratorError = true;
+            _iteratorError = err;
         } finally {
             try {
-                if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
-                    _iterator3.return();
+                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                    _iterator.return();
                 }
             } finally {
-                if (_didIteratorError3) {
-                    throw _iteratorError3;
+                if (_didIteratorError) {
+                    throw _iteratorError;
                 }
             }
         }

@@ -74,6 +74,9 @@
 		 * @param {string} lang The default language
 		 */
 		constructor(dict, lang) {
+			if (!dict || (typeof dict !== 'object') || Array.isArray(dict))
+				throw '[EO TranslatorJS] Invalid dictionary object';
+
 			this.dictionary = dict || {};
 			this.language = lang || document.documentElement.lang || 'en';
 		}
@@ -169,13 +172,16 @@
 			if (frags.length > 0) {
 
 				// Looping through the fragments
-				for (const frag of frags) {
+				for (const [index, frag] of Object.entries(frags)) {
 
 					// Updates the value of the temporary dictionary
-					tempDict = tempDict[frag];
+					tempDict = tempDict[frag] || (tempDict[frag] = {});
+
+					// Stopping the loop if the temporary dictionary is not valid
+					if (!tempDict) break;
 
 					// Checking if the last iteration has been reached
-					if (frag === frags.slice(0).reverse()[0]) {
+					if (parseInt(index) === frags.length - 1) {
 
 						// Adding/Updating the transition
 						tempDict[rawKey] = translation;
@@ -203,35 +209,35 @@
 			const rawKey = frags.pop();
 
 			// Checking if the language already exists in the dictionary
-			if (!this.dictionary.hasOwnProperty(lang)) {
+			if (this.dictionary.hasOwnProperty(lang)) {
 
-				// Initiate a value for the language
-				this.dictionary[lang] = {};
-			}
+				// Getting a copy of the dictionary
+				let tempDict = this.dictionary[lang];
 
-			// Getting a copy of the dictionary
-			let tempDict = this.dictionary[lang];
+				// Checking if the passed key can be nested
+				if (frags.length > 0) {
 
-			// Checking if the passed key can be nested
-			if (frags.length > 0) {
+					// Looping through the fragments
+					for (const [index, frag] of Object.entries(frags)) {
 
-				// Looping through the fragments
-				for (const frag of frags) {
+						// Updates the value of the temporary dictionary
+						tempDict = tempDict[frag];
 
-					// Updates the value of the temporary dictionary
-					tempDict = tempDict[frag];
+						// Stopping the loop if the temporary dictionary is not valid
+						if (!tempDict) break;
 
-					// Checking if the last iteration has been reached
-					if (frag === frags.slice(0).reverse()[0]) {
+						// Checking if the last iteration has been reached
+						if (parseInt(index) === frags.length - 1) {
 
-						// Removing the transition
-						delete tempDict[rawKey];
+							// Removing the transition
+							delete tempDict[rawKey];
+						}
 					}
-				}
-			} else {
+				} else {
 
-				// If not, delete the translation directly
-				delete tempDict[key]
+					// If not, delete the translation directly
+					delete tempDict[key]
+				}
 			}
 		}
 
