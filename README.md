@@ -1,6 +1,13 @@
 <p align="center">
     <img src="docs/assets/img/logo.svg" width="130" />
     <h1 align="center">EO TranslatorJS</h1>
+    <p align="center">
+        <img align="center" src="https://img.shields.io/npm/v/eo-translatorjs.svg" alt="NPM package version.">
+        <img align="center" src="https://img.shields.io/github/release/EOussama/eo-translatorjs.svg" alt="Latest github release.">
+        <img align="center" src="https://img.shields.io/npm/dt/eo-translatorjs.svg" alt="NPM downloads.">
+        <img align="center" src="https://img.shields.io/github/size/EOussama/eo-translatorjs/dist/eo-translator.min.js.svg" alt="EO TranslatorJS' size.">
+        <img align="center" src="https://img.shields.io/github/license/EOussama/eo-translatorjs.svg" alt="EO TranslatorJS' license.">
+    </p>
 </p>
 
 ## What is this?
@@ -10,8 +17,6 @@ EO TranslatorJS is a lightweight, very simple-to-use Javascript library that fac
 ## How does it work?
 
 In most cases, all you need is a dictionary object and a function call.
-
-## Syntax
 
 Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid that excessive pain. Translator JS operates on very minimalistic controllers. All you need to do is instantiate a Translator object and set it for work.
 
