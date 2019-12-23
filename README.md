@@ -2,11 +2,9 @@
     <img src="docs/assets/img/logo.svg" width="130" />
     <h1 align="center">EO TranslatorJS</h1>
     <p align="center">
+      <img align="center" src="https://img.shields.io/npm/dt/eo-translatorjs.svg" alt="NPM downloads.">
       <a href="https://www.npmjs.com/package/eo-translatorjs/v/latest">
           <img align="center" src="https://img.shields.io/npm/v/eo-translatorjs.svg" alt="NPM package version.">
-      </a>
-      <a href="https://github.com/EOussama/eo-translatorjs/releases/latest">
-        <img align="center" src="https://img.shields.io/npm/dt/eo-translatorjs.svg" alt="NPM downloads.">
       </a>
       <a href="https://raw.githubusercontent.com/EOussama/eo-translatorjs/master/dist/eo-translator.min.js">
         <img align="center" src="https://img.shields.io/github/size/EOussama/eo-translatorjs/dist/eo-translator.min.js.svg" alt="EO TranslatorJS' size.">
