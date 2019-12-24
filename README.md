@@ -235,6 +235,50 @@ Or you can simply translate the entire document;
 translator.translateDOM();
 ```
 
+EO TranslatorJS also allows for dictionary manipulation, such as adding, removing and updating translations at runtime;
+
+```js
+// Creating a dictionary object
+var dict = {
+  en: { tr1: "Translation 1" },
+  fr: {
+    tr1: "Traduction 1",
+    nested: { tr: "Traduction imbriqué" }
+  }
+};
+
+// Creating a translator object
+var translator = new EOTranslator(dict);
+
+// Adding an English translation with the key “tr2”
+translator.add("en", "tr2", "Translation 2");
+
+// Updating the English translation that matches the key “tr1”
+translator.add("en", "tr1", "Updated translation 1");
+
+// Adding a nested French translation
+translator.add("fr", "a.b.c", "Nouveau Traduction imbriqué!");
+
+// Removing a translation from the French language group
+translator.remove("fr", "nested.tr");
+```
+
+The dictionary object after all of the previous alterations:
+
+```json
+{
+  "en": {
+    "tr1": "Updated translation 1",
+    "tr2": "Translation 2"
+  },
+  "fr": {
+    "tr1": "Traduction 1",
+    "nested": {},
+    "a": { "b": { "c": "Nouveau Traduction imbriqué!" } }
+  }
+}
+```
+
 ## Credits
 
 Icon made by [Freepik](https://www.freepik.com/) from [Flaticon](https://www.flaticon.com/) and is licensed by [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).
