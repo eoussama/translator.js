@@ -25,7 +25,7 @@ EO TranslatorJS is a lightweight, very simple-to-use Javascript library that fac
 
 In most cases, all you need is a dictionary object and a function call.
 
-Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid that excessive pain. Translator JS operates on very minimalistic controllers. All you need to do is instantiate a Translator object and set it for work.
+Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid that excessive pain. EO Translator JS operates on very minimalistic controllers. All you need to do is instantiate a Translator object and set it for work.
 
 ```ts
 const translator = new EOTranslator(dictionary: Object, language: string);
