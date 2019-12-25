@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/EOussama/eo-translatorjs/issues"
   },
-  "homepage": "https://github.com/EOussama/eo-translatorjs#readme",
+  "homepage": "https://eoussama.github.io/eo-translatorjs/",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
