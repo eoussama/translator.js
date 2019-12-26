@@ -46,6 +46,9 @@ window.addEventListener('load', () => {
 	// The translator
 	var translator = new EOTranslator(dictionary);
 
+	// Printing available languages
+	console.log({ languages: translator.languages });
+
 	// Adding translations
 	translator.add('fr', 'nested.c.f', 'Maah');
 	translator.add('en', 'dynamicallyAddedTop', 'Top test');

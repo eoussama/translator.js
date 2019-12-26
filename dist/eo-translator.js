@@ -128,6 +128,15 @@ function _createClass(Constructor, protoProps, staticProps) {
                     ,
                 get: function get() {
                     return this._language;
+                }
+                /**
+                 * Gets the available languages
+                 */
+
+            }, {
+                key: "languages",
+                get: function get() {
+                    return this.dictionary ? Object.keys(this.dictionary) : [];
                 } //#endregion
                 //#region Constructor
 

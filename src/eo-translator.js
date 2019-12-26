@@ -61,7 +61,7 @@
 		 * Gets the available languages
 		 */
 		get languages() {
-			return this.dictionary ? Object.key(this.dictionary) : [];
+			return this.dictionary ? Object.keys(this.dictionary) : [];
 		}
 
 		//#endregion
