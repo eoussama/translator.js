@@ -57,6 +57,13 @@
 			return this._language;
 		}
 
+		/**
+		 * Gets the available languages
+		 */
+		get languages() {
+			return this.dictionary ? Object.key(this.dictionary) : [];
+		}
+
 		//#endregion
 
 		//#region Constructor
