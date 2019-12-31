@@ -4,9 +4,9 @@
   "description": "A simple javascript library for translating web content.",
   "scripts": {
     "build": "npx gulp",
-    "docs": "cp ./dist/eo-translator.min.js ./demos/assets/js/lib/",
+    "demos": "cp ./dist/eo-translator.min.js ./demos/assets/js/",
     "clean": "rm -rf ./dist/",
-    "prod": "npm run clean && npm run build && npm run docs"
+    "prod": "npm run clean && npm run build && npm run demos"
   },
   "directories": {
     "doc": "docs"
