@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="docs/assets/img/logo.svg" width="130" />
+    <img src="demos/assets/img/logo.svg" width="130" />
     <h1 align="center">EO TranslatorJS</h1>
     <p align="center">
       <a href="#">
