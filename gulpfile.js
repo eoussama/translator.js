@@ -20,7 +20,7 @@ gulp.task('build', function (done) {
 		.pipe(uglify())
 		.pipe(rename({ suffix: '.min' }))
 		.pipe(gulp.dest('dist'))
-		.pipe(gulp.dest('docs/assets/js/lib'));
+		.pipe(gulp.dest('demos/assets/js'));
 
 	done();
 });
