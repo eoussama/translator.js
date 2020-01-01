@@ -12,7 +12,7 @@
 
 <!DOCTYPE html>
 
-<html lang="es">
+<html lang="en">
 
 <head>
 
@@ -45,14 +45,40 @@
 </head>
 
 <body>
+  <header class="container header">
+    <h1 class="title">EO TranslatorJS</h1>
+
+    <h2>Demo 1</h2>
+    <p>Basic demo utilizing the <code>translate</code> method</p>
+  </header>
+
   <main class="container">
-    <header class="header">
-      <h1 class="title">EO TranslatorJS</h1>
+    <div>
+      <div>
+        <label for="globalTranslate">Select the language to translate to</label>
+        <select id="globalTranslate">
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="es">Spanish</option>
+          <option value="br">Portuguese</option>
+        </select>
+      </div>
 
-      <h2>Demo 1</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, at?</p>
-    </header>
+      <div>
+        <button id="translationButton"
+                class="btn">Greet</button>
 
+        <input id="greetedName"
+               type="text"
+               placeholder="EOussama">
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="note">
+      NOTE: The dictionary is missing Portuguese, so an error will be thrown accordingly.
+    </div>
   </main>
 
   <!-- Translate JS. -->

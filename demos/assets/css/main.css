@@ -35,11 +35,36 @@ body {
 }
 
 .header {
+  background-color: #b6bed0;
   border-bottom: 1px solid #afb7c5;
-  padding-bottom: 20px;
 }
 
 .title {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 80px;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.note {
+  color: #757f96;
+}
+
+hr {
+  background-color: #abbbd4;
+  border: none;
+
+  height: 1px;
+  margin: 50px 0 40px 0;
+}
+
+code {
+  color: #4d4f52;
+  background-color: #d5ddef;
+
+  border-radius: 4px;
+  padding: 0 5px;
 }
