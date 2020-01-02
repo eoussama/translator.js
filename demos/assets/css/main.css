@@ -18,13 +18,21 @@
 }
 
 body {
-  background-color: #c9d0de;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
   color: #111f3a;
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.7;
+
+  margin: auto;
+  max-width: 1024px;
+}
+
+main {
+  background-color: #c9d0de;
+  height: 100%;
 }
 
 .container {
