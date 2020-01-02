@@ -184,20 +184,20 @@ function _createClass(Constructor, protoProps, staticProps) {
                     });
 
                     if (!this.isValidLanguage(language)) {
-                        throw new Error("[EO TranslatorJS] Invalid target language \u201C".concat(language, "\u201D"));
-                    }
+                        return fallback;
+                    } else {
+                        var output = this.dictionary.hasOwnProperty(this.language);
 
-                    var output = this.dictionary.hasOwnProperty(this.language);
-
-                    if (output) {
-                        if (frags.length > 1) {
-                            output = extractValue(this.dictionary, language, frags);
-                        } else {
-                            output = this.dictionary[language][input];
+                        if (output) {
+                            if (frags.length > 1) {
+                                output = extractValue(this.dictionary, language, frags);
+                            } else {
+                                output = this.dictionary[language][input];
+                            }
                         }
-                    }
 
-                    return output ? assignParams(output, params) : fallback;
+                        return output ? assignParams(output, params) : fallback;
+                    }
                 }
                 /**
                  * Translates the contents of a DOM elemnt

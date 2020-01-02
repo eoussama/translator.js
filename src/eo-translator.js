@@ -105,20 +105,20 @@
 			const frags = input.split('.').filter(frag => frag.length > 0);
 
 			if (!this.isValidLanguage(language)) {
-				throw new Error(`[EO TranslatorJS] Invalid target language “${language}”`);
-			}
+				return fallback;
+			} else {
+				let output = this.dictionary.hasOwnProperty(this.language);
 
-			let output = this.dictionary.hasOwnProperty(this.language);
-
-			if (output) {
-				if (frags.length > 1) {
-					output = extractValue(this.dictionary, language, frags);
-				} else {
-					output = this.dictionary[language][input];
+				if (output) {
+					if (frags.length > 1) {
+						output = extractValue(this.dictionary, language, frags);
+					} else {
+						output = this.dictionary[language][input];
+					}
 				}
-			}
 
-			return output ? assignParams(output, params) : fallback;
+				return output ? assignParams(output, params) : fallback;
+			}
 		}
 
 		/**
