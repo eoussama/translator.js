@@ -47,6 +47,10 @@ main {
   border-bottom: 1px solid #afb7c5;
 }
 
+.align-right {
+  text-align: right;
+}
+
 .title {
   text-align: center;
   margin-bottom: 80px;
@@ -68,6 +72,10 @@ main {
   transition-property: background-color;
 }
 
+.btn.btn-large {
+  min-width: 190px;
+}
+
 .btn:hover {
   background-color: #ecf5ff;
 }
@@ -86,14 +94,16 @@ main {
   color: #757f96;
 }
 
-.controls {
-  text-align: center;
+.input-controls {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
 }
 
-.sect-select,
-.sect-input,
-.sect-btn {
-  margin-bottom: 20px;
+.validation-controls {
+  margin-top: 40px;
 }
 
 hr {
