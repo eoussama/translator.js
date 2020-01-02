@@ -47,8 +47,17 @@ main {
   border-bottom: 1px solid #afb7c5;
 }
 
+.div-sep {
+  margin: 30px 0 20px 0;
+}
+
 .align-right {
   text-align: right;
+}
+
+.highlight {
+  color: #295dc7;
+  font-style: italic;
 }
 
 .title {
