@@ -159,7 +159,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 
                 if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D"));
                 this.dictionary = dict || {};
-                this.language = lang || document.documentElement.lang || 'en';
+                this.language = lang || ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' ? document.documentElement.lang : 'en');
             } //#endregion
             //#region Methods
 
@@ -238,11 +238,14 @@ function _createClass(Constructor, protoProps, staticProps) {
                     var _this = this;
 
                     var language = lang || this.language;
-                    var container = DOMContainer || document;
-                    var elements = container.querySelectorAll('[eo-translator]');
-                    elements.forEach(function(element) {
-                        return _this.translateElement(element, language);
-                    });
+                    var container = DOMContainer || (typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' ? document : null;
+
+                    if (container) {
+                        var elements = container.querySelectorAll('[eo-translator]');
+                        elements.forEach(function(element) {
+                            return _this.translateElement(element, language);
+                        });
+                    }
                 }
                 /**
                  * Adds a new translation to a given language or updates an existing
@@ -419,9 +422,15 @@ function _createClass(Constructor, protoProps, staticProps) {
         return temp;
     }
 
-    if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
         module.exports = EOTranslator;
     } else {
-        obj.EOTranslator = EOTranslator;
+        if (typeof define === 'function' && define.amd) {
+            define([], function() {
+                return EOTranslator;
+            });
+        } else {
+            window['EOTranslator'] = EOTranslator;
+        }
     }
 })(typeof window !== 'undefined' ? window : void 0);

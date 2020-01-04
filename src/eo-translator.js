@@ -85,7 +85,7 @@
 				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”`);
 
 			this.dictionary = dict || {};
-			this.language = lang || document.documentElement.lang || 'en';
+			this.language = lang || (typeof document === 'object' ? document.documentElement.lang : 'en');
 		}
 
 		//#endregion
@@ -146,10 +146,12 @@
 		 */
 		translateDOM(DOMContainer, lang) {
 			const language = lang || this.language;
-			const container = DOMContainer || document;
-			const elements = container.querySelectorAll('[eo-translator]');
+			const container = DOMContainer || typeof document === 'object' ? document : null;
 
-			elements.forEach((element) => this.translateElement(element, language));
+			if (container) {
+				const elements = container.querySelectorAll('[eo-translator]');
+				elements.forEach((element) => this.translateElement(element, language));
+			}
 		}
 
 		/**
@@ -306,9 +308,19 @@
 		return temp;
 	}
 
-	if (typeof exports !== 'undefined') {
+
+
+	if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
 		module.exports = EOTranslator;
-	} else {
-		obj.EOTranslator = EOTranslator;
+	}
+	else {
+		if (typeof define === 'function' && define.amd) {
+			define([], function () {
+				return EOTranslator;
+			});
+		}
+		else {
+			window['EOTranslator'] = EOTranslator;
+		}
 	}
 })((typeof window !== 'undefined') ? window : this);
