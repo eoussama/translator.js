@@ -6,7 +6,8 @@
     "build": "npx gulp",
     "demos": "cp ./dist/eo-translator.min.js ./demos/assets/js/",
     "clean": "rm -rf ./dist/",
-    "prod": "npm run clean && npm run build && npm run demos"
+    "prod": "npm run clean && npm run build && npm run demos",
+    "test": "npx jest"
   },
   "directories": {
     "doc": "docs"
@@ -28,6 +29,7 @@
     "gulp-babel": "^8.0.0",
     "gulp-beautify": "^2.0.1",
     "gulp-rename": "^1.4.0",
-    "gulp-uglify": "^3.0.1"
+    "gulp-uglify": "^3.0.1",
+    "jest": "^24.9.0"
   }
 }
