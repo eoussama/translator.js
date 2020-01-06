@@ -85,7 +85,7 @@
 				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”`);
 
 			this.dictionary = dict || {};
-			this.language = lang || (typeof document === 'object' ? document.documentElement.lang : 'en');
+			this.language = lang || (typeof document === 'object' ? document.documentElement.lang : 'en') || 'en';
 		}
 
 		//#endregion

@@ -159,7 +159,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 
                 if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D"));
                 this.dictionary = dict || {};
-                this.language = lang || ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' ? document.documentElement.lang : 'en');
+                this.language = lang || ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' ? document.documentElement.lang : 'en') || 'en';
             } //#endregion
             //#region Methods
 
