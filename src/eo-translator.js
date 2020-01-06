@@ -25,11 +25,10 @@
 		 * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
 		 */
 		set dictionary(dict) {
-			if (!dict || typeof dict !== 'object' || Array.isArray(dict)) {
-				throw new Error('[EO TranslatorJS] Invalid dictionary object');
-			} else {
-				this._dictionary = dict;
-			}
+			if (!dict || typeof dict !== 'object' || Array.isArray(dict))
+				throw new Error('[EO TranslatorJS] Invalid dictionary object.');
+
+			this._dictionary = dict;
 		}
 
 		/**
@@ -43,11 +42,16 @@
 		 * @param {{ [x: string]: { [x: string]: any; }; }} lang The new language value
 		 */
 		set language(lang) {
-			if (typeof lang !== 'string') {
-				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”`);
-			} else {
-				this._language = lang;
-			}
+
+			// Checking if the language is a valid string
+			if (typeof lang !== 'string')
+				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`);
+
+			// Checking if the language exists in the dictionary
+			if (!this.dictionary.hasOwnProperty(lang) && lang.length > 0)
+				throw new Error(`[EO TranslatorJS] Invalid language key, “${typeof lang}” does not exist in the dictionary.`);
+
+			this._language = lang;
 		}
 
 		/**
@@ -78,11 +82,15 @@
 
 			// Checking if the dictionary is valid
 			if (!dict || typeof dict !== 'object' || Array.isArray(dict))
-				throw new Error('[EO TranslatorJS] Invalid dictionary object');
+				throw new Error('[EO TranslatorJS] Invalid dictionary object.');
 
-			// Checking if the language is valid
+			// Checking if the language is a valid string
 			if (typeof lang !== 'string')
-				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”`);
+				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`);
+
+			// Checking if the language exists in the dictionary
+			if (!dict.hasOwnProperty(lang) && lang.length > 0)
+				throw new Error(`[EO TranslatorJS] Invalid language key, “${typeof lang}” does not exist in the passed dictionary.`);
 
 			this.dictionary = dict || {};
 			this.language = lang || (typeof document === 'object' ? document.documentElement.lang : 'en') || 'en';

@@ -96,11 +96,8 @@ function _createClass(Constructor, protoProps, staticProps) {
                  * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
                  */
                 set: function set(dict) {
-                        if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) {
-                            throw new Error('[EO TranslatorJS] Invalid dictionary object');
-                        } else {
-                            this._dictionary = dict;
-                        }
+                        if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[EO TranslatorJS] Invalid dictionary object.');
+                        this._dictionary = dict;
                     }
                     /**
                      * Gets the dictionary value
@@ -116,11 +113,11 @@ function _createClass(Constructor, protoProps, staticProps) {
             }, {
                 key: "language",
                 set: function set(lang) {
-                        if (typeof lang !== 'string') {
-                            throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D"));
-                        } else {
-                            this._language = lang;
-                        }
+                        // Checking if the language is a valid string
+                        if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D.")); // Checking if the language exists in the dictionary
+
+                        if (!this.dictionary.hasOwnProperty(lang) && lang.length > 0) throw new Error("[EO TranslatorJS] Invalid language key, \u201C".concat(_typeof(lang), "\u201D does not exist in the dictionary."));
+                        this._language = lang;
                     }
                     /**
                      * Gets the language value
@@ -155,9 +152,11 @@ function _createClass(Constructor, protoProps, staticProps) {
                 _classCallCheck(this, EOTranslator);
 
                 // Checking if the dictionary is valid
-                if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[EO TranslatorJS] Invalid dictionary object'); // Checking if the language is valid
+                if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[EO TranslatorJS] Invalid dictionary object.'); // Checking if the language is a valid string
 
-                if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D"));
+                if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D.")); // Checking if the language exists in the dictionary
+
+                if (!dict.hasOwnProperty(lang) && lang.length > 0) throw new Error("[EO TranslatorJS] Invalid language key, \u201C".concat(_typeof(lang), "\u201D does not exist in the passed dictionary."));
                 this.dictionary = dict || {};
                 this.language = lang || ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' ? document.documentElement.lang : 'en') || 'en';
             } //#endregion
