@@ -61,7 +61,6 @@ describe('Creating a translator', function () {
       console.error({ error: e });
     }
 
-    console.log(translator);
     // Assert
     expect(translator.language).toEqual('en');
   });
