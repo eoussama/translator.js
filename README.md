@@ -91,7 +91,7 @@ var translator = new EOTranslator(dict, "es");
 We can also change the default language on runtime by directly passing a valid string value to the `language` property of the translator object.
 
 ```js
-// Setting the default language to Frensh on runtime.
+// Setting the default language to French on runtime.
 translator.language = "fr";
 ```
 
