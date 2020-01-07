@@ -15,9 +15,14 @@
 // Importing EO TranslatorJS
 var EOTranslator = require('./../dist/eo-translator');
 var creation = require('./creation');
+var crud = require('./crud');
 
 
 
 describe('Creating a translator', function () {
   creation(EOTranslator);
+});
+
+describe('CRUD operations on the translator', function () {
+  crud(EOTranslator);
 });
