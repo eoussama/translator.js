@@ -90,7 +90,7 @@
 
 			// Checking if the language exists in the dictionary
 			if (!dict.hasOwnProperty(lang) && lang.length > 0)
-				throw new Error(`[EO TranslatorJS] Invalid language key, “${typeof lang}” does not exist in the passed dictionary.`);
+				throw new Error(`[EO TranslatorJS] Invalid language key, “${lang}” does not exist in the passed dictionary.`);
 
 			this.dictionary = dict || {};
 			this.language = lang || (typeof document === 'object' ? document.documentElement.lang : 'en') || 'en';
