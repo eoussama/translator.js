@@ -48,7 +48,7 @@
 				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`);
 
 			// Checking if the language exists in the dictionary
-			if (!this.dictionary.hasOwnProperty(lang) && lang.length > 0)
+			if (!this.dictionary.hasOwnProperty(lang) && Object.keys(this.dictionary).length > 0 && lang.length > 0)
 				throw new Error(`[EO TranslatorJS] Invalid language key, “${typeof lang}” does not exist in the dictionary.`);
 
 			this._language = lang;
