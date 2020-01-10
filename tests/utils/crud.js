@@ -17,4 +17,27 @@ module.exports = function (EOTranslator) {
     // Assert
     expect(translator.dictionary).toEqual({ en: { translation: 'Hello, I\'m a translation' } });
   });
+
+  test('Editing a basic translation at run time.', function () {
+
+    // Arrange
+    var translator;
+    var dict = {
+      en: {
+        greet: 'Hello there!'
+      }
+    }
+
+    // Act
+    try {
+      translator = new EOTranslator(dict);
+      translator.add('en', 'greet', 'Hi there!');
+    }
+    catch (e) {
+      console.error({ error: e });
+    }
+
+    // Assert
+    expect(translator.dictionary).toEqual({ en: { greet: 'Hi there!' } });
+  });
 };
