@@ -40,4 +40,27 @@ module.exports = function (EOTranslator) {
     // Assert
     expect(translator.dictionary).toEqual({ en: { greet: 'Hi there!' } });
   });
+
+  test('Removing a translation at run time.', function () {
+
+    // Arrange
+    var translator;
+    var dict = {
+      en: {
+        greet: 'Hello there!'
+      }
+    }
+
+    // Act
+    try {
+      translator = new EOTranslator(dict);
+      translator.remove('en', 'greet');
+    }
+    catch (e) {
+      console.error({ error: e });
+    }
+
+    // Assert
+    expect(translator.dictionary).toEqual({ en: {} });
+  });
 };
