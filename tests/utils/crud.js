@@ -63,4 +63,27 @@ module.exports = function (EOTranslator) {
     // Assert
     expect(translator.dictionary).toEqual({ en: {} });
   });
+
+  test('Adding a nested translation at run time.', function () {
+
+    // Arrange
+    var translator;
+    var dict = {
+      en: {
+        greet: 'Hello there!'
+      }
+    }
+
+    // Act
+    try {
+      translator = new EOTranslator(dict);
+      translator.add('en', 'nested.a.b.c', '...');
+    }
+    catch (e) {
+      console.error({ error: e });
+    }
+
+    // Assert
+    expect(translator.dictionary).toEqual({ en: { greet: 'Hello there!', nested: { a: { b: { c: '...' } } } } });
+  });
 };
