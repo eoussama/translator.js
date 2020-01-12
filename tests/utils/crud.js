@@ -86,4 +86,89 @@ module.exports = function (EOTranslator) {
     // Assert
     expect(translator.dictionary).toEqual({ en: { greet: 'Hello there!', nested: { a: { b: { c: '...' } } } } });
   });
+
+  test('Adding a nested translation to an nestable object at run time.', function () {
+
+    // Arrange
+    var translator;
+    var dict = {
+      en: {
+        greet: 'Hello there!',
+        nested: {
+          a: '...'
+        }
+      }
+    };
+
+    // Act
+    try {
+      translator = new EOTranslator(dict);
+      translator.add('en', 'nested.b', '..');
+      translator.add('en', 'nested.c.d', '.');
+    }
+    catch (e) {
+      console.error({ error: e });
+    }
+
+    // Assert
+    expect(translator.dictionary).toEqual({ en: { greet: 'Hello there!', nested: { a: '...', b: '..', c: { d: '.' } } } });
+  });
+
+  test('Updating nested translations at run time.', function () {
+
+    // Arrange
+    var translator;
+    var dict = {
+      en: {
+        greet: 'Hello there!',
+        nested: {
+          a: {
+            b: {
+              c: '...'
+            }
+          }
+        }
+      }
+    };
+
+    // Act
+    try {
+      translator = new EOTranslator(dict);
+      translator.add('en', 'nested.a.b.c', '.');
+    }
+    catch (e) {
+      console.error({ error: e });
+    }
+
+    // Assert
+    expect(translator.dictionary).toEqual({ en: { greet: 'Hello there!', nested: { a: { b: { c: '.' } } } } });
+  });
+
+  test('Removing a nested translation at run time.', function () {
+
+    // Arrange
+    var translator;
+    var dict = {
+      en: {
+        greet: 'Hello there!',
+        nested: {
+          a: '...',
+          b: '..',
+          c: '.'
+        }
+      }
+    };
+
+    // Act
+    try {
+      translator = new EOTranslator(dict);
+      translator.remove('en', 'nested.ab');
+    }
+    catch (e) {
+      console.error({ error: e });
+    }
+
+    // Assert
+    expect(translator.dictionary).toEqual({ en: { greet: 'Hello there!', nested: { a: '...', b: '..', c: '.' } } });
+  });
 };
