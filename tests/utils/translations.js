@@ -49,4 +49,28 @@ module.exports = function (EOTranslator) {
     // Assert
     expect(translation).toEqual('Good evening!');
   });
+
+  test('Embedded values in translation.', function () {
+
+    // Arrange
+    var translator;
+    var translation = '';
+    var dict = {
+      en: {
+        greet: 'Hello {name}!'
+      }
+    }
+
+    // Act
+    try {
+      translator = new EOTranslator(dict);
+      translation = translator.translate('greet', { params: { name: 'Luffy' } });
+    }
+    catch (e) {
+      console.error({ error: e });
+    }
+
+    // Assert
+    expect(translation).toEqual('Hello Luffy!');
+  });
 };
