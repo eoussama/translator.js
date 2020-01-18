@@ -1,7 +1,7 @@
 /**
  * 
  * @name:       eo-translatorjs
- * @version:    3.0.1
+ * @version:    3.0.2
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/eo-translatorjs
