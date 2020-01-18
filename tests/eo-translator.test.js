@@ -17,6 +17,7 @@ var EOTranslator = require('./../dist/eo-translator');
 var creation = require('./utils/creation');
 var crud = require('./utils/crud');
 var translations = require('./utils/translations');
+var dom = require('./utils/dom');
 
 
 
@@ -30,4 +31,8 @@ describe('CRUD operations on the translator', function () {
 
 describe('Translations', function () {
   translations(EOTranslator);
+});
+
+describe('DOM translations', function () {
+  dom(EOTranslator);
 });
