@@ -12,7 +12,8 @@
 
 
 
-// Importing EO TranslatorJS
+// Importing the testing dependencies
+var jsdom = require('jsdom');
 var EOTranslator = require('./../dist/eo-translator');
 var creation = require('./utils/creation');
 var crud = require('./utils/crud');
@@ -34,5 +35,5 @@ describe('Translations', function () {
 });
 
 describe('DOM translations', function () {
-  dom(EOTranslator);
+  dom(EOTranslator, jsdom.JSDOM);
 });
