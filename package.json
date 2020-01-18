@@ -2,6 +2,12 @@
   "name": "eo-translatorjs",
   "version": "3.0.2",
   "description": "A simple javascript library for translating web content.",
+  "keywords": [
+    "translate",
+    "javascript-library",
+    "text-translation",
+    "node-package"
+  ],
   "scripts": {
     "build": "npx gulp",
     "test": "npx jest",
