@@ -1,5 +1,5 @@
 {
-  "name": "eo-translatorjs",
+  "name": "@eoussama/eo-translatorjs",
   "version": "3.0.2",
   "description": "A simple javascript library for translating web content.",
   "keywords": [
