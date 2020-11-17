@@ -181,7 +181,7 @@ translator.translate("a.b.c.d");
 // Returns `Nested value 3`
 translator.translate("a.b.c.f.g");
 
-// Returns `a.b.c.f.g.h` as ho matching key(s) was found
+// Returns `a.b.c.f.g.h` as no matching key(s) was found
 translator.translate("a.b.c.f.g.h");
 ```
 
