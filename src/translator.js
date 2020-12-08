@@ -23,6 +23,7 @@
 
 		/**
 		 * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
+		 * @throws Invalid dictionary object
 		 */
 		set dictionary(dict) {
 			if (!dict || typeof dict !== 'object' || Array.isArray(dict))
@@ -39,7 +40,8 @@
 		}
 
 		/**
-		 * @param {{ [x: string]: { [x: string]: any; }; }} lang The new language value
+		 * @param {string} lang The new language value
+		 * @throws Invalid language key
 		 */
 		set language(lang) {
 
@@ -77,6 +79,9 @@
 		 *
 		 * @param {object} dict The translation dictionary
 		 * @param {string} lang The default language
+		 * 
+		 * @throws Invalid dictionary object
+		 * @throws Invalid language key
 		 */
 		constructor(dict, lang = '') {
 
@@ -105,6 +110,8 @@
 		 *
 		 * @param {string} input The input value to translate
 		 * @param {object} options The translation options
+		 * 
+		 * @returns {string} The respective translation
 		 */
 		translate(input = '', options = {}) {
 			const language = options.lang || this.language;
@@ -273,6 +280,7 @@
 		 * Checks if an input language is defined in the dictionary
 		 *
 		 * @param {string} lang The language to check
+		 * @returns {boolean} The availability of the corresponding language
 		 */
 		isValidLanguage(lang) {
 			return this.dictionary.hasOwnProperty(lang);
@@ -282,10 +290,12 @@
 	}
 
 	/**
-	 * Affects a raw string a collection of parameters
+	 * Affects a raw string from the collection of parameters
 	 *
 	 * @param {string} raw The raw string to add the parameters to
 	 * @param {object} params The parameters object
+	 * 
+	 * @returns {string} The parame
 	 */
 	function assignParams(raw, params) {
 
@@ -309,6 +319,8 @@
 	 * @param {object} dictionary The dictionary object
 	 * @param {string} language The language to translate to
 	 * @param {array<string>} frags The list of nested keys
+	 * 
+	 * @returns {string | undefined} The extracted value
 	 */
 	function extractValue(dictionary, language, frags) {
 		let temp = dictionary[language];

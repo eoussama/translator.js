@@ -15,9 +15,11 @@
     "demos": "cp ./dist/translator.min.js ./demos/assets/js/",
     "prod": "npm run clean && npm run build && npm run demos"
   },
+  "main": "./dist/translator.min.js",
   "directories": {
     "doc": "docs"
   },
+  "types": "types/translator.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EOussama/translatorjs.git"
