@@ -1,6 +1,6 @@
 {
   "name": "eo-translatorjs",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "A simple javascript library for translating web content.",
   "keywords": [
     "translate",
@@ -30,9 +30,6 @@
     "url": "https://github.com/EOussama/translatorjs/issues"
   },
   "homepage": "https://eoussama.github.io/translatorjs/",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
