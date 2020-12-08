@@ -142,7 +142,15 @@
 				const fallback = (DOMElement.attributes['eo-translator-fallback'] || { value: input }).value;
 				const params = JSON.parse((DOMElement.attributes['eo-translator-params'] || { value: "{}" }).value) || {};
 
-				DOMElement.textContent = this.translate(input, { lang: language, fallback, params });
+				const html = DOMElement.attributes['eo-translator-html'] && ["true", "false"].includes(DOMElement.attributes['eo-translator-html'].value)
+					? JSON.parse(DOMElement.attributes['eo-translator-html'].value) === true
+					: false;
+
+				DOMElement[
+					html
+						? 'innerHTML'
+						: 'textContent'
+				] = this.translate(input, { lang: language, fallback, params });
 			}
 		}
 
