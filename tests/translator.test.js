@@ -14,7 +14,7 @@
 
 // Importing the testing dependencies
 var jsdom = require('jsdom');
-var EOTranslator = require('./../dist/eo-translator');
+var EOTranslator = require('../dist/translator');
 var creation = require('./utils/creation');
 var crud = require('./utils/crud');
 var translations = require('./utils/translations');

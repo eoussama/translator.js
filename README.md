@@ -1,6 +1,6 @@
 <p align="center">
     <img src="demos/assets/img/logo.svg" width="130" />
-    <h1 align="center">EO TranslatorJS</h1>
+    <h1 align="center">TranslatorJS</h1>
     <p align="center">
       <a href="#">
           <img align="center" src="https://img.shields.io/npm/dt/eo-translatorjs.svg" alt="NPM downloads.">
@@ -9,17 +9,17 @@
           <img align="center" src="https://img.shields.io/npm/v/eo-translatorjs.svg" alt="NPM package version.">
       </a>
       <a href="https://raw.githubusercontent.com/EOussama/translatorjs/master/dist/translator.min.js">
-        <img align="center" src="https://img.shields.io/github/size/EOussama/translatorjs/dist/translator.min.js.svg" alt="EO TranslatorJS' size.">
+        <img align="center" src="https://img.shields.io/github/size/EOussama/translatorjs/dist/translator.min.js.svg" alt="TranslatorJS' size.">
       </a>
       <a href="https://raw.githubusercontent.com/EOussama/translatorjs/master/LICENSE">
-        <img align="center" src="https://img.shields.io/github/license/EOussama/translatorjs.svg" alt="EO TranslatorJS' license.">
+        <img align="center" src="https://img.shields.io/github/license/EOussama/translatorjs.svg" alt="TranslatorJS' license.">
       </a>
     </p>
 </p>
 
 ## What is this?
 
-EO TranslatorJS is a lightweight, very simple-to-use Javascript library that facilitates the process of translating web pages.
+TranslatorJS is a lightweight, very simple-to-use Javascript library that facilitates the process of translating web pages.
 
 ## How does it work?
 
@@ -72,9 +72,9 @@ Now, translating something is as simple as stating the target translation's key;
 translator.translate("greeting");
 ```
 
-The above would simply return the translation that matches the key `greeting`, but wait, what language are we targeting here? We did not specify any default language so `EO TranslatorJS` does some improvisation and takes the document's language that resides in the `lang` attribute on the `html` element. If there was none, then `en` is set as the default translation language. In our case, we should be expecting `Hello` as a return value.
+The above would simply return the translation that matches the key `greeting`, but wait, what language are we targeting here? We did not specify any default language so `TranslatorJS` does some improvisation and takes the document's language that resides in the `lang` attribute on the `html` element. If there was none, then `en` is set as the default translation language. In our case, we should be expecting `Hello` as a return value.
 
-If we so wanted to target a specific language all we have to do is instruct EO TranslatorJS about it as follows;
+If we so wanted to target a specific language all we have to do is instruct TranslatorJS about it as follows;
 
 ```js
 translator.translate("greeting", { lang: "ar" });
@@ -151,7 +151,7 @@ translator.translate("not-home");
 translator.translate("not-home", { fallback: "Fallback value" });
 ```
 
-Nested keys are a big part of what makes EO TranslatorJS fun to use without sacrificing its simple usability.
+Nested keys are a big part of what makes TranslatorJS fun to use without sacrificing its simple usability.
 
 ```js
 // Creating a dictionary object
@@ -185,7 +185,7 @@ translator.translate("a.b.c.f.g");
 translator.translate("a.b.c.f.g.h");
 ```
 
-Another powerful feature that comes with EO TranslatorJS is embedding parameters.
+Another powerful feature that comes with TranslatorJS is embedding parameters.
 
 ```js
 // Creating a dictionary object
@@ -200,10 +200,10 @@ var translator = new EOTranslator(dict);
 translator.translate("greeting", { params: { name: "Jeff" } });
 ```
 
-Using EO TranslatorJS on a DOM element is just as simple. Mark the target element or elements that you want to translate the contents of, and then leave the rest for EO TranslatorJS.
+Using TranslatorJS on a DOM element is just as simple. Mark the target element or elements that you want to translate the contents of, and then leave the rest for TranslatorJS.
 
 ```html
-<!-- The eo-translator attribute is the marker that tells EO TranslatorJS to translate the element, the value that's passed to it is the translation key -->
+<!-- The eo-translator attribute is the marker that tells TranslatorJS to translate the element, the value that's passed to it is the translation key -->
 
 <!-- eo-translator-params holds the parameters. It must be valid JSON object. -->
 <span
@@ -235,7 +235,37 @@ Or you can simply translate the entire document;
 translator.translateDOM();
 ```
 
-EO TranslatorJS also allows for dictionary manipulation, such as adding, removing and updating translations at runtime;
+But wait, what about parsing HTML that's present in a translation? Easy;
+
+TranslatorJS also allows for dictionary manipulation, such as adding, removing and updating translations at runtime;
+
+```html
+<!-- The eo-translator-html attribute is the marker that tells TranslatorJS to parse HTML -->
+<span
+	id="target"
+	eo-translator="greeting"
+	eo-translator-html="true"
+	eo-translator-params='{ "name": "Luffy" }'
+></span>
+
+<script>
+	// Creating a dictionary object
+	var dict = {
+		en: { greeting: "Hello, <b>{name}</b>!" },
+	};
+
+	// Creating a translator object
+	var translator = new EOTranslator(dict);
+
+	// Getting the HTML element
+	var target = document.getElementById("target");
+
+	// Translating the element
+	translator.translateElement(target);
+</script>
+```
+
+Or you can simply translate the entire document;
 
 ```js
 // Creating a dictionary object

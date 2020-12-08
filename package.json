@@ -12,7 +12,7 @@
     "build": "npx gulp",
     "test": "npx jest",
     "clean": "rm -rf ./dist/",
-    "demos": "cp ./dist/eo-translator.min.js ./demos/assets/js/",
+    "demos": "cp ./dist/translator.min.js ./demos/assets/js/",
     "prod": "npm run clean && npm run build && npm run demos"
   },
   "directories": {

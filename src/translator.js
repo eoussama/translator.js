@@ -26,7 +26,7 @@
 		 */
 		set dictionary(dict) {
 			if (!dict || typeof dict !== 'object' || Array.isArray(dict))
-				throw new Error('[EO TranslatorJS] Invalid dictionary object.');
+				throw new Error('[TranslatorJS] Invalid dictionary object.');
 
 			this._dictionary = dict;
 		}
@@ -45,11 +45,11 @@
 
 			// Checking if the language is a valid string
 			if (typeof lang !== 'string')
-				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`);
+				throw new Error(`[TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`);
 
 			// Checking if the language exists in the dictionary
 			if (!this.dictionary.hasOwnProperty(lang) && Object.keys(this.dictionary).length > 0 && lang.length > 0)
-				throw new Error(`[EO TranslatorJS] Invalid language key, “${typeof lang}” does not exist in the dictionary.`);
+				throw new Error(`[TranslatorJS] Invalid language key, “${typeof lang}” does not exist in the dictionary.`);
 
 			this._language = lang;
 		}
@@ -82,15 +82,15 @@
 
 			// Checking if the dictionary is valid
 			if (!dict || typeof dict !== 'object' || Array.isArray(dict))
-				throw new Error('[EO TranslatorJS] Invalid dictionary object.');
+				throw new Error('[TranslatorJS] Invalid dictionary object.');
 
 			// Checking if the language is a valid string
 			if (typeof lang !== 'string')
-				throw new Error(`[EO TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`);
+				throw new Error(`[TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`);
 
 			// Checking if the language exists in the dictionary
 			if (!dict.hasOwnProperty(lang) && lang.length > 0)
-				throw new Error(`[EO TranslatorJS] Invalid language key, “${lang}” does not exist in the passed dictionary.`);
+				throw new Error(`[TranslatorJS] Invalid language key, “${lang}” does not exist in the passed dictionary.`);
 
 			this.dictionary = dict || {};
 			this.language = lang || (typeof document === 'object' ? document.documentElement.lang : 'en') || 'en';

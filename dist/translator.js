@@ -81,13 +81,13 @@ function _createClass(Constructor, protoProps, staticProps) {
  * A simple javascript library for translating web content.
  * 
  */
-(function (obj) {
+(function(obj) {
     /**
      * The translator class
      */
     var EOTranslator =
         /*#__PURE__*/
-        function () {
+        function() {
             _createClass(EOTranslator, [{
                 key: "dictionary",
                 //#region Properties
@@ -96,13 +96,13 @@ function _createClass(Constructor, protoProps, staticProps) {
                  * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
                  */
                 set: function set(dict) {
-                    if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[EO TranslatorJS] Invalid dictionary object.');
-                    this._dictionary = dict;
-                }
-                /**
-                 * Gets the dictionary value
-                 */
-                ,
+                        if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[TranslatorJS] Invalid dictionary object.');
+                        this._dictionary = dict;
+                    }
+                    /**
+                     * Gets the dictionary value
+                     */
+                    ,
                 get: function get() {
                     return this._dictionary;
                 }
@@ -113,16 +113,16 @@ function _createClass(Constructor, protoProps, staticProps) {
             }, {
                 key: "language",
                 set: function set(lang) {
-                    // Checking if the language is a valid string
-                    if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D.")); // Checking if the language exists in the dictionary
+                        // Checking if the language is a valid string
+                        if (typeof lang !== 'string') throw new Error("[TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D.")); // Checking if the language exists in the dictionary
 
-                    if (!this.dictionary.hasOwnProperty(lang) && Object.keys(this.dictionary).length > 0 && lang.length > 0) throw new Error("[EO TranslatorJS] Invalid language key, \u201C".concat(_typeof(lang), "\u201D does not exist in the dictionary."));
-                    this._language = lang;
-                }
-                /**
-                 * Gets the language value
-                 */
-                ,
+                        if (!this.dictionary.hasOwnProperty(lang) && Object.keys(this.dictionary).length > 0 && lang.length > 0) throw new Error("[TranslatorJS] Invalid language key, \u201C".concat(_typeof(lang), "\u201D does not exist in the dictionary."));
+                        this._language = lang;
+                    }
+                    /**
+                     * Gets the language value
+                     */
+                    ,
                 get: function get() {
                     return this._language;
                 }
@@ -152,11 +152,11 @@ function _createClass(Constructor, protoProps, staticProps) {
                 _classCallCheck(this, EOTranslator);
 
                 // Checking if the dictionary is valid
-                if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[EO TranslatorJS] Invalid dictionary object.'); // Checking if the language is a valid string
+                if (!dict || _typeof(dict) !== 'object' || Array.isArray(dict)) throw new Error('[TranslatorJS] Invalid dictionary object.'); // Checking if the language is a valid string
 
-                if (typeof lang !== 'string') throw new Error("[EO TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D.")); // Checking if the language exists in the dictionary
+                if (typeof lang !== 'string') throw new Error("[TranslatorJS] Invalid language key, expected \u201Cstring\u201D by recieved \u201C".concat(_typeof(lang), "\u201D.")); // Checking if the language exists in the dictionary
 
-                if (!dict.hasOwnProperty(lang) && lang.length > 0) throw new Error("[EO TranslatorJS] Invalid language key, \u201C".concat(lang, "\u201D does not exist in the passed dictionary."));
+                if (!dict.hasOwnProperty(lang) && lang.length > 0) throw new Error("[TranslatorJS] Invalid language key, \u201C".concat(lang, "\u201D does not exist in the passed dictionary."));
                 this.dictionary = dict || {};
                 this.language = lang || ((typeof document === "undefined" ? "undefined" : _typeof(document)) === 'object' ? document.documentElement.lang : 'en') || 'en';
             } //#endregion
@@ -178,7 +178,7 @@ function _createClass(Constructor, protoProps, staticProps) {
                     var language = options.lang || this.language;
                     var fallback = options.fallback || input;
                     var params = options.params || {};
-                    var frags = input.split('.').filter(function (frag) {
+                    var frags = input.split('.').filter(function(frag) {
                         return frag.length > 0;
                     });
 
@@ -242,7 +242,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 
                     if (container) {
                         var elements = container.querySelectorAll('[eo-translator]');
-                        elements.forEach(function (element) {
+                        elements.forEach(function(element) {
                             return _this.translateElement(element, language);
                         });
                     }
@@ -260,7 +260,7 @@ function _createClass(Constructor, protoProps, staticProps) {
                 key: "add",
                 value: function add(lang, key, translation) {
                     // Filtering the fragments
-                    var frags = key.split('.').filter(function (frag) {
+                    var frags = key.split('.').filter(function(frag) {
                         return frag.length > 0;
                     }); // Getting the raw key
 
@@ -309,7 +309,7 @@ function _createClass(Constructor, protoProps, staticProps) {
                 key: "remove",
                 value: function remove(lang, key) {
                     // Filtering the fragments
-                    var frags = key.split('.').filter(function (frag) {
+                    var frags = key.split('.').filter(function(frag) {
                         return frag.length > 0;
                     }); // Getting the raw key
 
@@ -370,7 +370,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 
     function assignParams(raw, params) {
         // Looping through the parameters
-        Object.keys(params).forEach(function (key) {
+        Object.keys(params).forEach(function(key) {
             // Creating a replacement pattern
             var pattern = new RegExp("{".concat(key, "}"), 'g'); // Replacing the parameters accordingly
 
@@ -426,7 +426,7 @@ function _createClass(Constructor, protoProps, staticProps) {
         module.exports = EOTranslator;
     } else {
         if (typeof define === 'function' && define.amd) {
-            define([], function () {
+            define([], function() {
                 return EOTranslator;
             });
         } else {

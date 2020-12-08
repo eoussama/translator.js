@@ -1,5 +1,5 @@
-// Importing EO TranslatorJS 
-var EOTranslator = require('./../assets/js/eo-translator.min');
+// Importing TranslatorJS 
+var EOTranslator = require('./../assets/js/translator.min');
 
 // Creating a dictionary
 var dict = {
