@@ -1,4 +1,4 @@
-declare module 'translatorjs' {
+declare module 'eo-translatorjs' {
 
   /**
    * @author EOussama
@@ -41,7 +41,7 @@ declare module 'translatorjs' {
      * @throws Invalid dictionary object
      * @throws Invalid language key
      */
-    constructor(dict: object, lang: string = '')
+    constructor(dict: object, lang: string)
 
     //#endregion
 
@@ -55,7 +55,7 @@ declare module 'translatorjs' {
      * 
      * @returns {string} The respective translation
      */
-    translate(input: string = '', options: object = {}): string;
+    translate(input: string, options: object): string;
 
     /**
      * @description Translates the contents of a DOM elemnt
