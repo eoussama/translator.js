@@ -20,14 +20,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EOussama/eo-translatorjs.git"
+    "url": "git+https://github.com/EOussama/translatorjs.git"
   },
   "author": "EOussama",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EOussama/eo-translatorjs/issues"
+    "url": "https://github.com/EOussama/translatorjs/issues"
   },
-  "homepage": "https://eoussama.github.io/eo-translatorjs/",
+  "homepage": "https://eoussama.github.io/translatorjs/",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },

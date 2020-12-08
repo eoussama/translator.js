@@ -8,11 +8,11 @@
       <a href="https://www.npmjs.com/package/eo-translatorjs/v/latest">
           <img align="center" src="https://img.shields.io/npm/v/eo-translatorjs.svg" alt="NPM package version.">
       </a>
-      <a href="https://raw.githubusercontent.com/EOussama/eo-translatorjs/master/dist/eo-translator.min.js">
-        <img align="center" src="https://img.shields.io/github/size/EOussama/eo-translatorjs/dist/eo-translator.min.js.svg" alt="EO TranslatorJS' size.">
+      <a href="https://raw.githubusercontent.com/EOussama/translatorjs/master/dist/translator.min.js">
+        <img align="center" src="https://img.shields.io/github/size/EOussama/translatorjs/dist/translator.min.js.svg" alt="EO TranslatorJS' size.">
       </a>
-      <a href="https://raw.githubusercontent.com/EOussama/eo-translatorjs/master/LICENSE">
-        <img align="center" src="https://img.shields.io/github/license/EOussama/eo-translatorjs.svg" alt="EO TranslatorJS' license.">
+      <a href="https://raw.githubusercontent.com/EOussama/translatorjs/master/LICENSE">
+        <img align="center" src="https://img.shields.io/github/license/EOussama/translatorjs.svg" alt="EO TranslatorJS' license.">
       </a>
     </p>
 </p>
@@ -99,15 +99,15 @@ The same goes for the dictionary if we so wanted:
 
 ```js
 var // Creating a dictionary object
-  dict1 = {
-    en: { home: "Home" },
-    fr: { home: "Maison" }
-  },
-  // Creating another dictionary object
-  dict2 = {
-    en: { home: "House" },
-    fr: { home: "Bâtiment" }
-  };
+	dict1 = {
+		en: { home: "Home" },
+		fr: { home: "Maison" },
+	},
+	// Creating another dictionary object
+	dict2 = {
+		en: { home: "House" },
+		fr: { home: "Bâtiment" },
+	};
 
 // Creating a translator object with `dict1` as a dictionary
 // and `en` (English) as a default language
@@ -137,8 +137,8 @@ Translating an invalid key outputs the input key, unless a fallback value has be
 ```js
 // Creating a dictionary object
 var dict = {
-  en: { home: "Home" },
-  fr: { home: "Maison" }
+	en: { home: "Home" },
+	fr: { home: "Maison" },
 };
 
 // Creating a translator object
@@ -156,20 +156,20 @@ Nested keys are a big part of what makes EO TranslatorJS fun to use without sacr
 ```js
 // Creating a dictionary object
 var dict = {
-  en: {
-    home: "Home",
-    a: {
-      b: {
-        c: {
-          d: "Nested value 1",
-          e: "Nested value 2",
-          f: {
-            g: "Nested value 3"
-          }
-        }
-      }
-    }
-  }
+	en: {
+		home: "Home",
+		a: {
+			b: {
+				c: {
+					d: "Nested value 1",
+					e: "Nested value 2",
+					f: {
+						g: "Nested value 3",
+					},
+				},
+			},
+		},
+	},
 };
 
 // Creating a translator object
@@ -190,7 +190,7 @@ Another powerful feature that comes with EO TranslatorJS is embedding parameters
 ```js
 // Creating a dictionary object
 var dict = {
-  en: { greeting: "Hello, {name}!" }
+	en: { greeting: "Hello, {name}!" },
 };
 
 // Creating a translator object
@@ -207,25 +207,25 @@ Using EO TranslatorJS on a DOM element is just as simple. Mark the target elemen
 
 <!-- eo-translator-params holds the parameters. It must be valid JSON object. -->
 <span
-  id="target"
-  eo-translator="greeting"
-  eo-translator-params='{ "name": "Luffy" }'
+	id="target"
+	eo-translator="greeting"
+	eo-translator-params='{ "name": "Luffy" }'
 ></span>
 
 <script>
-  // Creating a dictionary object
-  var dict = {
-    en: { greeting: "Hello, {name}!" }
-  };
+	// Creating a dictionary object
+	var dict = {
+		en: { greeting: "Hello, {name}!" },
+	};
 
-  // Creating a translator object
-  var translator = new EOTranslator(dict);
+	// Creating a translator object
+	var translator = new EOTranslator(dict);
 
-  // Getting the HTML element
-  var target = document.getElementById("target");
+	// Getting the HTML element
+	var target = document.getElementById("target");
 
-  // Translating the element
-  translator.translateElement(target);
+	// Translating the element
+	translator.translateElement(target);
 </script>
 ```
 
@@ -240,11 +240,11 @@ EO TranslatorJS also allows for dictionary manipulation, such as adding, removin
 ```js
 // Creating a dictionary object
 var dict = {
-  en: { tr1: "Translation 1" },
-  fr: {
-    tr1: "Traduction 1",
-    nested: { tr: "Traduction imbriqué" }
-  }
+	en: { tr1: "Translation 1" },
+	fr: {
+		tr1: "Traduction 1",
+		nested: { tr: "Traduction imbriqué" },
+	},
 };
 
 // Creating a translator object
@@ -267,15 +267,15 @@ The dictionary object after all of the previous alterations:
 
 ```json
 {
-  "en": {
-    "tr1": "Updated translation 1",
-    "tr2": "Translation 2"
-  },
-  "fr": {
-    "tr1": "Traduction 1",
-    "nested": {},
-    "a": { "b": { "c": "Nouveau Traduction imbriqué!" } }
-  }
+	"en": {
+		"tr1": "Updated translation 1",
+		"tr2": "Translation 2"
+	},
+	"fr": {
+		"tr1": "Traduction 1",
+		"nested": {},
+		"a": { "b": { "c": "Nouveau Traduction imbriqué!" } }
+	}
 }
 ```
 
