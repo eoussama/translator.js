@@ -1,5 +1,5 @@
 {
-  "name": "@eoussama/eo-translatorjs",
+  "name": "eo-translatorjs",
   "version": "3.0.2",
   "description": "A simple javascript library for translating web content.",
   "keywords": [
@@ -15,7 +15,7 @@
     "demos": "cp ./dist/translator.min.js ./demos/assets/js/",
     "prod": "npm run clean && npm run build && npm run demos"
   },
-  "main": "./dist/translator.min.js",
+  "main": "./dist/translator.js",
   "directories": {
     "doc": "docs"
   },
