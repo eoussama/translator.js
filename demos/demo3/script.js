@@ -1,10 +1,10 @@
 /**
  * 
- * @name:       eo-translatorjs
- * @version:    3.0.2
+ * @name:       translatorjs
+ * @version:    3.1.0
  * @author:     EOussama
  * @license     MIT
- * @source:     https://github.com/EOussama/eo-translatorjs
+ * @source:     https://github.com/EOussama/translatorjs
  * 
  * A simple javascript library for translating web content.
  * 
@@ -19,22 +19,22 @@ window.addEventListener('load', () => {
     'en': {
       'inform': 'At times, commas will also be integral in a complete sentence. \
       They punctuate clauses within a complete sentence. For example, \
-      "Without her dog, {pet-name}, {owner-name} would be very sad." \
+      "Without her dog, <b>{pet-name}</b>, <b>{owner-name}</b> would be very sad." \
       Commas love to enter the scene whenever there\'s a natural pause, \
       or a clause, within a complete sentence.'
     },
     'fr': {
       'inform': 'Parfois, les virgules feront également partie intégrante \
       d\'une phrase complète. Ils ponctuent les clauses \
-      d\'une phrase complète. Par exemple, "Sans son chien, {pet-name}, \
-      {owner-name} serait très triste." \
+      d\'une phrase complète. Par exemple, "Sans son chien, <b>{pet-name}</b>, \
+      <b>{owner-name}</b> serait très triste." \
       Les virgules adorent entrer en scène chaque fois \
       qu\'il y a une pause naturelle ou une clause dans une phrase complète.'
     },
     'es': {
       'inform': 'A veces, las comas también serán integrales en una oración completa. \
       Puntúan cláusulas dentro de una oración completa. Por ejemplo, "Sin su perro, \
-      {pet-name}, {owner-name} estaría muy triste". A las comas les encanta entrar en escena \
+      <b>{pet-name}</b>, <b>{owner-name}</b> estaría muy triste". A las comas les encanta entrar en escena \
       cada vez que hay una pausa natural, o una cláusula, dentro de una oración completa.'
     }
   };

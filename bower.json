@@ -1,5 +1,5 @@
 {
-  "name": "eo-translatorjs",
+  "name": "translatorjs",
   "description": "A simple javascript library for translating web content.",
   "main": "",
   "authors": ["EOussama"],
@@ -10,7 +10,7 @@
     "text-translation",
     "node-package"
   ],
-  "homepage": "https://github.com/EOussama/eo-translatorjs",
+  "homepage": "https://github.com/EOussama/translatorjs",
   "ignore": [
     "**/.*",
     "node_modules",

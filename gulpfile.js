@@ -7,7 +7,7 @@ var
 
 // Building the code for production.
 gulp.task('build', function (done) {
-	gulp.src('./src/eo-translator.js')
+	gulp.src('./src/translator.js')
 
 		// Translating code.
 		.pipe(babel({

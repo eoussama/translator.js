@@ -1,10 +1,10 @@
 /**
  * 
- * @name:       eo-translatorjs
- * @version:    3.0.2
+ * @name:       translatorjs
+ * @version:    3.1.0
  * @author:     EOussama
  * @license     MIT
- * @source:     https://github.com/EOussama/eo-translatorjs
+ * @source:     https://github.com/EOussama/translatorjs
  * 
  * A simple javascript library for translating web content.
  * 
