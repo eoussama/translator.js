@@ -1,16 +1,20 @@
+/**
+ *
+ * @param EOTranslator
+ * @param jsdom
+ */
 module.exports = function (EOTranslator, jsdom) {
-  test('Translating a single DOM element.', function () {
-
+  test("Translating a single DOM element.", () => {
     // Arrange
-    var dom = new jsdom('<p id="target" eo-translator="greeting"></p>');
-    var target = dom.window.document.getElementById('target');
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    const dom = new jsdom("<p id=\"target\" eo-translator=\"greeting\"></p>");
+    const target = dom.window.document.getElementById("target");
+    let translator;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
@@ -22,21 +26,20 @@ module.exports = function (EOTranslator, jsdom) {
     }
 
     // Assert
-    expect(target.textContent).toEqual('Hello!');
+    expect(target.textContent).toEqual("Hello!");
   });
 
-  test('Passing an invalid translation key should fallback to the specified value.', function () {
-
+  test("Passing an invalid translation key should fallback to the specified value.", () => {
     // Arrange
-    var dom = new jsdom('<p id="target" eo-translator="invalidKey" eo-translator-fallback="Fallback value"></p>');
-    var target = dom.window.document.getElementById('target');
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    const dom = new jsdom("<p id=\"target\" eo-translator=\"invalidKey\" eo-translator-fallback=\"Fallback value\"></p>");
+    const target = dom.window.document.getElementById("target");
+    let translator;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
@@ -48,21 +51,20 @@ module.exports = function (EOTranslator, jsdom) {
     }
 
     // Assert
-    expect(target.textContent).toEqual('Fallback value');
+    expect(target.textContent).toEqual("Fallback value");
   });
 
-  test('Embedding values in a translation.', function () {
-
+  test("Embedding values in a translation.", () => {
     // Arrange
-    var dom = new jsdom('<p id="target" eo-translator="greeting" eo-translator-params=\'{"name": "Luffy"}\'></p>');
-    var target = dom.window.document.getElementById('target');
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello, {name}!' },
-      fr: { greeting: 'Bonjour {name}!' },
-      es: { greeting: 'Hola {name}!' },
-      br: { greeting: 'Jola {name}!' }
-    }
+    const dom = new jsdom("<p id=\"target\" eo-translator=\"greeting\" eo-translator-params='{\"name\": \"Luffy\"}'></p>");
+    const target = dom.window.document.getElementById("target");
+    let translator;
+    const dict = {
+      en: { greeting: "Hello, {name}!" },
+      fr: { greeting: "Bonjour {name}!" },
+      es: { greeting: "Hola {name}!" },
+      br: { greeting: "Jola {name}!" },
+    };
 
     // Act
     try {
@@ -74,32 +76,31 @@ module.exports = function (EOTranslator, jsdom) {
     }
 
     // Assert
-    expect(target.textContent).toEqual('Hello, Luffy!');
+    expect(target.textContent).toEqual("Hello, Luffy!");
   });
 
-  test('Translation to a language that\'s not the default one.', function () {
-
+  test("Translation to a language that's not the default one.", () => {
     // Arrange
-    var dom = new jsdom('<p id="target" eo-translator="greeting"></p>');
-    var target = dom.window.document.getElementById('target');
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    const dom = new jsdom("<p id=\"target\" eo-translator=\"greeting\"></p>");
+    const target = dom.window.document.getElementById("target");
+    let translator;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
       translator = new EOTranslator(dict);
-      translator.translateElement(target, 'fr');
+      translator.translateElement(target, "fr");
     }
     catch (e) {
       console.error({ error: e });
     }
 
     // Assert
-    expect(target.textContent).toEqual('Bonjour!');
+    expect(target.textContent).toEqual("Bonjour!");
   });
 };

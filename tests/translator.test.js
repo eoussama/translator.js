@@ -1,39 +1,38 @@
 /**
- * 
+ *
  * @name:       translatorjs
  * @version:    3.1.0
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/translatorjs
- * 
+ *
  * A simple javascript library for translating web content.
- * 
  */
 
 
 
 // Importing the testing dependencies
-var jsdom = require('jsdom');
-var EOTranslator = require('../dist/translator');
-var creation = require('./utils/creation');
-var crud = require('./utils/crud');
-var translations = require('./utils/translations');
-var dom = require('./utils/dom');
+const jsdom = require("jsdom");
+const EOTranslator = require("../dist/translator");
+const creation = require("./utils/creation");
+const crud = require("./utils/crud");
+const dom = require("./utils/dom");
+const translations = require("./utils/translations");
 
 
 
-describe('Creating a translator', function () {
+describe("creating a translator", () => {
   creation(EOTranslator);
 });
 
-describe('CRUD operations on the translator', function () {
+describe("CRUD operations on the translator", () => {
   crud(EOTranslator);
 });
 
-describe('Translations', function () {
+describe("translations", () => {
   translations(EOTranslator);
 });
 
-describe('DOM translations', function () {
+describe("dOM translations", () => {
   dom(EOTranslator, jsdom.JSDOM);
 });

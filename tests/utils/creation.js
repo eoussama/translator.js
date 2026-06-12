@@ -1,14 +1,17 @@
+/**
+ *
+ * @param EOTranslator
+ */
 module.exports = function (EOTranslator) {
-  test('Passing a valid translator.', function () {
-
+  test("Passing a valid translator.", () => {
     // Arrange
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    let translator;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
@@ -22,39 +25,37 @@ module.exports = function (EOTranslator) {
     expect(translator.dictionary).toEqual(dict);
   });
 
-  test('Passing a valid translator with French as a default language.', function () {
-
+  test("Passing a valid translator with French as a default language.", () => {
     // Arrange
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    let translator;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
-      translator = new EOTranslator(dict, 'fr');
+      translator = new EOTranslator(dict, "fr");
     }
     catch (e) {
       console.error({ error: e });
     }
 
     // Assert
-    expect(translator.language).toEqual('fr');
+    expect(translator.language).toEqual("fr");
   });
 
-  test('English “en” should be the default language if none was specified.', function () {
-
+  test("English “en” should be the default language if none was specified.", () => {
     // Arrange
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    let translator;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
@@ -65,47 +66,45 @@ module.exports = function (EOTranslator) {
     }
 
     // Assert
-    expect(translator.language).toEqual('en');
+    expect(translator.language).toEqual("en");
   });
 
-  test('Creating a translator and changing its default language at run time.', function () {
-
+  test("Creating a translator and changing its default language at run time.", () => {
     // Arrange
-    var translator;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    let translator;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
       translator = new EOTranslator(dict);
-      translator.language = 'br';
+      translator.language = "br";
     }
     catch (e) {
       console.error({ error: e });
     }
 
     // Assert
-    expect(translator.language).toEqual('br');
+    expect(translator.language).toEqual("br");
   });
 
-  test('Passing an invalid string as a default language on translator creation should throw an error.', function () {
-
+  test("Passing an invalid string as a default language on translator creation should throw an error.", () => {
     // Arrange
-    var errorThrown = false;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    let errorThrown = false;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
-      new EOTranslator(dict, 'ar');
+      new EOTranslator(dict, "ar");
     }
     catch (e) {
       errorThrown = true;
@@ -116,22 +115,21 @@ module.exports = function (EOTranslator) {
     expect(errorThrown).toBe(true);
   });
 
-  test('Passing an invalid string as a default language at run time should throw an error.', function () {
-
+  test("Passing an invalid string as a default language at run time should throw an error.", () => {
     // Arrange
-    var translator;
-    var errorThrown = false;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    let translator;
+    let errorThrown = false;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {
-      translator = new EOTranslator(dict, 'es');
-      translator.language = 'ar';
+      translator = new EOTranslator(dict, "es");
+      translator.language = "ar";
     }
     catch (e) {
       errorThrown = true;
@@ -142,11 +140,10 @@ module.exports = function (EOTranslator) {
     expect(errorThrown).toBe(true);
   });
 
-  test('Passing an invalid object as a dictionary on creation should throw an error.', function () {
-
+  test("Passing an invalid object as a dictionary on creation should throw an error.", () => {
     // Arrange
-    var errorThrown = false;
-    var dict = true;
+    let errorThrown = false;
+    const dict = true;
 
     // Act
     try {
@@ -161,17 +158,16 @@ module.exports = function (EOTranslator) {
     expect(errorThrown).toBe(true);
   });
 
-  test('Passing an invalid object as a dictionary at run time should throw an error.', function () {
-
+  test("Passing an invalid object as a dictionary at run time should throw an error.", () => {
     // Arrange
-    var translator;
-    var errorThrown = false;
-    var dict = {
-      en: { greeting: 'Hello!' },
-      fr: { greeting: 'Bonjour!' },
-      es: { greeting: 'Hola!' },
-      br: { greeting: 'Jola!' }
-    }
+    let translator;
+    let errorThrown = false;
+    const dict = {
+      en: { greeting: "Hello!" },
+      fr: { greeting: "Bonjour!" },
+      es: { greeting: "Hola!" },
+      br: { greeting: "Jola!" },
+    };
 
     // Act
     try {

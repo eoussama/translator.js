@@ -63,7 +63,7 @@ The name you choose for languages is important, in our case, they are `ar`, `en`
 Then we instantiate a translator object;
 
 ```js
-var translator = new EOTranslator(dict);
+const translator = new EOTranslator(dict);
 ```
 
 Now, translating something is as simple as stating the target translation's key;
@@ -85,7 +85,7 @@ Notice how we forced the translator object to ignore the default language and us
 
 ```js
 // Setting the default language to Spanish.
-var translator = new EOTranslator(dict, "es");
+const translator = new EOTranslator(dict, "es");
 ```
 
 We can also change the default language on runtime by directly passing a valid string value to the `language` property of the translator object.
@@ -98,20 +98,20 @@ translator.language = "fr";
 The same goes for the dictionary if we so wanted:
 
 ```js
-var // Creating a dictionary object
-	dict1 = {
-		en: { home: "Home" },
-		fr: { home: "Maison" },
-	},
-	// Creating another dictionary object
-	dict2 = {
-		en: { home: "House" },
-		fr: { home: "Bâtiment" },
-	};
+const // Creating a dictionary object
+  dict1 = {
+    en: { home: "Home" },
+    fr: { home: "Maison" },
+  };
+// Creating another dictionary object
+const dict2 = {
+  en: { home: "House" },
+  fr: { home: "Bâtiment" },
+};
 
 // Creating a translator object with `dict1` as a dictionary
 // and `en` (English) as a default language
-var translator = new EOTranslator(dict1, "en");
+const translator = new EOTranslator(dict1, "en");
 
 // Returns `Home`
 translator.translate("home");
@@ -136,13 +136,13 @@ Translating an invalid key outputs the input key, unless a fallback value has be
 
 ```js
 // Creating a dictionary object
-var dict = {
-	en: { home: "Home" },
-	fr: { home: "Maison" },
+const dict = {
+  en: { home: "Home" },
+  fr: { home: "Maison" },
 };
 
 // Creating a translator object
-var translator = new EOTranslator(dict, "en");
+const translator = new EOTranslator(dict, "en");
 
 // Returns `not-home` as no matching key in the dictionary was found
 translator.translate("not-home");
@@ -155,25 +155,25 @@ Nested keys are a big part of what makes TranslatorJS fun to use without sacrifi
 
 ```js
 // Creating a dictionary object
-var dict = {
-	en: {
-		home: "Home",
-		a: {
-			b: {
-				c: {
-					d: "Nested value 1",
-					e: "Nested value 2",
-					f: {
-						g: "Nested value 3",
-					},
-				},
-			},
-		},
-	},
+const dict = {
+  en: {
+    home: "Home",
+    a: {
+      b: {
+        c: {
+          d: "Nested value 1",
+          e: "Nested value 2",
+          f: {
+            g: "Nested value 3",
+          },
+        },
+      },
+    },
+  },
 };
 
 // Creating a translator object
-var translator = new EOTranslator(dict);
+const translator = new EOTranslator(dict);
 
 // Returns `Nested value 1`
 translator.translate("a.b.c.d");
@@ -189,12 +189,12 @@ Another powerful feature that comes with TranslatorJS is embedding parameters.
 
 ```js
 // Creating a dictionary object
-var dict = {
-	en: { greeting: "Hello, {name}!" },
+const dict = {
+  en: { greeting: "Hello, {name}!" },
 };
 
 // Creating a translator object
-var translator = new EOTranslator(dict);
+const translator = new EOTranslator(dict);
 
 // Returns `Hello, Jeff!`
 translator.translate("greeting", { params: { name: "Jeff" } });
@@ -269,16 +269,16 @@ Or you can simply translate the entire document;
 
 ```js
 // Creating a dictionary object
-var dict = {
-	en: { tr1: "Translation 1" },
-	fr: {
-		tr1: "Traduction 1",
-		nested: { tr: "Traduction imbriqué" },
-	},
+const dict = {
+  en: { tr1: "Translation 1" },
+  fr: {
+    tr1: "Traduction 1",
+    nested: { tr: "Traduction imbriqué" },
+  },
 };
 
 // Creating a translator object
-var translator = new EOTranslator(dict);
+const translator = new EOTranslator(dict);
 
 // Adding an English translation with the key “tr2”
 translator.add("en", "tr2", "Translation 2");
@@ -297,15 +297,15 @@ The dictionary object after all of the previous alterations:
 
 ```json
 {
-	"en": {
-		"tr1": "Updated translation 1",
-		"tr2": "Translation 2"
-	},
-	"fr": {
-		"tr1": "Traduction 1",
-		"nested": {},
-		"a": { "b": { "c": "Nouveau Traduction imbriqué!" } }
-	}
+  "en": {
+    "tr1": "Updated translation 1",
+    "tr2": "Translation 2"
+  },
+  "fr": {
+    "tr1": "Traduction 1",
+    "nested": {},
+    "a": { "b": { "c": "Nouveau Traduction imbriqué!" } }
+  }
 }
 ```
 

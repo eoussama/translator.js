@@ -2,37 +2,40 @@
   "name": "eo-translatorjs",
   "version": "3.1.1",
   "description": "A simple javascript library for translating web content.",
+  "directories": {
+    "doc": "docs"
+  },
+  "author": "EOussama",
+  "license": "MIT",
+  "homepage": "https://eoussama.github.io/translatorjs/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EOussama/translatorjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EOussama/translatorjs/issues"
+  },
   "keywords": [
     "translate",
     "javascript-library",
     "text-translation",
     "node-package"
   ],
+  "main": "./dist/translator.js",
+  "types": "types/translator.d.ts",
   "scripts": {
-    "build": "npx gulp",
-    "test": "npx jest",
+    "build": "gulp",
+    "test": "jest",
+    "lint": "dx lint",
+    "lint:fix": "dx lint --fix",
     "clean": "rm -rf ./dist/",
     "demos": "cp ./dist/translator.min.js ./demos/assets/js/",
-    "prod": "npm run clean && npm run build && npm run demos"
+    "prod": "pnpm run clean && pnpm run build && pnpm run demos"
   },
-  "main": "./dist/translator.js",
-  "directories": {
-    "doc": "docs"
-  },
-  "types": "types/translator.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EOussama/translatorjs.git"
-  },
-  "author": "EOussama",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/EOussama/translatorjs/issues"
-  },
-  "homepage": "https://eoussama.github.io/translatorjs/",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
+    "@eoussama/dx": "^0.0.4",
     "gulp": "^5.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-beautify": "^2.0.1",

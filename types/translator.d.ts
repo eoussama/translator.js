@@ -1,4 +1,4 @@
-declare module 'eo-translatorjs' {
+declare module "eo-translatorjs" {
 
   /**
    * @author EOussama
@@ -7,8 +7,7 @@ declare module 'eo-translatorjs' {
    * @class
    */
   class EOTranslator {
-
-    //#region Properties
+    // #region Properties
 
     /**
      * @description The dictionary that the translator uses
@@ -28,38 +27,36 @@ declare module 'eo-translatorjs' {
      */
     readonly languages: string[];
 
-    //#endregion
+    // #endregion
 
-    //#region Lifecycle
+    // #region Lifecycle
 
     /**
      * @description Instantiates a translator object
      *
      * @param {object} dict The translation dictionary
      * @param {string} lang The default language
-     * 
      * @throws Invalid dictionary object
      * @throws Invalid language key
      */
-    constructor(dict: object, lang: string)
+    constructor(dict: object, lang: string);
 
-    //#endregion
+    // #endregion
 
-    //#region Methods
+    // #region Methods
 
     /**
      * @description Translates an input value
      *
      * @param {string} input The input value to translate
      * @param {object} options The translation options
-     * 
      * @returns {string} The respective translation
      */
     translate(input: string, options: object): string;
 
     /**
      * @description Translates the contents of a DOM elemnt
-     * 
+     *
      * @param {HTMLElement} DOMElement The DOM element to translate the content of
      * @param {string} lang The language to translate to
      */
@@ -99,8 +96,8 @@ declare module 'eo-translatorjs' {
      */
     isValidLanguage(lang: string): boolean;
 
-    //#endregion
+    // #endregion
   }
 
-  export = EOTranslator
+  export = EOTranslator;
 }
