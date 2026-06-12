@@ -106,7 +106,7 @@ function _toPrimitive(t, r) {
 /*!
  *
  * @name:       eo-translatorjs
- * @version:    3.1.2
+ * @version:    3.1.3
  * @author:     EOussama
  * @license     MIT
  * @source:     https://github.com/EOussama/eo-translatorjs
