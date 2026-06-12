@@ -1,6 +1,5 @@
-/**
+/*!
  *
- * @param obj
  * @name:       translatorjs
  * @version:    3.1.0
  * @author:     EOussama
@@ -8,57 +7,71 @@
  * @source:     https://github.com/EOussama/translatorjs
  *
  * A simple javascript library for translating web content.
+ *
  */
 
-
-
-(function (obj) {
+;(function () {
   /**
-   * The translator class
+   * @description The translator class
    */
   class EOTranslator {
     // #region Properties
 
     /**
-     * @param {{ [x: string]: { [x: string]: any; }; }} dict The new dictionary value
+     * @description Sets the translation dictionary.
+     * @param {{ [x: string]: { [x: string]: unknown } }} dict The new dictionary value
      * @throws Invalid dictionary object
      */
     set dictionary(dict) {
-      if (!dict || typeof dict !== "object" || Array.isArray(dict)) { throw new Error("[TranslatorJS] Invalid dictionary object."); }
+      if (!dict || typeof dict !== "object" || Array.isArray(dict)) {
+        throw new Error("[TranslatorJS] Invalid dictionary object.");
+      }
 
       this._dictionary = dict;
     }
 
     /**
-     * Gets the dictionary value
+     * @description Gets the dictionary value.
+     * @returns {{ [x: string]: { [x: string]: unknown } }} The current dictionary
      */
     get dictionary() {
       return this._dictionary;
     }
 
     /**
+     * @description Sets the active language.
      * @param {string} lang The new language value
      * @throws Invalid language key
      */
     set language(lang) {
       // Checking if the language is a valid string
-      if (typeof lang !== "string") { throw new TypeError(`[TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`); }
+      if (typeof lang !== "string") {
+        throw new TypeError(`[TranslatorJS] Invalid language key, expected "string" by recieved "${typeof lang}".`);
+      }
 
       // Checking if the language exists in the dictionary
-      if (!this.dictionary.hasOwnProperty(lang) && Object.keys(this.dictionary).length > 0 && lang.length > 0) { throw new Error(`[TranslatorJS] Invalid language key, “${typeof lang}” does not exist in the dictionary.`); }
+      if (
+        !Object.prototype.hasOwnProperty.call(this.dictionary, lang)
+        && Object.keys(this.dictionary).length > 0
+        && lang.length > 0
+      ) {
+        throw new Error(`[TranslatorJS] Invalid language key, "${typeof lang}" does not exist in the dictionary.`);
+      }
 
       this._language = lang;
     }
 
     /**
-     * Gets the language value
+     * @description Gets the language value.
+     * @returns {string} The current language
      */
     get language() {
       return this._language;
     }
 
     /**
-     * Gets the available languages
+     * @description Gets the available languages.
+     * @returns {string[]} The list of available languages
      */
     get languages() {
       return this.dictionary ? Object.keys(this.dictionary) : [];
@@ -69,7 +82,7 @@
     // #region Constructor
 
     /**
-     * Instantiates a translator object
+     * @description Instantiates a translator object.
      *
      * @param {object} dict The translation dictionary
      * @param {string} lang The default language
@@ -78,13 +91,19 @@
      */
     constructor(dict, lang = "") {
       // Checking if the dictionary is valid
-      if (!dict || typeof dict !== "object" || Array.isArray(dict)) { throw new Error("[TranslatorJS] Invalid dictionary object."); }
+      if (!dict || typeof dict !== "object" || Array.isArray(dict)) {
+        throw new Error("[TranslatorJS] Invalid dictionary object.");
+      }
 
       // Checking if the language is a valid string
-      if (typeof lang !== "string") { throw new TypeError(`[TranslatorJS] Invalid language key, expected “string” by recieved “${typeof lang}”.`); }
+      if (typeof lang !== "string") {
+        throw new TypeError(`[TranslatorJS] Invalid language key, expected "string" by recieved "${typeof lang}".`);
+      }
 
       // Checking if the language exists in the dictionary
-      if (!dict.hasOwnProperty(lang) && lang.length > 0) { throw new Error(`[TranslatorJS] Invalid language key, “${lang}” does not exist in the passed dictionary.`); }
+      if (!Object.prototype.hasOwnProperty.call(dict, lang) && lang.length > 0) {
+        throw new Error(`[TranslatorJS] Invalid language key, "${lang}" does not exist in the passed dictionary.`);
+      }
 
       this.dictionary = dict || {};
       this.language = lang || (typeof document === "object" ? document.documentElement.lang : "en") || "en";
@@ -95,7 +114,7 @@
     // #region Methods
 
     /**
-     * Translates an input value
+     * @description Translates an input value.
      *
      * @param {string} input The input value to translate
      * @param {object} options The translation options
@@ -111,7 +130,7 @@
         return fallback;
       }
       else {
-        let output = this.dictionary.hasOwnProperty(this.language);
+        let output = Object.prototype.hasOwnProperty.call(this.dictionary, this.language);
 
         if (output) {
           if (frags.length > 1) {
@@ -127,7 +146,7 @@
     }
 
     /**
-     * Translates the contents of a DOM elemnt
+     * @description Translates the contents of a DOM element.
      *
      * @param {HTMLElement} DOMElement The DOM element to translate the content of
      * @param {string} lang The language to translate to
@@ -135,7 +154,7 @@
     translateElement(DOMElement, lang) {
       if (DOMElement) {
         const language = lang || this.language;
-        const input = DOMElement.attributes["eo-translator"].value || DOMElement.textContent || DOMElement.innerText || DOMElement.innerHTML;
+        const input = DOMElement.attributes["eo-translator"].value || DOMElement.textContent || DOMElement.innerHTML;
         const fallback = (DOMElement.attributes["eo-translator-fallback"] || { value: input }).value;
         const params = JSON.parse((DOMElement.attributes["eo-translator-params"] || { value: "{}" }).value) || {};
 
@@ -152,7 +171,7 @@
     }
 
     /**
-     * Translates a DOM document/element
+     * @description Translates a DOM document/element.
      *
      * @param {HTMLElement} DOMContainer The HTML container
      * @param {string} lang The language to translate to
@@ -169,12 +188,10 @@
     }
 
     /**
-     * Adds a new translation to a given language or updates an existing
-     * one accordingly.
+     * @description Adds a new translation to a given language or updates an existing one accordingly.
      *
      * @param {string} lang The language to add the translation to
-     * @param {string} keys The key of the translation
-     * @param key
+     * @param {string} key The key of the translation
      * @param {string} translation The translation to add
      */
     add(lang, key, translation) {
@@ -185,7 +202,7 @@
       const rawKey = frags.pop();
 
       // Checking if the language already exists in the dictionary
-      if (!this.dictionary.hasOwnProperty(lang)) {
+      if (!Object.prototype.hasOwnProperty.call(this.dictionary, lang)) {
         // Initiate a value for the language
         this.dictionary[lang] = {};
       }
@@ -197,11 +214,18 @@
       if (frags.length > 0) {
         // Looping through the fragments
         for (const [index, frag] of Object.entries(frags)) {
+          // Ensure the nested object exists
+          if (!tempDict[frag]) {
+            tempDict[frag] = {};
+          }
+
           // Updates the value of the temporary dictionary
-          tempDict = tempDict[frag] || (tempDict[frag] = {});
+          tempDict = tempDict[frag];
 
           // Stopping the loop if the temporary dictionary is not valid
-          if (!tempDict) { break; }
+          if (!tempDict) {
+            break;
+          }
 
           // Checking if the last iteration has been reached
           if (Number.parseInt(index) === frags.length - 1) {
@@ -217,11 +241,10 @@
     }
 
     /**
-     * Removes a translation from a given language
+     * @description Removes a translation from a given language.
      *
      * @param {string} lang The language to remove the translation from
-     * @param {string} keys The key of the translation to remove
-     * @param key
+     * @param {string} key The key of the translation to remove
      */
     remove(lang, key) {
       // Filtering the fragments
@@ -231,7 +254,7 @@
       const rawKey = frags.pop();
 
       // Checking if the language already exists in the dictionary
-      if (this.dictionary.hasOwnProperty(lang)) {
+      if (Object.prototype.hasOwnProperty.call(this.dictionary, lang)) {
         // Getting a copy of the dictionary
         let tempDict = this.dictionary[lang];
 
@@ -243,7 +266,9 @@
             tempDict = tempDict[frag];
 
             // Stopping the loop if the temporary dictionary is not valid
-            if (!tempDict) { break; }
+            if (!tempDict) {
+              break;
+            }
 
             // Checking if the last iteration has been reached
             if (Number.parseInt(index) === frags.length - 1) {
@@ -260,24 +285,24 @@
     }
 
     /**
-     * Checks if an input language is defined in the dictionary
+     * @description Checks if an input language is defined in the dictionary.
      *
      * @param {string} lang The language to check
      * @returns {boolean} The availability of the corresponding language
      */
     isValidLanguage(lang) {
-      return this.dictionary.hasOwnProperty(lang);
+      return Object.prototype.hasOwnProperty.call(this.dictionary, lang);
     }
 
     // #endregion
   }
 
   /**
-   * Affects a raw string from the collection of parameters
+   * @description Affects a raw string from the collection of parameters.
    *
    * @param {string} raw The raw string to add the parameters to
    * @param {object} params The parameters object
-   * @returns {string} The parame
+   * @returns {string} The parameterised output
    */
   function assignParams(raw, params) {
     // Looping through the parameters
@@ -291,11 +316,10 @@
 
     // Returning a parametated (if you will) output
     return raw;
-  };
+  }
 
   /**
-   * @description
-   * Extracts the nested values
+   * @description Extracts the nested values.
    *
    * @param {object} dictionary The dictionary object
    * @param {string} language The language to translate to
@@ -316,8 +340,7 @@
     return temp;
   }
 
-
-
+  /* global define */
   if (typeof module !== "undefined" && typeof module.exports !== "undefined") {
     module.exports = EOTranslator;
   }
@@ -331,4 +354,4 @@
       window.EOTranslator = EOTranslator;
     }
   }
-})((typeof window !== "undefined") ? window : this);
+}());

@@ -1,0 +1,12 @@
+overrides:
+  "@babel/helpers": ">=7.26.10"
+  "@babel/traverse": ">=7.23.2"
+  brace-expansion: ">=1.1.13"
+  cross-spawn: ">=7.0.5"
+  js-yaml: ">=3.14.2"
+  lodash: ">=4.17.24"
+  micromatch: ">=4.0.8"
+  minimatch: ">=3.1.4"
+  minimist: ">=0.2.4"
+  picomatch: ">=2.3.2"
+  semver: ">=5.7.2"

@@ -1,6 +1,6 @@
 {
   "name": "eo-translatorjs",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "A simple javascript library for translating web content.",
   "directories": {
     "doc": "docs"
@@ -33,15 +33,15 @@
     "prod": "pnpm run clean && pnpm run build && pnpm run demos"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
     "@eoussama/dx": "^0.0.4",
-    "gulp": "^5.0.0",
+    "gulp": "^5.0.1",
     "gulp-babel": "^8.0.0",
-    "gulp-beautify": "^2.0.1",
-    "gulp-rename": "^1.4.0",
-    "gulp-uglify": "^3.0.1",
-    "jest": "^29.6.1",
-    "jsdom": "^16.0.0"
+    "gulp-beautify": "^3.0.0",
+    "gulp-rename": "^2.1.0",
+    "gulp-uglify": "^3.0.2",
+    "jest": "^29.7.0",
+    "jsdom": "^26.0.0"
   }
 }

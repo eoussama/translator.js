@@ -25,7 +25,7 @@ describe("creating a translator", () => {
   creation(EOTranslator);
 });
 
-describe("CRUD operations on the translator", () => {
+describe("crud operations on the translator", () => {
   crud(EOTranslator);
 });
 
@@ -33,6 +33,6 @@ describe("translations", () => {
   translations(EOTranslator);
 });
 
-describe("dOM translations", () => {
+describe("dom translations", () => {
   dom(EOTranslator, jsdom.JSDOM);
 });

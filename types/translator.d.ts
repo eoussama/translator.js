@@ -13,7 +13,7 @@ declare module "eo-translatorjs" {
      * @description The dictionary that the translator uses
      * @throws Invalid dictionary object
      */
-    dictionary: { [x: string]: { [x: string]: any } };
+    dictionary: { [x: string]: { [x: string]: unknown } };
 
     /**
      * @description The default language
