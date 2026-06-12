@@ -1,185 +1,153 @@
 /**
+ * @description
+ * Tests for EOTranslator instantiation and property setters.
  *
- * @param EOTranslator
+ * @param {typeof import('../../dist/translator')} EOTranslator
  */
 module.exports = function (EOTranslator) {
-  test("Passing a valid translator.", () => {
-    // Arrange
-    let translator;
-    const dict = {
-      en: { greeting: "Hello!" },
-      fr: { greeting: "Bonjour!" },
-      es: { greeting: "Hola!" },
-      br: { greeting: "Jola!" },
-    };
+  const DICT = {
+    en: { greeting: "Hello!" },
+    fr: { greeting: "Bonjour!" },
+    es: { greeting: "Hola!" },
+    br: { greeting: "Jola!" },
+  };
 
-    // Act
-    try {
-      translator = new EOTranslator(dict);
-    }
-    catch (e) {
-      console.error({ error: e });
-    }
+  // ---------------------------------------------------------------------------
+  // Constructor — happy paths
+  // ---------------------------------------------------------------------------
 
-    // Assert
-    expect(translator.dictionary).toEqual(dict);
+  test("creates a translator with a valid dictionary", () => {
+    const translator = new EOTranslator(DICT);
+
+    expect(translator.dictionary).toEqual(DICT);
   });
 
-  test("Passing a valid translator with French as a default language.", () => {
-    // Arrange
-    let translator;
-    const dict = {
-      en: { greeting: "Hello!" },
-      fr: { greeting: "Bonjour!" },
-      es: { greeting: "Hola!" },
-      br: { greeting: "Jola!" },
-    };
+  test("sets the specified language as default", () => {
+    const translator = new EOTranslator(DICT, "fr");
 
-    // Act
-    try {
-      translator = new EOTranslator(dict, "fr");
-    }
-    catch (e) {
-      console.error({ error: e });
-    }
-
-    // Assert
-    expect(translator.language).toEqual("fr");
+    expect(translator.language).toBe("fr");
   });
 
-  test("English “en” should be the default language if none was specified.", () => {
-    // Arrange
-    let translator;
-    const dict = {
-      en: { greeting: "Hello!" },
-      fr: { greeting: "Bonjour!" },
-      es: { greeting: "Hola!" },
-      br: { greeting: "Jola!" },
-    };
+  test("\"en\" is the default language when none is specified", () => {
+    const translator = new EOTranslator(DICT);
 
-    // Act
-    try {
-      translator = new EOTranslator(dict);
-    }
-    catch (e) {
-      console.error({ error: e });
-    }
-
-    // Assert
-    expect(translator.language).toEqual("en");
+    expect(translator.language).toBe("en");
   });
 
-  test("Creating a translator and changing its default language at run time.", () => {
-    // Arrange
-    let translator;
-    const dict = {
-      en: { greeting: "Hello!" },
-      fr: { greeting: "Bonjour!" },
-      es: { greeting: "Hola!" },
-      br: { greeting: "Jola!" },
-    };
+  test("allows changing the active language at runtime via the setter", () => {
+    const translator = new EOTranslator(DICT);
 
-    // Act
-    try {
-      translator = new EOTranslator(dict);
-      translator.language = "br";
-    }
-    catch (e) {
-      console.error({ error: e });
-    }
-
-    // Assert
-    expect(translator.language).toEqual("br");
+    translator.language = "br";
+    expect(translator.language).toBe("br");
   });
 
-  test("Passing an invalid string as a default language on translator creation should throw an error.", () => {
-    // Arrange
-    let errorThrown = false;
-    const dict = {
-      en: { greeting: "Hello!" },
-      fr: { greeting: "Bonjour!" },
-      es: { greeting: "Hola!" },
-      br: { greeting: "Jola!" },
-    };
+  test("accepts an empty dictionary", () => {
+    const translator = new EOTranslator({});
 
-    // Act
-    try {
-      new EOTranslator(dict, "ar");
-    }
-    catch (e) {
-      errorThrown = true;
-      console.info(e.message);
-    }
-
-    // Assert
-    expect(errorThrown).toBe(true);
+    expect(translator.dictionary).toEqual({});
   });
 
-  test("Passing an invalid string as a default language at run time should throw an error.", () => {
-    // Arrange
-    let translator;
-    let errorThrown = false;
-    const dict = {
-      en: { greeting: "Hello!" },
-      fr: { greeting: "Bonjour!" },
-      es: { greeting: "Hola!" },
-      br: { greeting: "Jola!" },
-    };
+  // ---------------------------------------------------------------------------
+  // Constructor — error paths
+  // ---------------------------------------------------------------------------
 
-    // Act
-    try {
-      translator = new EOTranslator(dict, "es");
-      translator.language = "ar";
-    }
-    catch (e) {
-      errorThrown = true;
-      console.info(e.message);
-    }
-
-    // Assert
-    expect(errorThrown).toBe(true);
+  test("throws when the language key does not exist in the dictionary", () => {
+    expect(() => new EOTranslator(DICT, "ar")).toThrow("[EOTranslatorJS]");
   });
 
-  test("Passing an invalid object as a dictionary on creation should throw an error.", () => {
-    // Arrange
-    let errorThrown = false;
-    const dict = true;
-
-    // Act
-    try {
-      new EOTranslator(dict);
-    }
-    catch (e) {
-      errorThrown = true;
-      console.info(e.message);
-    }
-
-    // Assert
-    expect(errorThrown).toBe(true);
+  test("throws when a non-string is passed as the language", () => {
+    expect(() => new EOTranslator(DICT, 42)).toThrow(TypeError);
   });
 
-  test("Passing an invalid object as a dictionary at run time should throw an error.", () => {
-    // Arrange
-    let translator;
-    let errorThrown = false;
-    const dict = {
-      en: { greeting: "Hello!" },
-      fr: { greeting: "Bonjour!" },
-      es: { greeting: "Hola!" },
-      br: { greeting: "Jola!" },
-    };
+  test("throws when a boolean is passed as the dictionary", () => {
+    expect(() => new EOTranslator(true)).toThrow("[EOTranslatorJS]");
+  });
 
-    // Act
-    try {
-      translator = new EOTranslator(dict);
+  test("throws when null is passed as the dictionary", () => {
+    expect(() => new EOTranslator(null)).toThrow("[EOTranslatorJS]");
+  });
+
+  test("throws when an array is passed as the dictionary", () => {
+    expect(() => new EOTranslator(["en"])).toThrow("[EOTranslatorJS]");
+  });
+
+  // ---------------------------------------------------------------------------
+  // Setter — dictionary
+  // ---------------------------------------------------------------------------
+
+  test("allows replacing the dictionary at runtime via the setter", () => {
+    const translator = new EOTranslator(DICT);
+    const newDict = { de: { greeting: "Hallo!" } };
+
+    translator.dictionary = newDict;
+    expect(translator.dictionary).toEqual(newDict);
+  });
+
+  test("throws when an array is assigned to the dictionary setter", () => {
+    const translator = new EOTranslator(DICT);
+
+    expect(() => {
       translator.dictionary = [];
-    }
-    catch (e) {
-      errorThrown = true;
-      console.info(e.message);
-    }
+    }).toThrow("[EOTranslatorJS]");
+  });
 
-    // Assert
-    expect(errorThrown).toBe(true);
+  test("throws when null is assigned to the dictionary setter", () => {
+    const translator = new EOTranslator(DICT);
+
+    expect(() => {
+      translator.dictionary = null;
+    }).toThrow("[EOTranslatorJS]");
+  });
+
+  // ---------------------------------------------------------------------------
+  // Setter — language
+  // ---------------------------------------------------------------------------
+
+  test("throws when an invalid language is set at runtime", () => {
+    const translator = new EOTranslator(DICT, "es");
+
+    expect(() => {
+      translator.language = "ar";
+    }).toThrow("[EOTranslatorJS]");
+  });
+
+  test("throws when a non-string is assigned to the language setter", () => {
+    const translator = new EOTranslator(DICT);
+
+    expect(() => {
+      translator.language = 99;
+    }).toThrow(TypeError);
+  });
+
+  // ---------------------------------------------------------------------------
+  // Getter — languages
+  // ---------------------------------------------------------------------------
+
+  test("languages getter returns all top-level language keys", () => {
+    const translator = new EOTranslator(DICT);
+
+    expect(translator.languages).toEqual(["en", "fr", "es", "br"]);
+  });
+
+  test("languages getter returns an empty array for an empty dictionary", () => {
+    const translator = new EOTranslator({});
+
+    expect(translator.languages).toEqual([]);
+  });
+
+  // ---------------------------------------------------------------------------
+  // isValidLanguage
+  // ---------------------------------------------------------------------------
+
+  test("isValidLanguage returns true for an existing language", () => {
+    const translator = new EOTranslator(DICT);
+
+    expect(translator.isValidLanguage("fr")).toBe(true);
+  });
+
+  test("isValidLanguage returns false for a missing language", () => {
+    const translator = new EOTranslator(DICT);
+
+    expect(translator.isValidLanguage("ar")).toBe(false);
   });
 };

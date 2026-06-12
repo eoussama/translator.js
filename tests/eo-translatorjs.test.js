@@ -1,10 +1,10 @@
 /**
  *
- * @name:       translatorjs
- * @version:    3.1.0
+ * @name:       eo-translatorjs
+ * @version:    3.1.2
  * @author:     EOussama
  * @license     MIT
- * @source:     https://github.com/EOussama/translatorjs
+ * @source:     https://github.com/EOussama/eo-translatorjs
  *
  * A simple javascript library for translating web content.
  */
@@ -13,7 +13,7 @@
 
 // Importing the testing dependencies
 const jsdom = require("jsdom");
-const EOTranslator = require("../dist/translator");
+const EOTranslator = require("../dist/eo-translatorjs");
 const creation = require("./utils/creation");
 const crud = require("./utils/crud");
 const dom = require("./utils/dom");

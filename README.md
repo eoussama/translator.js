@@ -1,6 +1,6 @@
 <p align="center">
     <img src="demos/assets/img/logo.svg" width="130" />
-    <h1 align="center">TranslatorJS</h1>
+    <h1 align="center">EOTranslator.js</h1>
     <p align="center">
       <a href="#">
           <img align="center" src="https://img.shields.io/npm/dt/eo-translatorjs.svg" alt="NPM downloads.">
@@ -8,306 +8,346 @@
       <a href="https://www.npmjs.com/package/eo-translatorjs/v/latest">
           <img align="center" src="https://img.shields.io/npm/v/eo-translatorjs.svg" alt="NPM package version.">
       </a>
-      <a href="https://raw.githubusercontent.com/EOussama/translatorjs/master/dist/translator.min.js">
-        <img align="center" src="https://img.shields.io/github/size/EOussama/translatorjs/dist/translator.min.js.svg" alt="TranslatorJS' size.">
+      <a href="https://raw.githubusercontent.com/EOussama/eo-translatorjs/master/dist/translator.min.js">
+        <img align="center" src="https://img.shields.io/github/size/EOussama/eo-translatorjs/dist/translator.min.js.svg" alt="EOTranslator.js' size.">
       </a>
-      <a href="https://raw.githubusercontent.com/EOussama/translatorjs/master/LICENSE">
-        <img align="center" src="https://img.shields.io/github/license/EOussama/translatorjs.svg" alt="TranslatorJS' license.">
+      <a href="https://raw.githubusercontent.com/EOussama/eo-translatorjs/master/LICENSE">
+        <img align="center" src="https://img.shields.io/github/license/EOussama/eo-translatorjs.svg" alt="EOTranslator.js' license.">
       </a>
     </p>
 </p>
 
 ## What is this?
 
-TranslatorJS is a lightweight, very simple-to-use Javascript library that facilitates the process of translating web pages.
+EOTranslator.js is a lightweight, zero-dependency JavaScript library that makes it easy to translate web page content. Define a dictionary, create a translator instance, and call a single method to translate a string or an entire DOM tree.
 
-## How does it work?
+---
 
-In most cases, all you need is a dictionary object and a function call.
+## Installation
 
-Something that scares people away from using most of the other libraries is their unnecessary complexity, after all, we use libraries to avoid that excessive pain. EO Translator JS operates on very minimalistic controllers. All you need to do is instantiate a Translator object and set it for work.
+### npm / pnpm / yarn
 
-```ts
-const translator = new EOTranslator(dictionary: Object, language: string);
+```bash
+npm install eo-translatorjs
+# or
+pnpm add eo-translatorjs
+# or
+yarn add eo-translatorjs
 ```
 
-| dictionary (_`required`_)                                                  | language (_`optional`_)                                                                                                                                                             |
-| -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| An object that contains all of the keys and their respective translations. | A string value that represents the default language. If none is provided, the document's `lang` attribute value is used, otherwise, the string `en` is set as the default language. |
-
-## Usage
-
-In order to start using Translator JS, you should first include it on your HTML file;
+### Browser (script tag)
 
 ```html
-<script src="eo-translator.js"></script>
-
-<!-- or -->
-
 <script src="eo-translator.min.js"></script>
 ```
 
-Now, we need to create a dictionary, an object that stores all of our translations, grouped by language keys;
+---
+
+## Quick start
 
 ```js
-var dict = {
-  ar: { greeting: 'مرحباً' }
-  en: { greeting: 'Hello' },
-  es: { greeting: 'Hola' },
-  fr: { greeting: 'Bonjour' }
-};
+// CommonJS (Node.js)
+const EOTranslator = require("eo-translatorjs");
+
+// ES module bundler
+import EOTranslator from "eo-translatorjs";
 ```
 
-The name you choose for languages is important, in our case, they are `ar`, `en`, `es`, and `fr` indicating _Arabic_ _English_, _Espagnol_ and _Français_ respectively. They could be called anything, however, for the sake of simplicity, we used those specific codes which can easily and universally be understood.
-
-Then we instantiate a translator object;
-
 ```js
-const translator = new EOTranslator(dict);
-```
-
-Now, translating something is as simple as stating the target translation's key;
-
-```js
-translator.translate("greeting");
-```
-
-The above would simply return the translation that matches the key `greeting`, but wait, what language are we targeting here? We did not specify any default language so `TranslatorJS` does some improvisation and takes the document's language that resides in the `lang` attribute on the `html` element. If there was none, then `en` is set as the default translation language. In our case, we should be expecting `Hello` as a return value.
-
-If we so wanted to target a specific language all we have to do is instruct TranslatorJS about it as follows;
-
-```js
-translator.translate("greeting", { lang: "ar" });
-```
-
-Simply that will return `مرحباً`.
-Notice how we forced the translator object to ignore the default language and use another that we specified with the translation function call, meaning that the default language is still `en`, and so to change it, we could have simply passed the desired default language to the object when we first instantiated it.
-
-```js
-// Setting the default language to Spanish.
-const translator = new EOTranslator(dict, "es");
-```
-
-We can also change the default language on runtime by directly passing a valid string value to the `language` property of the translator object.
-
-```js
-// Setting the default language to French on runtime.
-translator.language = "fr";
-```
-
-The same goes for the dictionary if we so wanted:
-
-```js
-const // Creating a dictionary object
-  dict1 = {
-    en: { home: "Home" },
-    fr: { home: "Maison" },
-  };
-// Creating another dictionary object
-const dict2 = {
-  en: { home: "House" },
-  fr: { home: "Bâtiment" },
-};
-
-// Creating a translator object with `dict1` as a dictionary
-// and `en` (English) as a default language
-const translator = new EOTranslator(dict1, "en");
-
-// Returns `Home`
-translator.translate("home");
-
-// Changing the dictionary
-translator.dictionary = dict2;
-
-// Returns `House`
-translator.translate("home");
-
-// Changing the default language
-translator.language = "fr";
-
-// Returns `Bâtiment`
-translator.translate("home");
-
-// Returns `House`
-translator.translate("home", { lang: "en" });
-```
-
-Translating an invalid key outputs the input key, unless a fallback value has been specified.
-
-```js
-// Creating a dictionary object
 const dict = {
-  en: { home: "Home" },
-  fr: { home: "Maison" },
+  en: { greeting: "Hello" },
+  fr: { greeting: "Bonjour" },
+  es: { greeting: "Hola" },
 };
 
-// Creating a translator object
 const translator = new EOTranslator(dict, "en");
 
-// Returns `not-home` as no matching key in the dictionary was found
-translator.translate("not-home");
-
-// Returns `Fallback value`
-translator.translate("not-home", { fallback: "Fallback value" });
+translator.translate("greeting");           // → "Hello"
+translator.translate("greeting", { lang: "fr" }); // → "Bonjour"
 ```
 
-Nested keys are a big part of what makes TranslatorJS fun to use without sacrificing its simple usability.
+---
+
+## Constructor
 
 ```js
-// Creating a dictionary object
+new EOTranslator(dictionary, language?)
+```
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `dictionary` | `object` | ✅ | Plain object with language keys at the top level |
+| `language` | `string` | ✗ | Default language. Falls back to the document `lang` attribute, then `"en"` |
+
+```js
+const translator = new EOTranslator(dict);          // language defaults to "en"
+const translator = new EOTranslator(dict, "fr");    // explicitly set to French
+```
+
+**Throws:**
+
+- `Error` — when the dictionary is not a plain object
+- `TypeError` — when the language argument is not a string
+- `Error` — when the language key does not exist in the dictionary
+
+---
+
+## Properties
+
+### `dictionary`
+
+Get or replace the entire translation dictionary at runtime.
+
+```js
+translator.dictionary = {
+  en: { home: "House" },
+  fr: { home: "Maison" },
+};
+```
+
+Throws if the assigned value is not a plain object.
+
+### `language`
+
+Get or set the active language at runtime.
+
+```js
+translator.language = "fr";
+console.log(translator.language); // "fr"
+```
+
+Throws if the value is not a string or does not exist in the dictionary.
+
+### `languages` _(read-only)_
+
+Returns an array of all language keys currently present in the dictionary.
+
+```js
+const dict = { en: {}, fr: {}, es: {} };
+const translator = new EOTranslator(dict, "en");
+
+console.log(translator.languages); // ["en", "fr", "es"]
+```
+
+---
+
+## Methods
+
+### `translate(key, options?)`
+
+Translates a key in the active (or specified) language.
+
+| Parameter | Type | Description |
+|---|---|---|
+| `key` | `string` | Translation key. Supports dot notation for nested keys |
+| `options.lang` | `string` | Override the active language for this call only |
+| `options.fallback` | `string` | Value to return when the key is not found. Defaults to the key itself |
+| `options.params` | `object` | Interpolation parameters replacing `{placeholder}` tokens |
+
+```js
 const dict = {
   en: {
-    home: "Home",
-    a: {
-      b: {
-        c: {
-          d: "Nested value 1",
-          e: "Nested value 2",
-          f: {
-            g: "Nested value 3",
-          },
-        },
-      },
+    greeting: "Hello, {name}!",
+    ui: {
+      title: "Welcome",
+    },
+  },
+  fr: {
+    greeting: "Bonjour, {name}!",
+  },
+};
+
+const translator = new EOTranslator(dict, "en");
+
+// Basic translation
+translator.translate("ui.title");                             // → "Welcome"
+
+// With parameters
+translator.translate("greeting", { params: { name: "Luffy" } }); // → "Hello, Luffy!"
+
+// With a language override (does not change the default)
+translator.translate("greeting", { lang: "fr", params: { name: "Luffy" } }); // → "Bonjour, Luffy!"
+
+// Missing key — returns the key itself by default
+translator.translate("missing.key");                         // → "missing.key"
+
+// Missing key — custom fallback
+translator.translate("missing.key", { fallback: "N/A" });   // → "N/A"
+```
+
+---
+
+### `translateElement(element, lang?)`
+
+Translates the content of a single DOM element. The element must carry the `eo-translator` attribute.
+
+**Supported attributes:**
+
+| Attribute | Required | Description |
+|---|---|---|
+| `eo-translator` | ✅ | The translation key |
+| `eo-translator-fallback` | ✗ | Fallback text when the key is not found |
+| `eo-translator-params` | ✗ | JSON object of interpolation parameters |
+| `eo-translator-html` | ✗ | Set to `"true"` to write `innerHTML` instead of `textContent` |
+
+```html
+<span
+  id="hello"
+  eo-translator="greeting"
+  eo-translator-params='{ "name": "Luffy" }'
+></span>
+```
+
+```js
+const dict = { en: { greeting: "Hello, {name}!" } };
+const translator = new EOTranslator(dict, "en");
+
+translator.translateElement(document.getElementById("hello"));
+// <span ...>Hello, Luffy!</span>
+```
+
+**HTML rendering:**
+
+```html
+<span
+  id="hello"
+  eo-translator="greeting"
+  eo-translator-html="true"
+></span>
+```
+
+```js
+const dict = { en: { greeting: "Hello, <b>World</b>!" } };
+const translator = new EOTranslator(dict, "en");
+
+translator.translateElement(document.getElementById("hello"));
+// <span ...>Hello, <b>World</b>!</span>
+```
+
+Passing `null` or an element without the `eo-translator` attribute is a safe no-op.
+
+---
+
+### `translateDOM(container?, lang?)`
+
+Translates **all** `[eo-translator]` elements within a container in one call.
+
+When called without arguments it scans the entire `document` (browser only).
+
+```js
+// Translate everything in the document using the active language
+translator.translateDOM();
+
+// Translate everything inside a specific container
+translator.translateDOM(document.getElementById("app"));
+
+// Translate a container using a language override
+translator.translateDOM(document.getElementById("app"), "fr");
+```
+
+---
+
+### `add(lang, key, translation)`
+
+Adds a new translation entry or updates an existing one. Supports dot notation for nested keys. Creates the language group automatically if it does not yet exist.
+
+```js
+const dict = {
+  en: { tr1: "Translation 1" },
+  fr: { tr1: "Traduction 1" },
+};
+const translator = new EOTranslator(dict, "en");
+
+// Add a new key
+translator.add("en", "tr2", "Translation 2");
+
+// Update an existing key
+translator.add("en", "tr1", "Updated translation 1");
+
+// Add a nested key — creates intermediate objects automatically
+translator.add("fr", "menu.home", "Accueil");
+translator.add("fr", "menu.about", "À propos");
+```
+
+---
+
+### `remove(lang, key)`
+
+Removes a translation entry from the dictionary. Supports dot notation. Does nothing if the language or key does not exist.
+
+```js
+// Remove a top-level key
+translator.remove("fr", "tr1");
+
+// Remove a nested key
+translator.remove("fr", "menu.about");
+```
+
+---
+
+### `isValidLanguage(lang)`
+
+Returns `true` when the given string is a top-level key in the dictionary.
+
+```js
+const dict = { en: {}, fr: {} };
+const translator = new EOTranslator(dict, "en");
+
+translator.isValidLanguage("fr");  // → true
+translator.isValidLanguage("ar");  // → false
+```
+
+---
+
+## Nested keys
+
+Dot-separated keys let you organise translations into namespaces without any extra configuration.
+
+```js
+const dict = {
+  en: {
+    nav: {
+      home: "Home",
+      about: "About us",
+    },
+    footer: {
+      copyright: "© 2024 Example Inc.",
     },
   },
 };
 
-// Creating a translator object
-const translator = new EOTranslator(dict);
+const translator = new EOTranslator(dict, "en");
 
-// Returns `Nested value 1`
-translator.translate("a.b.c.d");
-
-// Returns `Nested value 3`
-translator.translate("a.b.c.f.g");
-
-// Returns `a.b.c.f.g.h` as no matching key(s) was found
-translator.translate("a.b.c.f.g.h");
+translator.translate("nav.home");         // → "Home"
+translator.translate("nav.about");        // → "About us"
+translator.translate("footer.copyright"); // → "© 2024 Example Inc."
+translator.translate("nav.missing");      // → "nav.missing" (fallback to key)
 ```
 
-Another powerful feature that comes with TranslatorJS is embedding parameters.
+---
+
+## Parameter interpolation
+
+Use `{placeholder}` tokens inside translations and supply values via `options.params` (or the `eo-translator-params` attribute in HTML).
 
 ```js
-// Creating a dictionary object
 const dict = {
-  en: { greeting: "Hello, {name}!" },
-};
-
-// Creating a translator object
-const translator = new EOTranslator(dict);
-
-// Returns `Hello, Jeff!`
-translator.translate("greeting", { params: { name: "Jeff" } });
-```
-
-Using TranslatorJS on a DOM element is just as simple. Mark the target element or elements that you want to translate the contents of, and then leave the rest for TranslatorJS.
-
-```html
-<!-- The eo-translator attribute is the marker that tells TranslatorJS to translate the element, the value that's passed to it is the translation key -->
-
-<!-- eo-translator-params holds the parameters. It must be valid JSON object. -->
-<span
-	id="target"
-	eo-translator="greeting"
-	eo-translator-params='{ "name": "Luffy" }'
-></span>
-
-<script>
-	// Creating a dictionary object
-	var dict = {
-		en: { greeting: "Hello, {name}!" },
-	};
-
-	// Creating a translator object
-	var translator = new EOTranslator(dict);
-
-	// Getting the HTML element
-	var target = document.getElementById("target");
-
-	// Translating the element
-	translator.translateElement(target);
-</script>
-```
-
-Or you can simply translate the entire document;
-
-```js
-translator.translateDOM();
-```
-
-But wait, what about parsing HTML that's present in a translation? Easy;
-
-TranslatorJS also allows for dictionary manipulation, such as adding, removing and updating translations at runtime;
-
-```html
-<!-- The eo-translator-html attribute is the marker that tells TranslatorJS to parse HTML -->
-<span
-	id="target"
-	eo-translator="greeting"
-	eo-translator-html="true"
-	eo-translator-params='{ "name": "Luffy" }'
-></span>
-
-<script>
-	// Creating a dictionary object
-	var dict = {
-		en: { greeting: "Hello, <b>{name}</b>!" },
-	};
-
-	// Creating a translator object
-	var translator = new EOTranslator(dict);
-
-	// Getting the HTML element
-	var target = document.getElementById("target");
-
-	// Translating the element
-	translator.translateElement(target);
-</script>
-```
-
-Or you can simply translate the entire document;
-
-```js
-// Creating a dictionary object
-const dict = {
-  en: { tr1: "Translation 1" },
-  fr: {
-    tr1: "Traduction 1",
-    nested: { tr: "Traduction imbriqué" },
+  en: {
+    greeting: "Hello, {first} {last}!",
+    score: "You scored {points} points.",
   },
 };
 
-// Creating a translator object
-const translator = new EOTranslator(dict);
+const translator = new EOTranslator(dict, "en");
 
-// Adding an English translation with the key “tr2”
-translator.add("en", "tr2", "Translation 2");
+translator.translate("greeting", { params: { first: "Monkey", last: "D. Luffy" } });
+// → "Hello, Monkey D. Luffy!"
 
-// Updating the English translation that matches the key “tr1”
-translator.add("en", "tr1", "Updated translation 1");
-
-// Adding a nested French translation
-translator.add("fr", "a.b.c", "Nouveau Traduction imbriqué!");
-
-// Removing a translation from the French language group
-translator.remove("fr", "nested.tr");
+translator.translate("score", { params: { points: 42 } });
+// → "You scored 42 points."
 ```
 
-The dictionary object after all of the previous alterations:
-
-```json
-{
-  "en": {
-    "tr1": "Updated translation 1",
-    "tr2": "Translation 2"
-  },
-  "fr": {
-    "tr1": "Traduction 1",
-    "nested": {},
-    "a": { "b": { "c": "Nouveau Traduction imbriqué!" } }
-  }
-}
-```
+---
 
 ## Credits
 

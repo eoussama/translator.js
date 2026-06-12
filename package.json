@@ -7,13 +7,13 @@
   },
   "author": "EOussama",
   "license": "MIT",
-  "homepage": "https://eoussama.github.io/translatorjs/",
+  "homepage": "https://eoussama.github.io/eo-translatorjs/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EOussama/translatorjs.git"
+    "url": "git+https://github.com/EOussama/eo-translatorjs.git"
   },
   "bugs": {
-    "url": "https://github.com/EOussama/translatorjs/issues"
+    "url": "https://github.com/EOussama/eo-translatorjs/issues"
   },
   "keywords": [
     "translate",
@@ -21,15 +21,15 @@
     "text-translation",
     "node-package"
   ],
-  "main": "./dist/translator.js",
-  "types": "types/translator.d.ts",
+  "main": "./dist/eo-translatorjs.js",
+  "types": "types/eo-translatorjs.d.ts",
   "scripts": {
     "build": "gulp",
     "test": "jest",
     "lint": "dx lint",
     "lint:fix": "dx lint --fix",
     "clean": "rm -rf ./dist/",
-    "demos": "cp ./dist/translator.min.js ./demos/assets/js/",
+    "demos": "cp ./dist/eo-translatorjs.min.js ./demos/assets/js/",
     "prod": "pnpm run clean && pnpm run build && pnpm run demos"
   },
   "devDependencies": {

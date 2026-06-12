@@ -9,7 +9,7 @@ const uglify = require("gulp-uglify");
 
 // Building the code for production.
 gulp.task("build", (done) => {
-  gulp.src("./src/translator.js")
+  gulp.src("./src/eo-translatorjs.js")
 
   // Translating code.
     .pipe(babel({
